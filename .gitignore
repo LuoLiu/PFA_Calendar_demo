@@ -1,0 +1,8 @@
+*.o
+*.dia
+*.d
+Build/
+*.xcuserstate
+PFA_Calendar_demo.xcworkspace/xcuserdata/
+PFA_Calendar_demo.xcodeproj/xcuserdata/
+PFA_Calendar_demo.xcodeproj/project.xcworkspace

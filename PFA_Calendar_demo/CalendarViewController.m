@@ -30,6 +30,8 @@
     
 //    [self.collectionView registerNib:[UINib nibWithNibName:kCalendarCellNibName bundle:nil] forCellWithReuseIdentifier:kCalendarCellReuseIdentifier];
     [self bindView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToPreMonth:) name:@"scrollToPreMonth" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToNextMonth:) name:@"scrollToNextMonth" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,6 +68,32 @@
     NSInteger section = [self.collectionView indexPathForItemAtPoint:self.collectionView.contentOffset].section;
     //self.currentMonth = [_viewModel monthForSection:section];
     [self.delegate calendarCurrentMonthStringDidChangeTo:[_viewModel setMonthLabelForSection:section]];
+}
+
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    NSInteger section = [self.collectionView indexPathForItemAtPoint:self.collectionView.contentOffset].section;
+    [self.delegate calendarCurrentMonthStringDidChangeTo:[_viewModel setMonthLabelForSection:section]];
+}
+
+- (void)scrollToPreMonth:(id)sender {
+    NSInteger section = [self.collectionView indexPathForItemAtPoint:self.collectionView.contentOffset].section;
+    if (section > 0) {
+        [self collectionViewScrollToSection:section-1 animated:YES];
+    }
+}
+
+- (void)scrollToNextMonth:(id)sender {
+    NSInteger section = [self.collectionView indexPathForItemAtPoint:self.collectionView.contentOffset].section;
+    if (section < [self.collectionView numberOfSections]) {
+        [self collectionViewScrollToSection:section+1 animated:YES];
+    }
+}
+
+- (void)collectionViewScrollToSection:(NSInteger)section animated:(BOOL)animated {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:section];
+    [self.collectionView scrollToItemAtIndexPath:indexPath
+                                atScrollPosition:UICollectionViewScrollPositionLeft
+                                        animated:animated];
 }
 
 #pragma mark - UICollectionView FlowLayout

@@ -11,6 +11,8 @@
 
 @interface CalendarContainerController () <CalendarViewControllerDelegate>
 
+@property (strong, nonatomic) CalendarViewController *calendarVC;
+
 @end
 
 @implementation CalendarContainerController
@@ -23,8 +25,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"CalendarEmbedSegue"]) {
-        CalendarViewController *calendarVC = segue.destinationViewController;
-        calendarVC.delegate = self;
+        self.calendarVC = segue.destinationViewController;
+        self.calendarVC.delegate = self;
     }
     else if ([segue.identifier isEqualToString:@"CalendarScheduleEmbedSegue"])
     {

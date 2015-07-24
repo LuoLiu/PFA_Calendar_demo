@@ -9,11 +9,13 @@
 #import "PFACalendarViewController.h"
 #import "CalendarContainerController.h"
 #import "ScheduleTableViewController.h"
+#import "CalendarViewController.h"
 
 @interface PFACalendarViewController () <CalendarContainerControllerDelegate>
 
-//@property (strong, nonatomic) CalendarContainerController *calendarCC;
-//@property (strong, nonatomic) ScheduleTableViewController *scheduleVC;
+@property (strong, nonatomic) CalendarContainerController *calendarCC;
+@property (strong, nonatomic) ScheduleTableViewController *scheduleVC;
+@property (strong, nonatomic) CalendarViewController *calendarVC;
 
 @end
 
@@ -48,6 +50,15 @@
     }
 }
 
+- (IBAction)toPreMonth:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"scrollToPreMonth" object:nil];
+}
+
+- (IBAction)toNextMonth:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"scrollToNextMonth" object:nil];
+}
+
+
 - (void)calendarCurrentMonthStringDidChangeTo:(NSString *)monthString {
     self.monthLabel.text = monthString;
     NSLog(@"CurrentMonth:%@", monthString);
@@ -58,12 +69,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"CalendarContainerEmbedSegue"]) {
-        CalendarContainerController *calendarCC = segue.destinationViewController;
-        calendarCC.delegate = self;
+        self.calendarCC = segue.destinationViewController;
+        self.calendarCC.delegate = self;
     }
     else if ([segue.identifier isEqualToString:@"ScheduleTableViewEmbedSegue"])
     {
-        //
+        self.scheduleVC = segue.destinationViewController;
     }
 }
 

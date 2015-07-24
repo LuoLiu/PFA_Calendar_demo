@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class CalendarContainerController;
+@class CalendarViewController;
 
 @protocol CalendarContainerControllerDelegate <NSObject>
 

@@ -32,6 +32,7 @@
     [self bindView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToPreMonth:) name:@"scrollToPreMonth" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToNextMonth:) name:@"scrollToNextMonth" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectedToday:) name:@"selectedToday" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,16 +58,48 @@
 
 #pragma mark - UICollectionView Delegate
 
+-(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    CalendarCollectionViewCell *cell = (CalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    if (cell.isPlaceholder) {
+        // 如果是上个月或者下个月的元素，则无需调用代理方法，在[setSelectedDate:animated:]中还会调用此方法
+        return [_viewModel isDateInRange:cell.date] && ![cell.date isEqualToDateForDay:_viewModel.selectedDate];
+    }
+    BOOL shouldSelect = ![collectionView.indexPathsForSelectedItems containsObject:indexPath];
+    
+    return shouldSelect && [_viewModel isDateInRange:cell.date];
+}
+
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     CalendarCollectionViewCell *cell = (CalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    NSLog(@"select Cell: %@", cell.date);
+    if (cell.isPlaceholder) {
+        [_viewModel setSelectedDate:cell.date animate:YES];
+    } else {
+        [cell configureCellAppearence];
+        _viewModel.selectedDate = [_viewModel dateForIndexPath:indexPath];
+//        if (!_supressEvent) {
+//            [_viewModel didSelectDate:_viewModel.selectedDate];
+//        }
+    }
+    
+    // CollectionView选中状态仅仅在‘当月’体现，placeholder需要重新计算'选中'状态
+    [collectionView.visibleCells enumerateObjectsUsingBlock:^(CalendarCollectionViewCell *cell, NSUInteger idx, BOOL *stop) {
+        if (cell.isPlaceholder) {
+            [cell setNeedsLayout];
+        }
+    }];
+    NSLog(@"select Day: %@", cell.dateLabel.text);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CalendarCollectionViewCell *cell = (CalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell configureCellAppearence];
 }
 
 #pragma mark - ScrollView Delegate
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSInteger section = [self.collectionView indexPathForItemAtPoint:self.collectionView.contentOffset].section;
-    //self.currentMonth = [_viewModel monthForSection:section];
     [self.delegate calendarCurrentMonthStringDidChangeTo:[_viewModel setMonthLabelForSection:section]];
 }
 
@@ -74,6 +107,8 @@
     NSInteger section = [self.collectionView indexPathForItemAtPoint:self.collectionView.contentOffset].section;
     [self.delegate calendarCurrentMonthStringDidChangeTo:[_viewModel setMonthLabelForSection:section]];
 }
+
+#pragma mark - NSNotification Method
 
 - (void)scrollToPreMonth:(id)sender {
     NSInteger section = [self.collectionView indexPathForItemAtPoint:self.collectionView.contentOffset].section;
@@ -89,6 +124,19 @@
     }
 }
 
+- (void)selectedToday:(id)sender {
+    NSDate *currentDate = [NSDate date];
+    NSIndexPath *indexPath = [_viewModel indexPathForDate:currentDate];
+    [self.collectionView selectItemAtIndexPath:indexPath
+                                      animated:YES
+                                scrollPosition:UICollectionViewScrollPositionLeft];
+    [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
+    //CalendarCollectionViewCell *cell = (CalendarCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    //[cell configureCellAppearence];
+    //NSLog(@"select Day: %@", cell.dateLabel.text);
+
+}
+
 - (void)collectionViewScrollToSection:(NSInteger)section animated:(BOOL)animated {
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:section];
     [self.collectionView scrollToItemAtIndexPath:indexPath
@@ -102,7 +150,7 @@
     return CGSizeMake(CGRectGetWidth(self.collectionView.frame)/WEEK_DAYS, CGRectGetHeight(self.collectionView.frame)/COLLECTIONVIEW_ROWS);
 }
 
-#pragma mark - configure
+#pragma mark - Configure
 
 - (void)bindView {
     NSArray *dateList = [NSArray array];
@@ -111,9 +159,14 @@
 
 - (void)configureCell:(CalendarCollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
+    cell.calenderViewModel = _viewModel;
+    cell.month = [[[_viewModel.minimumDate firstDayOfMonth] dateByAddMonths:indexPath.section] dateByIgnoringTimeComponents];
     cell.date = [_viewModel dateForIndexPath:indexPath];
     NSInteger dateDay = [cell.date getDay];
     cell.dateLabel.text = [NSString stringWithFormat:@"%d",(int)dateDay];
+    [cell configureCellAppearence];
+
+    [cell setNeedsLayout];
 }
 
 @end

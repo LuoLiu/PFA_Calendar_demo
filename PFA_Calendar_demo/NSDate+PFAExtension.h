@@ -17,6 +17,10 @@
 - (NSInteger)weekOfYear;
 - (NSDate *)dateByIgnoringTimeComponents;
 
+- (BOOL)isEqualToDateForDay:(NSDate *)date;
+- (BOOL)isEqualToDateForWeek:(NSDate *)date;
+- (BOOL)isEqualToDateForMonth:(NSDate *)date;
+    
 - (NSDate *)firstDayOfMonth;
 - (NSDate *)lastDayOfMonth;
 - (NSInteger)numberOfDaysInMonth;

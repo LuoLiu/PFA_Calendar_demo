@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xme-12-2Pa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xme-12-2Pa">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -274,6 +274,7 @@
                                                 <constraint firstAttribute="centerY" secondItem="Qpe-il-tUW" secondAttribute="centerY" id="BM0-c0-ZMs">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                                                 </constraint>
+                                                <constraint firstItem="66C-fX-PLs" firstAttribute="leading" secondItem="Qpe-il-tUW" secondAttribute="trailing" constant="200" id="DBq-EU-pZi"/>
                                                 <constraint firstAttribute="centerY" secondItem="66C-fX-PLs" secondAttribute="centerY" id="EpK-Cj-jr0"/>
                                                 <constraint firstItem="Qpe-il-tUW" firstAttribute="leading" secondItem="FFP-5o-xpA" secondAttribute="trailing" constant="8" id="fTB-Nk-NrN">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="8"/>
@@ -294,6 +295,7 @@
                                                     <exclude reference="2L6-PU-8Wa"/>
                                                     <exclude reference="BM0-c0-ZMs"/>
                                                     <exclude reference="fTB-Nk-NrN"/>
+                                                    <exclude reference="DBq-EU-pZi"/>
                                                     <exclude reference="EpK-Cj-jr0"/>
                                                     <exclude reference="kbR-nE-pi4"/>
                                                     <exclude reference="toc-k7-rGL"/>
@@ -310,6 +312,7 @@
                                                     <include reference="2L6-PU-8Wa"/>
                                                     <include reference="BM0-c0-ZMs"/>
                                                     <include reference="fTB-Nk-NrN"/>
+                                                    <include reference="DBq-EU-pZi"/>
                                                     <include reference="EpK-Cj-jr0"/>
                                                     <include reference="kbR-nE-pi4"/>
                                                     <include reference="toc-k7-rGL"/>
@@ -795,6 +798,7 @@
                                                 </switch>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="s0R-43-Iyn" firstAttribute="leading" secondItem="4QM-70-NLK" secondAttribute="trailing" constant="200" id="3cK-Jj-er1"/>
                                                 <constraint firstItem="s0R-43-Iyn" firstAttribute="trailing" secondItem="vfQ-J9-Asc" secondAttribute="trailingMargin" id="IRB-9r-xJr"/>
                                                 <constraint firstAttribute="centerY" secondItem="4QM-70-NLK" secondAttribute="centerY" id="Kfw-5w-6OD">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="2"/>
@@ -821,6 +825,7 @@
                                                     <exclude reference="Kfw-5w-6OD"/>
                                                     <exclude reference="aU7-UA-qKL"/>
                                                     <exclude reference="gkA-km-ILX"/>
+                                                    <exclude reference="3cK-Jj-er1"/>
                                                     <exclude reference="IRB-9r-xJr"/>
                                                     <exclude reference="xdh-ed-ihf"/>
                                                     <exclude reference="Kyl-O9-EvQ"/>
@@ -837,6 +842,7 @@
                                                     <include reference="Kfw-5w-6OD"/>
                                                     <include reference="aU7-UA-qKL"/>
                                                     <include reference="gkA-km-ILX"/>
+                                                    <include reference="3cK-Jj-er1"/>
                                                     <include reference="IRB-9r-xJr"/>
                                                     <include reference="xdh-ed-ihf"/>
                                                     <include reference="Kyl-O9-EvQ"/>
@@ -1389,6 +1395,9 @@
                                         <include reference="YNd-zl-yOT"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="selectedToday:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="oXx-Cg-FU8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1647,8 +1656,7 @@
                                         <exclude reference="Oew-8r-jdc"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="Oew-8r-jdc"/>
                                     </mask>
@@ -1804,9 +1812,6 @@
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DlL-dE-zoL">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
-                                </variation>
                                 <connections>
                                     <segue destination="LS9-Ds-0hC" kind="embed" identifier="CalendarScheduleEmbedSegue" id="FGn-nk-Pav"/>
                                 </connections>
@@ -1898,11 +1903,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EfW-Kh-zMq" userLabel="icon_hospital">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_hospital" translatesAutoresizingMaskIntoConstraints="NO" id="EfW-Kh-zMq" userLabel="icon_hospital">
                                             <rect key="frame" x="0.0" y="45" width="15" height="15"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AIg-Zg-yQ7" userLabel="icon_mm">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mm" translatesAutoresizingMaskIntoConstraints="NO" id="AIg-Zg-yQ7" userLabel="icon_mm">
                                             <rect key="frame" x="18" y="45" width="15" height="15"/>
+                                        </imageView>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_pp" translatesAutoresizingMaskIntoConstraints="NO" id="Ieq-49-oHY" userLabel="icon_pp">
+                                            <rect key="frame" x="35" y="45" width="15" height="15"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDT-a9-wUs">
                                             <rect key="frame" x="5" y="0.0" width="18" height="18"/>
@@ -1961,9 +1969,6 @@
                                                 </mask>
                                             </variation>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ieq-49-oHY" userLabel="icon_pp">
-                                            <rect key="frame" x="35" y="45" width="15" height="15"/>
-                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -1998,10 +2003,10 @@
                                     <mask key="subviews">
                                         <exclude reference="EfW-Kh-zMq"/>
                                         <exclude reference="AIg-Zg-yQ7"/>
+                                        <exclude reference="Ieq-49-oHY"/>
                                         <exclude reference="ZDT-a9-wUs"/>
                                         <exclude reference="5VZ-Iu-GZg"/>
                                         <exclude reference="rIV-QB-aXP"/>
-                                        <exclude reference="Ieq-49-oHY"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="974-Gz-bNt"/>
@@ -2029,10 +2034,10 @@
                                     <mask key="subviews">
                                         <include reference="EfW-Kh-zMq"/>
                                         <include reference="AIg-Zg-yQ7"/>
+                                        <include reference="Ieq-49-oHY"/>
                                         <include reference="ZDT-a9-wUs"/>
                                         <include reference="5VZ-Iu-GZg"/>
                                         <include reference="rIV-QB-aXP"/>
-                                        <include reference="Ieq-49-oHY"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="974-Gz-bNt"/>
@@ -2289,4 +2294,9 @@
             <point key="canvasLocation" x="924.75" y="1191.375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_hospital" width="512" height="512"/>
+        <image name="icon_mm" width="512" height="512"/>
+        <image name="icon_pp" width="512" height="512"/>
+    </resources>
 </document>

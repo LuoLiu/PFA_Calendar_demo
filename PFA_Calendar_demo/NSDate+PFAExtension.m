@@ -48,6 +48,18 @@
     return [calendar dateFromComponents:components];
 }
 
+- (BOOL)isEqualToDateForDay:(NSDate *)date {
+    return [self getYear] == [date getYear] && [self getMonth] == [date getMonth] && [self getDay] == [date getDay];
+}
+
+- (BOOL)isEqualToDateForWeek:(NSDate *)date {
+    return [self getYear] == [date getYear] && [self weekOfYear] == [date weekOfYear];
+}
+
+- (BOOL)isEqualToDateForMonth:(NSDate *)date {
+    return [self getYear] == [date getYear] && [self getMonth] == [date getMonth];
+}
+
 #pragma mark - Date For Month
 
 - (NSDate *)firstDayOfMonth {

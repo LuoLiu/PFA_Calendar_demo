@@ -13,11 +13,21 @@
 
 @interface CalendarCollectionViewModel : NSObject
 
+@property (strong, nonatomic) NSArray *dateList;
+@property (strong, nonatomic) NSDate *minimumDate;
+@property (strong, nonatomic) NSDate *maximumDate;
+@property (strong, nonatomic) NSDate *currentDate;
+@property (strong, nonatomic) NSDate *selectedDate;
+@property (strong, nonatomic) NSDate *currentMonth;
+
 - (instancetype)initWithDateList:(NSArray *)dateList;
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfItemsInSection:(NSInteger)section;
 - (NSDate *)dateForIndexPath:(NSIndexPath *)indexPath;
+- (NSIndexPath *)indexPathForDate:(NSDate *)date;
 //- (NSDate *)monthForSection:(NSInteger)section;
 - (NSString *)setMonthLabelForSection:(NSInteger)section;
+- (BOOL)isDateInRange:(NSDate *)date;
+- (void)setSelectedDate:(NSDate *)selectedDate animate:(BOOL)animate;
 
 @end

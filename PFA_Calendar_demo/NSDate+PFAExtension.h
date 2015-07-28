@@ -10,6 +10,21 @@
 
 @interface NSDate (PFAExtension)
 
+///日付
+///YYYY/MM/DDの形式
+@property (copy, nonatomic) NSString *date;
+
+///戌の日
+///0: 通常日、1: 戌の日
+@property (assign, nonatomic) BOOL isDogsDay;
+
+///祝日
+///0: 通常日、1: 祝日
+@property (assign, nonatomic) BOOL isHoliday;
+
+///祝日名
+@property (copy, nonatomic) NSString *holidayName;
+
 - (NSInteger)getDay;
 - (NSInteger)getMonth;
 - (NSInteger)getYear;
@@ -17,6 +32,7 @@
 - (NSString *)dayInWeek;
 - (NSInteger)weekOfYear;
 - (NSDate *)dateByIgnoringTimeComponents;
+- (NSString *)stringWithFormat:(NSString *)format;
 
 - (BOOL)isEqualToDateForDay:(NSDate *)date;
 - (BOOL)isEqualToDateForWeek:(NSDate *)date;
@@ -42,7 +58,6 @@
 
 + (instancetype)dateFromString:(NSString *)string format:(NSString *)format;
 + (instancetype)dateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day;
-
 @end
 
 @interface NSCalendar (PFAExtension)

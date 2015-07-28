@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@class CalendarCellInfo;
-
 @interface CalendarCollectionViewModel : NSObject
 
 @property (strong, nonatomic) NSArray *dateList;

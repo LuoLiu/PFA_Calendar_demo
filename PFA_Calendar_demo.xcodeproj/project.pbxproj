@@ -13,8 +13,6 @@
 		78BBEFFF1B5DF2ED00DE8EDA /* AddScheduleContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78BBEFFE1B5DF2ED00DE8EDA /* AddScheduleContainerController.m */; };
 		78BBF0021B5DF32000DE8EDA /* AddScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78BBF0011B5DF32000DE8EDA /* AddScheduleTableViewController.m */; };
 		78BBF0051B5DF70B00DE8EDA /* ScheduleTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 78BBF0041B5DF70B00DE8EDA /* ScheduleTableViewModel.m */; };
-		78BBF0081B5DF72D00DE8EDA /* ScheduleTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 78BBF0071B5DF72D00DE8EDA /* ScheduleTableDataSource.m */; };
-		78BBF00B1B5DF73B00DE8EDA /* ScheduleTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78BBF00A1B5DF73A00DE8EDA /* ScheduleTableDelegate.m */; };
 		78BBF0111B5DFEDE00DE8EDA /* NSDate+PFAExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 78BBF0101B5DFEDE00DE8EDA /* NSDate+PFAExtension.m */; };
 		78BBF0141B5DFF8500DE8EDA /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 78BBF0131B5DFF8500DE8EDA /* ScheduleEvent.m */; };
 		78FBEE331B5C85910022F0CC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 78FBEE321B5C85910022F0CC /* main.m */; };
@@ -59,10 +57,6 @@
 		78BBF0011B5DF32000DE8EDA /* AddScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddScheduleTableViewController.m; sourceTree = "<group>"; };
 		78BBF0031B5DF70B00DE8EDA /* ScheduleTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewModel.h; sourceTree = "<group>"; };
 		78BBF0041B5DF70B00DE8EDA /* ScheduleTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewModel.m; sourceTree = "<group>"; };
-		78BBF0061B5DF72D00DE8EDA /* ScheduleTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableDataSource.h; sourceTree = "<group>"; };
-		78BBF0071B5DF72D00DE8EDA /* ScheduleTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableDataSource.m; sourceTree = "<group>"; };
-		78BBF0091B5DF73A00DE8EDA /* ScheduleTableDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableDelegate.h; sourceTree = "<group>"; };
-		78BBF00A1B5DF73A00DE8EDA /* ScheduleTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableDelegate.m; sourceTree = "<group>"; };
 		78BBF00F1B5DFEDE00DE8EDA /* NSDate+PFAExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+PFAExtension.h"; sourceTree = "<group>"; };
 		78BBF0101B5DFEDE00DE8EDA /* NSDate+PFAExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+PFAExtension.m"; sourceTree = "<group>"; };
 		78BBF0121B5DFF8500DE8EDA /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleEvent.h; sourceTree = "<group>"; };
@@ -242,10 +236,6 @@
 				78FBEE761B5CCC320022F0CC /* CalendarCollectionViewModel.m */,
 				78BBF0031B5DF70B00DE8EDA /* ScheduleTableViewModel.h */,
 				78BBF0041B5DF70B00DE8EDA /* ScheduleTableViewModel.m */,
-				78BBF0061B5DF72D00DE8EDA /* ScheduleTableDataSource.h */,
-				78BBF0071B5DF72D00DE8EDA /* ScheduleTableDataSource.m */,
-				78BBF0091B5DF73A00DE8EDA /* ScheduleTableDelegate.h */,
-				78BBF00A1B5DF73A00DE8EDA /* ScheduleTableDelegate.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -396,12 +386,10 @@
 			files = (
 				78FBEE731B5C9C1E0022F0CC /* CalendarCollectionViewCell.m in Sources */,
 				78FBEE6A1B5C98D10022F0CC /* PFACalendarViewController.m in Sources */,
-				78BBF0081B5DF72D00DE8EDA /* ScheduleTableDataSource.m in Sources */,
 				7839591D1B60F5DD002C55CA /* CalendarContainerController.m in Sources */,
 				78FBEE361B5C85910022F0CC /* AppDelegate.m in Sources */,
 				787D3C861B5CE133004E882B /* CalendarCellInfo.m in Sources */,
 				78BBF0051B5DF70B00DE8EDA /* ScheduleTableViewModel.m in Sources */,
-				78BBF00B1B5DF73B00DE8EDA /* ScheduleTableDelegate.m in Sources */,
 				78FBEE771B5CCC320022F0CC /* CalendarCollectionViewModel.m in Sources */,
 				78BBEFFF1B5DF2ED00DE8EDA /* AddScheduleContainerController.m in Sources */,
 				78FBEE331B5C85910022F0CC /* main.m in Sources */,

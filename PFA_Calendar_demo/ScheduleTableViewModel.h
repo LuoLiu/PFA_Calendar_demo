@@ -11,9 +11,7 @@
 
 @interface ScheduleTableViewModel : NSObject
 
-
-@property (strong, nonatomic) id<UITableViewDataSource> dataSource;
-@property (strong, nonatomic) id<UITableViewDelegate> delegate;
+- (instancetype)initWithEventList:(NSArray *)eventList;
 
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;

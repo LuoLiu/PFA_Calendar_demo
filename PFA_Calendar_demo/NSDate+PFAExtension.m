@@ -80,6 +80,12 @@
     return [calendar dateFromComponents:components];
 }
 
+- (NSString *)stringWithFormat:(NSString *)format {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = format;
+    return [formatter stringFromDate:self];
+}
+
 - (BOOL)isEqualToDateForDay:(NSDate *)date {
     return [self getYear] == [date getYear] && [self getMonth] == [date getMonth] && [self getDay] == [date getDay];
 }
@@ -202,6 +208,24 @@
 
 - (NSDate *)dateByMinusYears:(NSInteger)years {
     return [self dateByAddYears:-years];
+}
+
+#pragma mark - Property
+
+- (NSString *)date {
+    return [self stringWithFormat:@"YYYY/MM/DD"];
+}
+
+- (BOOL)isDogsDay {
+    return NO;
+}
+
+- (BOOL)isHoliday {
+    return NO;
+}
+
+- (NSString *)holidayName {
+    return @"holidayName";
 }
 
 #pragma mark - DateTransform

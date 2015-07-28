@@ -8,10 +8,15 @@
 
 #import "ScheduleTableViewController.h"
 #import "ScheduleDetailTableViewCell.h"
+#import "ScheduleTableViewModel.h"
+#import "ScheduleEvent.h"
 
 #define kCalendarScheduleTableCellReuseIdentifier    @"ScheduleDetailTableCellIdentifier"
 
 @interface ScheduleTableViewController ()
+
+@property (strong, nonatomic) ScheduleTableViewModel *viewModel;
+@property (strong, nonatomic) NSArray *evenList;
 
 @end
 
@@ -19,6 +24,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    ///////////test
+    ScheduleEvent *event1 = [[ScheduleEvent alloc] init];
+    event1.eventTitle = @"Test 1";
+    event1.startDate = @"2015/7/27 11:00:11";
+    
+    ScheduleEvent *event2 = [[ScheduleEvent alloc] init];
+    event2.eventTitle = @"Test 2";
+    event2.startDate = @"2015/7/27 22:00:22";
+    
+    ScheduleEvent *event3 = [[ScheduleEvent alloc] init];
+    event3.eventTitle = @"Test 3";
+    event3.startDate = @"2015/7/28 23:00:33";
+    
+    _evenList = [NSArray arrayWithObjects:event1, event2, event3, nil];
+    ///////////test
+
+    _viewModel = [[ScheduleTableViewModel alloc] initWithEventList:_evenList];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,15 +52,15 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return [_viewModel numberOfSections];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return [_viewModel numberOfRowsInSection:section];
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [NSString stringWithFormat:@"Section %d", (int)section];
+    return [_viewModel titleForHeaderInSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

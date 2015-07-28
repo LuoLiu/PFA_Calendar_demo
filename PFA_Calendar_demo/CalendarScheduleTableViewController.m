@@ -72,13 +72,13 @@
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"MM月dd日";
     NSString *weekDayString = [NSString stringWithFormat:@"（%@）", [self.scheduleDate dayInWeek]];
-    NSString *scheduleDateString = [[dateFormatter stringFromDate:self.scheduleDate] stringByAppendingString:weekDayString];
+    NSString *scheduleDateString = [[self.scheduleDate stringWithFormat:@"MM月dd日"] stringByAppendingString:weekDayString];
     
-    ////Add:holiday
-    //
+    if (self.scheduleDate.isHoliday) {
+        NSString *holidayName = [NSString stringWithString:self.scheduleDate.holidayName];
+        scheduleDateString = [scheduleDateString stringByAppendingString:holidayName];
+    }
     
     return scheduleDateString;
 }

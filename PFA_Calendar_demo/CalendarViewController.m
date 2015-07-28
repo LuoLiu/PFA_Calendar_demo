@@ -87,7 +87,7 @@
             [cell setNeedsLayout];
         }
     }];
-    NSLog(@"select Day: %@", cell.dateLabel.text);
+    NSLog(@"select Day: %@, %@", cell.dateLabel.text, [cell.date dayInWeek]);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath

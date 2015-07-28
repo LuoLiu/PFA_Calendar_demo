@@ -26,13 +26,15 @@
     
     if (self) {
         _dateList = dateList;
-        _minimumDate = [dateList firstObject];
-        _maximumDate = [dateList lastObject];
-        _currentDate = [NSDate date].dateByIgnoringTimeComponents;
+        _minimumDate  = [dateList firstObject];
+        _maximumDate  = [dateList lastObject];
+        _currentDate  = [NSDate date].dateByIgnoringTimeComponents;
         _currentMonth = [_currentDate copy];
         ////////test
         _minimumDate = [NSDate dateWithYear:1970 month:1 day:1];
         _maximumDate = [NSDate dateWithYear:2099 month:12 day:31];
+        _pregDate    = [NSDate dateWithYear:2015 month:3 day:5];
+        _expBirthday = [NSDate dateWithYear:2015 month:12 day:25];
         ////////test
     }
     return self;
@@ -145,6 +147,18 @@
     NSDate *selectMonth = [[_minimumDate firstDayOfMonth] dateByAddMonths:section];
     NSString *monthString = [NSString stringWithFormat:@"%d/%d", (int)[selectMonth getYear], (int)[selectMonth getMonth]];
     return monthString;
+}
+
+- (NSString *)weekAndDayToExpBirthday:(NSDate *)date {
+    if ([date daysFrom:_expBirthday] >= 0 || [date daysFrom:_pregDate] < 0) {
+        return @"";
+    }
+    
+    NSInteger week = [date weeksFrom:_pregDate];
+    NSInteger day = [date daysFrom:_pregDate]%7;
+    
+    NSString *weekAndDayString = [NSString stringWithFormat:@"%dw%dd", (int)week, (int)day];
+    return weekAndDayString;
 }
 
 @end

@@ -36,6 +36,38 @@
     return component.weekday;
 }
 
+- (NSString *)dayInWeek {
+    NSCalendar *calendar = [NSCalendar sharedCalendar];
+    NSDateComponents *component = [calendar components:NSCalendarUnitWeekday fromDate:self];
+    switch (component.weekday) {
+        case 1:
+            return @"日";
+            break;
+        case 2:
+            return @"月";
+            break;
+        case 3:
+            return @"火";
+            break;
+        case 4:
+            return @"水";
+            break;
+        case 5:
+            return @"木";
+            break;
+        case 6:
+            return @"金";
+            break;
+        case 7:
+            return @"土";
+            break;
+            
+        default:
+            return @"";
+            break;
+    }
+}
+
 - (NSInteger)weekOfYear {
     NSCalendar *calendar = [NSCalendar sharedCalendar];
     NSDateComponents *component = [calendar components:NSCalendarUnitWeekOfYear fromDate:self];

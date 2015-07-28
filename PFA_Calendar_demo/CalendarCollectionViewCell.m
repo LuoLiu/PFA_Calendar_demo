@@ -48,10 +48,11 @@
     self.hospitalIcon.hidden = YES;
     self.mmIcon.hidden = YES;
     self.ppIcon.hidden = YES;
+    
+    self.weekAndDayLabel.text = [_calenderViewModel weekAndDayToExpBirthday:self.date];
 }
 
-- (UIColor *)colorForCurrentStateInDictionary:(NSDictionary *)dictionary
-{
+- (UIColor *)colorForCurrentStateInDictionary:(NSDictionary *)dictionary {
     if (self.selected) {
         if (self.isToday) {
             return dictionary[@(CalendarCellStateToday)];
@@ -68,19 +69,20 @@
     return dictionary[@(CalendarCellStateNormal)];
 }
 
-- (BOOL)isPlaceholder
-{
+- (BOOL)isPlaceholder {
     return ![self.date isEqualToDateForMonth:self.month];
 }
 
-- (BOOL)isToday
-{
+- (BOOL)isToday {
     return [self.date isEqualToDateForDay:_calenderViewModel.currentDate];
 }
 
-- (BOOL)isWeekend
-{
-    return [self.date weekday] == 1 || [self.date weekday] == 7;
+- (BOOL)isSaturday {
+    return [self.date weekday] == 7;
+}
+
+- (BOOL)isSunday {
+    return [self.date weekday] == 1;
 }
 
 @end

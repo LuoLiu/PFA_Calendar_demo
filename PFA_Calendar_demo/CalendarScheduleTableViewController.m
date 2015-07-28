@@ -8,10 +8,14 @@
 
 #import "CalendarScheduleTableViewController.h"
 #import "ScheduleDetailTableViewCell.h"
+#import "ScheduleEvent.h"
+#import "NSDate+PFAExtension.h"
 
 #define kCalendarScheduleTableCellReuseIdentifier      @"ScheduleDetailTableCellIdentifier"
 
 @interface CalendarScheduleTableViewController ()
+
+@property (strong, nonatomic) NSMutableArray *scheduleEventList;
 
 @end
 
@@ -19,6 +23,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    ///////获取特定日期的scheduleEventList
+    _scheduleEventList = [NSMutableArray array];
+    ///////////test
+    _scheduleDate = [NSDate date];
+    ScheduleEvent *event1 = [[ScheduleEvent alloc] init];
+    event1.eventTitle = @"Test 1";
+    event1.startDate = @"00:11";
+    [_scheduleEventList addObject:event1];
+    
+    ScheduleEvent *event2 = [[ScheduleEvent alloc] init];
+    event2.eventTitle = @"Test 2";
+    event2.startDate = @"00:22";
+    [_scheduleEventList addObject:event2];
+    ///////////test
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,21 +55,32 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 3;
+    return self.scheduleEventList.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ScheduleDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCalendarScheduleTableCellReuseIdentifier];
     
-    cell.dateLabel.text = @"00:00";
-    cell.planLabel.text = [NSString stringWithFormat:@"%d", (int)indexPath.row];
+    if (self.scheduleEventList.count != 0) {
+        ScheduleEvent *scheduleEvent = [self.scheduleEventList objectAtIndex:indexPath.row];
+        cell.dateLabel.text = scheduleEvent.startDate;
+        cell.planLabel.text = scheduleEvent.eventTitle;
+    }
     
     return cell;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"Section Title";
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"MM月dd日";
+    NSString *weekDayString = [NSString stringWithFormat:@"（%@）", [self.scheduleDate dayInWeek]];
+    NSString *scheduleDateString = [[dateFormatter stringFromDate:self.scheduleDate] stringByAppendingString:weekDayString];
+    
+    ////Add:holiday
+    //
+    
+    return scheduleDateString;
 }
 
 /*

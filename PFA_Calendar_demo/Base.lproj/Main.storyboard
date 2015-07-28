@@ -1929,18 +1929,20 @@
                                     <constraint firstItem="EfW-Kh-zMq" firstAttribute="leading" secondItem="mcH-Sc-TyM" secondAttribute="leading" id="IyN-fK-2ud"/>
                                     <constraint firstItem="rIV-QB-aXP" firstAttribute="top" secondItem="mcH-Sc-TyM" secondAttribute="top" id="Ntw-bw-DFD"/>
                                     <constraint firstItem="Ieq-49-oHY" firstAttribute="centerY" secondItem="AIg-Zg-yQ7" secondAttribute="centerY" id="R6K-5I-1hB"/>
-                                    <constraint firstItem="AIg-Zg-yQ7" firstAttribute="top" secondItem="5VZ-Iu-GZg" secondAttribute="bottom" constant="13" id="WNr-0a-TRe"/>
+                                    <constraint firstItem="AIg-Zg-yQ7" firstAttribute="top" secondItem="5VZ-Iu-GZg" secondAttribute="bottom" constant="13" id="WNr-0a-TRe">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                    </constraint>
                                     <constraint firstItem="EfW-Kh-zMq" firstAttribute="centerY" secondItem="AIg-Zg-yQ7" secondAttribute="centerY" id="aa4-ck-j6z"/>
                                     <constraint firstAttribute="bottom" secondItem="Ieq-49-oHY" secondAttribute="bottom" id="c47-JZ-Pzh"/>
                                     <constraint firstItem="ZDT-a9-wUs" firstAttribute="top" secondItem="mcH-Sc-TyM" secondAttribute="top" id="cbY-I5-D85"/>
                                     <constraint firstItem="Ieq-49-oHY" firstAttribute="width" secondItem="AIg-Zg-yQ7" secondAttribute="width" id="mZC-dl-OgF"/>
                                     <constraint firstItem="EfW-Kh-zMq" firstAttribute="width" secondItem="AIg-Zg-yQ7" secondAttribute="width" id="que-1s-dfx"/>
                                     <constraint firstAttribute="centerX" secondItem="5VZ-Iu-GZg" secondAttribute="centerX" id="rRE-wD-8ZX">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="-2.5"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                     </constraint>
                                     <constraint firstAttribute="trailing" secondItem="rIV-QB-aXP" secondAttribute="trailing" id="saz-Qu-iTH"/>
                                     <constraint firstAttribute="centerY" secondItem="5VZ-Iu-GZg" secondAttribute="centerY" id="x3y-rC-JNQ">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="5.5"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                     </constraint>
                                 </constraints>
                                 <variation key="default">

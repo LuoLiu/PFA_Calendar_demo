@@ -20,6 +20,14 @@
 @property (strong, nonatomic) NSDate *selectedDate;
 @property (strong, nonatomic) NSDate *currentMonth;
 
+///妊娠日
+@property (strong, nonatomic) NSDate *pregDate;
+///出産予定日
+@property (strong, nonatomic) NSDate *expBirthday;
+///誕生日(出生日)
+@property (strong, nonatomic) NSDate *birthday;
+
+
 - (instancetype)initWithDateList:(NSArray *)dateList;
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfItemsInSection:(NSInteger)section;
@@ -29,5 +37,6 @@
 - (NSString *)setMonthLabelForSection:(NSInteger)section;
 - (BOOL)isDateInRange:(NSDate *)date;
 - (void)setSelectedDate:(NSDate *)selectedDate animate:(BOOL)animate;
+- (NSString *)weekAndDayToExpBirthday:(NSDate *)date;
 
 @end

@@ -7,8 +7,23 @@
 //
 
 #import "AddScheduleTableViewController.h"
+#import "ScheduleEvent.h"
+#import "AlarmTableViewController.h"
 
-@interface AddScheduleTableViewController ()
+@interface AddScheduleTableViewController () <AlarmTableViewControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextField *eventTitleTextField;
+@property (weak, nonatomic) IBOutlet UITextView *memoTextView;
+@property (weak, nonatomic) IBOutlet UISwitch *checkUpSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *shareSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *alarmLabel;
+
+@property (strong, nonatomic) AlarmTableViewController *alarmTableVC;
+@property (strong, nonatomic) ScheduleEvent *scheduleEvent;
+
+@property (strong, nonatomic) NSDate *startDate;
+@property (strong, nonatomic) NSDate *endDate;
+@property (assign, nonatomic) NSInteger alarmMinutes;
 
 @end
 
@@ -17,11 +32,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    _scheduleEvent = [[ScheduleEvent alloc] init];
+    _memoTextView.text = @"";
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addScheduleEvent) name:@"addScheduleEvent" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,58 +53,77 @@
     return 7;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (IBAction)checkUpSwitchAction:(id)sender {
+    if ([(UISwitch *)sender isOn]) {
+        _scheduleEvent.eventType = ScheduleEventTypeCheckup;
+        self.eventTitleTextField.text = @"検診";
+    }
+    else {
+        _scheduleEvent.eventType = ScheduleEventTypeOthers;
+        self.eventTitleTextField.text = @"";
+    }
+}
+
+- (IBAction)shareSwitchAction:(id)sender {
+    _scheduleEvent.isShare = [(UISwitch *)sender isOn];
+}
+
+- (void)addScheduleEvent {
+    _scheduleEvent.isShare = self.shareSwitch.isOn;
+    _scheduleEvent.alarmMinutes = self.alarmMinutes;
+    _scheduleEvent.eventTitle = [NSString stringWithString:self.eventTitleTextField.text];
+    _scheduleEvent.memo = [NSString stringWithString:self.memoTextView.text];
     
-    // Configure the cell...
+    [self.delegate getNewScheduleEvent:_scheduleEvent];
+}
+
+-(void)alarmMinutes:(NSInteger)alarmMinutes {
     
-    return cell;
-}
-*/
+    _alarmMinutes = alarmMinutes;
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    if (alarmMinutes < 0) {
+        self.alarmLabel.text = @"あし";
+        return;
+    }
+    
+    NSString *alarmString = @"";
+    switch (alarmMinutes) {
+        case 0:
+            alarmString = @"予定時刻";
+            break;
+        case 5:
+            alarmString = @"5分前";
+            break;
+        case 15:
+            alarmString = @"15分前";
+            break;
+        case 30:
+            alarmString = @"30分前";
+            break;
+        case 60:
+            alarmString = @"1時間前";
+            break;
+        case 60*2:
+            alarmString = @"2時間前";
+            break;
+        case 60*24:
+            alarmString = @"1日前";
+            break;
+            
+        default:
+            alarmString = @"あし";
+            break;
+    }
+    self.alarmLabel.text = [NSString stringWithString:alarmString];
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"ShowAlarmSegue"]) {
+        self.alarmTableVC = segue.destinationViewController;
+        self.alarmTableVC.delegate = self;
+    }
 }
-*/
 
 @end

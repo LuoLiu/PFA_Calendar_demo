@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class AlarmTableViewController;
+
+@protocol AlarmTableViewControllerDelegate <NSObject>
+
+- (void)alarmMinutes:(NSInteger)alarmMinutes;
+
+@end
+
 @interface AlarmTableViewController : UITableViewController
+
+@property (assign, nonatomic) id<AlarmTableViewControllerDelegate> delegate;
 
 @end

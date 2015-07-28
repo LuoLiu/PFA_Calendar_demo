@@ -7,8 +7,13 @@
 //
 
 #import "AddScheduleContainerController.h"
+#import "AddScheduleTableViewController.h"
+#import "ScheduleEvent.h"
 
-@interface AddScheduleContainerController ()
+@interface AddScheduleContainerController () <AddScheduleTableViewControllerDelegate>
+
+@property (strong, nonatomic)AddScheduleTableViewController *addScheduleTableVC;
+@property (strong, nonatomic)ScheduleEvent *scheduleEvent;
 
 @end
 
@@ -24,14 +29,28 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+- (IBAction)okButtonTapped:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"addScheduleEvent" object:nil];
+}
+
+- (IBAction)delButtonTapped:(id)sender {
+    //Delete scheduleEvent
+
+}
+
+-(void)getNewScheduleEvent:(ScheduleEvent *)scheduleEvent {
+    self.scheduleEvent = scheduleEvent;
+    //Add scheduleEvent.....
+
+}
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"AddScheduleEmbedSegue"]) {
+        self.addScheduleTableVC = segue.destinationViewController;
+        self.addScheduleTableVC.delegate = self;
+    }
 }
-*/
 
 @end

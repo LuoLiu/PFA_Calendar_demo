@@ -18,6 +18,7 @@
 
 @interface AlarmTableViewController : UITableViewController
 
+@property (strong, nonatomic) NSDate *startDate;
 @property (assign, nonatomic) id<AlarmTableViewControllerDelegate> delegate;
 
 @end

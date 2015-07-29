@@ -9,6 +9,7 @@
 #import "AddScheduleTableViewController.h"
 #import "ScheduleEvent.h"
 #import "AlarmTableViewController.h"
+#import "NSDate+PFAExtension.h"
 
 @interface AddScheduleTableViewController () <AlarmTableViewControllerDelegate>
 
@@ -34,6 +35,11 @@
     
     _scheduleEvent = [[ScheduleEvent alloc] init];
     _memoTextView.text = @"";
+    
+    //test
+    _scheduleEvent.startDate = @"2015/7/29 23:00:22";
+    //test
+    self.startDate = [NSDate dateFromString:_scheduleEvent.startDate format:@"yyyy/MM/dd HH:mm:ss"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addScheduleEvent) name:@"addScheduleEvent" object:nil];
 }
@@ -123,6 +129,7 @@
     if ([segue.identifier isEqualToString:@"ShowAlarmSegue"]) {
         self.alarmTableVC = segue.destinationViewController;
         self.alarmTableVC.delegate = self;
+        self.alarmTableVC.startDate = self.startDate;
     }
 }
 

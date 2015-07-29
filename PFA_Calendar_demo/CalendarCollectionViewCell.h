@@ -39,6 +39,8 @@ typedef NS_ENUM(NSInteger, CalendarCellState) {
 @property (strong, nonatomic) NSDate *month;
 @property (assign, nonatomic) BOOL hasEvent;
 @property (assign, nonatomic, getter=isPlaceholder) BOOL isPlaceholder;
+@property (assign, nonatomic, getter=isSaturday)    BOOL isSaturday;
+@property (assign, nonatomic, getter=isSunday)      BOOL isSunday;
 
 - (void)configureCellAppearence;
 

@@ -125,16 +125,20 @@
 }
 
 - (void)selectedToday:(id)sender {
-    NSDate *currentDate = [NSDate date];
+    NSDate *currentDate = _viewModel.currentDate;
     NSIndexPath *indexPath = [_viewModel indexPathForDate:currentDate];
-    [self.collectionView selectItemAtIndexPath:indexPath
-                                      animated:YES
-                                scrollPosition:UICollectionViewScrollPositionLeft];
+    [self scrollToCurrentMonthAnimated:YES];
     [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
     //CalendarCollectionViewCell *cell = (CalendarCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     //[cell configureCellAppearence];
     //NSLog(@"select Day: %@", cell.dateLabel.text);
 
+}
+
+- (void)scrollToCurrentMonthAnimated:(BOOL)animated {
+    NSDate *currentMonth = _viewModel.currentMonth;
+    NSIndexPath *indexPath = [_viewModel indexPathForDate:currentMonth];
+    [self collectionViewScrollToSection:indexPath.section animated:animated];
 }
 
 - (void)collectionViewScrollToSection:(NSInteger)section animated:(BOOL)animated {

@@ -1676,7 +1676,6 @@
                                     <constraint firstItem="tTl-oi-yr9" firstAttribute="leading" secondItem="na9-Z3-zA7" secondAttribute="trailing" id="kui-DS-bI8"/>
                                     <constraint firstItem="na9-Z3-zA7" firstAttribute="leading" secondItem="9OJ-eT-OzF" secondAttribute="trailing" id="lgp-Sm-r7u"/>
                                     <constraint firstItem="Kzg-T1-akh" firstAttribute="leading" secondItem="tTl-oi-yr9" secondAttribute="trailing" id="nF0-oj-tf5"/>
-                                    <constraint firstAttribute="height" constant="30" id="oZS-Cx-9ip"/>
                                     <constraint firstItem="Kzg-T1-akh" firstAttribute="width" secondItem="tTl-oi-yr9" secondAttribute="width" id="qwt-KJ-kyx"/>
                                     <constraint firstItem="Ger-gV-3tZ" firstAttribute="width" secondItem="tTl-oi-yr9" secondAttribute="width" id="wok-CV-zi7"/>
                                     <constraint firstItem="uMJ-ex-mW3" firstAttribute="leading" secondItem="Gji-oj-rWh" secondAttribute="leading" id="xUJ-vu-ESE"/>
@@ -1693,7 +1692,6 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="awB-KP-3Zf"/>
-                                        <exclude reference="oZS-Cx-9ip"/>
                                         <exclude reference="gLW-0K-4Nz"/>
                                         <exclude reference="Bia-pW-4Jo"/>
                                         <exclude reference="DTP-Zb-cN1"/>
@@ -1729,7 +1727,6 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="awB-KP-3Zf"/>
-                                        <include reference="oZS-Cx-9ip"/>
                                         <include reference="gLW-0K-4Nz"/>
                                         <include reference="Bia-pW-4Jo"/>
                                         <include reference="DTP-Zb-cN1"/>

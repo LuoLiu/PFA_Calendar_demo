@@ -43,6 +43,11 @@
     event2.eventTitle = @"Test 2";
     event2.startDate = [NSDate dateFromString:@"00:22" format:@"HH:mm"];
     [_scheduleEventList addObject:event2];
+    
+    ScheduleEvent *event3 = [[ScheduleEvent alloc] init];
+    event3.eventTitle = @"Test 3";
+    event3.startDate = [NSDate dateFromString:@"00:33" format:@"HH:mm"];
+    [_scheduleEventList addObject:event3];
     ///////////test
 }
 

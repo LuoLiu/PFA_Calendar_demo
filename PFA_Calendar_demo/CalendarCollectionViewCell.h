@@ -31,10 +31,11 @@ typedef NS_ENUM(NSInteger, CalendarCellState) {
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weekAndDayLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *dateIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *monthIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *hospitalIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *mmIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *ppIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 
 @property (strong, nonatomic) CalendarCollectionViewModel *calenderViewModel;
 @property (strong, nonatomic) CalendarDate  *calendarDate;

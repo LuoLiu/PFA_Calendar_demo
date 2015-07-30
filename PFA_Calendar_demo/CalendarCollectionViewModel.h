@@ -39,6 +39,7 @@
 
 - (NSString *)setMonthLabelForSection:(NSInteger)section;
 - (NSString *)weekAndDayToExpBirthday:(NSDate *)date;
+- (NSInteger)pregMonthsInDate:(NSDate *)date;
 
 - (CalendarDate *)calendarDateForIndexPath:(NSIndexPath *)indexPath;
 

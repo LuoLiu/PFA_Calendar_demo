@@ -14,7 +14,7 @@
 
 #define kCellSelectedColor      [UIColor redColor]
 #define kCellTodayColor         [UIColor blueColor]
-#define kCellPlaceholderColor   [UIColor colorWithWhite:0.9 alpha:1]
+#define kCellPlaceholderColor   [UIColor clearColor]
 #define kCellNormalColor        [UIColor whiteColor]
 #define kCellAnnounceColor      [UIColor yellowColor]
 
@@ -22,6 +22,7 @@
 #define kCellPlaceholderTextColor   [UIColor colorWithWhite:0.5 alpha:1]
 #define kCellSaturdayTextColor      [UIColor blueColor]
 #define kCellSundayTextColor        [UIColor redColor]
+#define kCellHolidayTextColor       [UIColor redColor]
 
 @interface CalendarCollectionViewCell ()
 
@@ -47,6 +48,7 @@
     _dateLabelColors[@(CalendarCellStatePlaceholder)]   = kCellPlaceholderTextColor;
     _dateLabelColors[@(CalendarCellStateSaturday)]      = kCellSaturdayTextColor;
     _dateLabelColors[@(CalendarCellStateSunday)]        = kCellSundayTextColor;
+    _dateLabelColors[@(CalendarCellStateHoliday)]       = kCellHolidayTextColor;
 }
 
 -(void)prepareForReuse {
@@ -55,10 +57,11 @@
     self.hospitalIcon.hidden = YES;
     self.mmIcon.hidden = YES;
     self.ppIcon.hidden = YES;
+    self.monthIcon.image = nil;
+    self.monthIcon.backgroundColor = [UIColor clearColor];///test
 }
 
 - (void)configureCellAppearence {
-    
     self.weekAndDayLabel.hidden = self.isPlaceholder;
 //    self.userInteractionEnabled = !self.isPlaceholder;
     
@@ -70,6 +73,39 @@
     self.ppIcon.hidden = YES;
     
     self.weekAndDayLabel.text = [_calenderViewModel weekAndDayToExpBirthday:self.calendarDate.date];
+    self.backgroundImageView.image = [self setBackgroundImage];
+    self.monthIcon.image = [self setmonthIconImage];
+
+}
+
+- (UIImage *)setmonthIconImage {
+    if (self.isPlaceholder) {
+        self.monthIcon.backgroundColor = [UIColor clearColor];///test
+        return nil;
+    }
+    if ([self.calendarDate.date isEqualToDateForDay:_calenderViewModel.expBirthday]) {
+        self.monthIcon.backgroundColor = [UIColor greenColor];///test
+        return [UIImage imageNamed:@""];
+    }
+    else if ([_calenderViewModel pregMonthsInDate:self.calendarDate.date] >= 0) {
+        self.monthIcon.backgroundColor = [UIColor redColor];///test
+        return [UIImage imageNamed:@""];
+    }
+    self.monthIcon.backgroundColor = [UIColor clearColor];///test
+    return nil;
+}
+
+- (UIImage *)setBackgroundImage {
+    if ([self.calendarDate.date isEqualToDate:_calenderViewModel.expBirthday]) {
+        return [UIImage imageNamed:@""];
+    }
+    else if ([self.calendarDate.date isEqualToDate:_calenderViewModel.birthday]) {
+        return [UIImage imageNamed:@""];
+    }
+    else if ([self.calendarDate isDogsDay]) {
+        return [UIImage imageNamed:@""];
+    }
+    return nil;
 }
 
 - (UIColor *)backgroundColorForCurrentStateInDictionary:(NSDictionary *)dictionary {
@@ -95,6 +131,9 @@
     }
     if (self.isSunday) {
         return dictionary[@(CalendarCellStateSunday)];
+    }
+    if (self.calendarDate.isHoliday) {
+        return dictionary[@(CalendarCellStateHoliday)];
     }
     
     return dictionary[@(CalendarCellStateNormal)];

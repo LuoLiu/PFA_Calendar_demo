@@ -127,8 +127,6 @@
 			children = (
 				787D3C841B5CE133004E882B /* CalendarDate.h */,
 				787D3C851B5CE133004E882B /* CalendarDate.m */,
-				78BBF00F1B5DFEDE00DE8EDA /* NSDate+HYExtension.h */,
-				78BBF0101B5DFEDE00DE8EDA /* NSDate+HYExtension.m */,
 				78BBF0121B5DFF8500DE8EDA /* ScheduleEvent.h */,
 				78BBF0131B5DFF8500DE8EDA /* ScheduleEvent.m */,
 			);
@@ -172,6 +170,15 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		78D0ED6B1B6A45BC00028BBE /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				78BBF00F1B5DFEDE00DE8EDA /* NSDate+HYExtension.h */,
+				78BBF0101B5DFEDE00DE8EDA /* NSDate+HYExtension.m */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
 		78FBEE241B5C85910022F0CC = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +207,7 @@
 				78671C101B5CD9A500CBE291 /* Model */,
 				78BBF00D1B5DFDCC00DE8EDA /* View */,
 				78FBEE781B5CCC390022F0CC /* ViewModel */,
+				78D0ED6B1B6A45BC00028BBE /* Util */,
 				78FBEE3A1B5C85910022F0CC /* Main.storyboard */,
 				78FBEE3D1B5C85910022F0CC /* Images.xcassets */,
 				78FBEE3F1B5C85910022F0CC /* LaunchScreen.xib */,

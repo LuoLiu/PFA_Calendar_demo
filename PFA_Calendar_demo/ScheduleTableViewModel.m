@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) NSArray *eventList;
 @property (strong, nonatomic) NSArray *dateList;
+@property (assign, nonatomic) BOOL addEvenForSelf;
 
 @end
 
@@ -44,17 +45,68 @@
     return [_dateList objectAtIndex:section];
 }
 
+- (NSArray *)eventsForCalendarDate:(CalendarDate *)calendarDate {
+    NSMutableArray *eventsForDate = [NSMutableArray array];
+    NSString *dateString = [self dateTitleForCalendarDate:calendarDate];
+    for (ScheduleEvent *event in self.eventList) {
+        NSString *eventDateTitle = [self dateTitleForCalendarDate:event.calendarDate];
+        if ([eventDateTitle isEqualToString:dateString]) {
+            [eventsForDate addObject:event];
+            if (event.isShare) {
+                [eventsForDate addObject:event];
+            }
+        }
+    }
+    return eventsForDate;
+}
+
 - (NSArray *)eventsForSection:(NSInteger)section {
     NSMutableArray *eventsForSection = [NSMutableArray array];
     NSString *sectionTitle = [self titleForHeaderInSection:section];
     for (ScheduleEvent *event in self.eventList) {
-        NSString *eventDateTitle = [self dateTitleForEvent:event];
+        NSString *eventDateTitle = [self dateTitleForCalendarDate:event.calendarDate];
         if ([eventDateTitle isEqualToString:sectionTitle]) {
             [eventsForSection addObject:event];
+            if (event.isShare) {
+                [eventsForSection addObject:event];
+            }
         }
     }
-    
+
     return eventsForSection;
+}
+
+- (ScheduleEvent *)eventForIndexPath:(NSIndexPath *)indexPath {
+    ScheduleEvent *cellEvent = [[self eventsForSection:indexPath.section] objectAtIndex:indexPath.row];
+    return cellEvent;
+}
+
+- (NSString *)dateStringForIndexPath:(NSIndexPath *)indexPath {
+    ScheduleEvent *event = [self eventForIndexPath:indexPath];
+    return [event.startDate stringWithFormat:@"HH:mm"];
+}
+
+- (NSString *)planStringForIndexPath:(NSIndexPath *)indexPath {
+    ScheduleEvent *event = [self eventForIndexPath:indexPath];
+    return event.eventTitle;
+}
+
+- (UIImage *)imageForForIndexPath:(NSIndexPath *)indexPath {
+    ScheduleEvent *event = [self eventForIndexPath:indexPath];
+    if (event.eventType == ScheduleEventTypeCheckup) {
+        return [UIImage imageNamed:@""];//医院icon
+    }
+    else if (!event.isShare) {
+        return [UIImage imageNamed:@""];//上传者icon
+    }
+    else if (event.isShare && _addEvenForSelf){//&& 上传者
+        _addEvenForSelf = YES;
+        return [UIImage imageNamed:@""];//上传者icon
+    }
+    else {
+        _addEvenForSelf = NO;
+        return [UIImage imageNamed:@""];//对方icon
+    }
 }
 
 - (NSArray *)sortEventList:(NSArray *)eventList byAscending:(BOOL)ascending {
@@ -68,7 +120,7 @@
     NSMutableArray *dateList = [NSMutableArray array];
 
     for (ScheduleEvent *event in self.eventList) {
-        NSString *dateTitle = [self dateTitleForEvent:event];
+        NSString *dateTitle = [self dateTitleForCalendarDate:event.calendarDate];
         if (![dateList containsObject:dateTitle]) {
             [dateList addObject:dateTitle];
         }
@@ -76,12 +128,12 @@
     return dateList;
 }
 
-- (NSString *)dateTitleForEvent:(ScheduleEvent *)event {
-    NSDate *eventDate = event.startDate;
-    NSString *weekDayString = [NSString stringWithFormat:@"（%@）", [eventDate dayInWeek]];
-    NSString *title = [[eventDate stringWithFormat:@"MM月dd日"] stringByAppendingString:weekDayString];
-    if (event.calendarDate.isHoliday) {
-        NSString *holidayName = [NSString stringWithString:event.calendarDate.holidayName];
+- (NSString *)dateTitleForCalendarDate:(CalendarDate *)calendarDate {
+    //NSDate *eventDate = event.startDate;
+    NSString *weekDayString = [NSString stringWithFormat:@"（%@）", [calendarDate.date dayInWeek]];
+    NSString *title = [[calendarDate.date stringWithFormat:@"MM月dd日"] stringByAppendingString:weekDayString];
+    if (calendarDate.isHoliday) {
+        NSString *holidayName = [NSString stringWithString:calendarDate.holidayName];
         title = [title stringByAppendingString:holidayName];
     }
     return title;

@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+//@class ScheduleEvent;
+
 @interface ScheduleTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *planLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *iconImage;
+@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
+
+//@property (strong, nonatomic) ScheduleEvent *scheduleEvent;
 
 @end

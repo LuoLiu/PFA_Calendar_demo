@@ -7,7 +7,19 @@
 //
 
 #import "ScheduleEvent.h"
+#import "CalendarDate.h"
+#import "NSDate+HYExtension.h"
 
 @implementation ScheduleEvent
+
+- (CalendarDate *)calendarDate {
+    CalendarDate *date = [[CalendarDate alloc] init];
+    date.date = [NSDate dateWithYear:[self.startDate getYear] month:[self.startDate getMonth] day:[self.startDate getDay]];
+    ///从服务器获取数据
+    date.isHoliday = NO;
+    date.isDogsDay = NO;
+    date.holidayName = @"";
+    return date;
+}
 
 @end

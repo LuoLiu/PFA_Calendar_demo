@@ -159,4 +159,18 @@
     return weekAndDayString;
 }
 
+- (NSInteger)pregMonthsInDate:(NSDate *)date {
+    if ([date daysFrom:_expBirthday] >= 0 || [date daysFrom:_pregDate] < 0) {
+        return -1;
+    }
+    
+    NSInteger week = [date weeksFrom:_pregDate];
+    NSInteger day = [date daysFrom:_pregDate]%7;
+
+    if ((week+1)%4 == 0 && day == 6) {
+        return week/4;
+    }
+    return -1;
+}
+
 @end

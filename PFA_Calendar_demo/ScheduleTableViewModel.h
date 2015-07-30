@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@class ScheduleEvent;
+@class CalendarDate;
+
 @interface ScheduleTableViewModel : NSObject
 
 - (instancetype)initWithEventList:(NSArray *)eventList;
@@ -16,5 +19,10 @@
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 - (NSString *)titleForHeaderInSection:(NSInteger)section;
+- (ScheduleEvent *)eventForIndexPath:(NSIndexPath *)indexPath;
+- (NSArray *)eventsForCalendarDate:(CalendarDate *)calendarDate;
+- (NSString *)dateStringForIndexPath:(NSIndexPath *)indexPath;
+- (NSString *)planStringForIndexPath:(NSIndexPath *)indexPath;
+- (UIImage *)imageForForIndexPath:(NSIndexPath *)indexPath;
 
 @end

@@ -14,8 +14,8 @@
 - (NSInteger)getMonth;
 - (NSInteger)getYear;
 - (NSInteger)weekday;
-- (NSString *)dayInWeek;
 - (NSInteger)weekOfYear;
+- (NSString *)dayInWeek;
 - (NSDate *)dateByIgnoringTimeComponents;
 - (NSString *)stringWithFormat:(NSString *)format;
 

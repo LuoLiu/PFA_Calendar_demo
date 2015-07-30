@@ -33,9 +33,9 @@
     [self bindView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToPreMonth:) name:@"scrollToPreMonth" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToNextMonth:) name:@"scrollToNextMonth" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToToday:) name:@"scrollToToday" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToToday) name:@"scrollToToday" object:nil];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self scrollToToday:self];
+        [self scrollToTodayAnimated:NO];
         NSInteger section = [_viewModel indexPathForDate:_viewModel.currentMonth].section;
         [self.delegate calendarCurrentMonthStringDidChangeTo:[_viewModel setMonthLabelForSection:section]];
         [self.collectionView.visibleCells makeObjectsPerformSelector:@selector(setNeedsLayout)];
@@ -170,12 +170,16 @@
     [self collectionViewScrollToSection:indexPath.section animated:animated];
 }
 
-- (void)scrollToToday:(id)sender {
+- (void)scrollToTodayAnimated:(BOOL)animated {
     NSDate *currentDate = _viewModel.currentDate;
     NSIndexPath *indexPath = [_viewModel indexPathForDate:currentDate];
-    [self scrollToCurrentMonthAnimated:YES];
+    [self scrollToCurrentMonthAnimated:animated];
     [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
     [self.delegate getScheduleDate:[_viewModel calendarDateForIndexPath:indexPath]];
+}
+
+- (void)scrollToToday {
+    [self scrollToTodayAnimated:YES];
 }
 
 

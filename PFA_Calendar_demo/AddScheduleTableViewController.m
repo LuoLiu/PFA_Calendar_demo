@@ -60,7 +60,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return 8;
 }
 
 - (IBAction)checkUpSwitchAction:(id)sender {
@@ -84,7 +84,15 @@
     _scheduleEvent.eventTitle = [NSString stringWithString:self.eventTitleTextField.text];
     _scheduleEvent.memo = [NSString stringWithString:self.memoTextView.text];
     
-    [self.delegate getNewScheduleEvent:_scheduleEvent];
+}
+
+- (IBAction)okButtonTapped:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"addScheduleEvent" object:nil];
+}
+
+- (IBAction)delButtonTapped:(id)sender {
+    //Delete scheduleEvent
+    
 }
 
 -(void)alarmMinutes:(NSInteger)alarmMinutes {

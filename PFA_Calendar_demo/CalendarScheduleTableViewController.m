@@ -8,7 +8,9 @@
 
 #import "CalendarScheduleTableViewController.h"
 #import "CalendarViewController.h"
-#import "ScheduleDetailTableViewCell.h"
+#import "ScheduleDetailTableViewController.h"
+#import "ScheduleTableViewCell.h"
+#import "AnnounceTableViewCell.h"
 #import "ScheduleEvent.h"
 #import "CalendarDate.h"
 #import "NSDate+HYExtension.h"
@@ -18,6 +20,8 @@
 @interface CalendarScheduleTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *scheduleEventList;
+@property (strong, nonatomic) ScheduleDetailTableViewController *scheduleDetailTableVC;
+@property (assign, nonatomic) BOOL hasAnnounce;
 
 @end
 
@@ -40,7 +44,6 @@
     event2.startDate = [NSDate dateFromString:@"00:22" format:@"HH:mm"];
     [_scheduleEventList addObject:event2];
     ///////////test
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,23 +60,45 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.scheduleEventList.count;
+    if (_hasAnnounce) {
+        return self.scheduleEventList.count+1;
+    }
+    else {
+        return self.scheduleEventList.count;
+    }
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ScheduleDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCalendarScheduleTableCellReuseIdentifier];
-    
-    if (self.scheduleEventList.count != 0) {
-        ScheduleEvent *scheduleEvent = [self.scheduleEventList objectAtIndex:indexPath.row];
-        cell.dateLabel.text = [scheduleEvent.startDate stringWithFormat:@"HH:mm"];
-        cell.planLabel.text = scheduleEvent.eventTitle;
+    if (_hasAnnounce) {
+        if (indexPath.row == 0) {
+            AnnounceTableViewCell *announceCell = [tableView dequeueReusableCellWithIdentifier:@"AnnounceCell" forIndexPath:indexPath];
+            announceCell.contentLabel.text = @"アナウンス";
+            return announceCell;
+        }
+        ScheduleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCalendarScheduleTableCellReuseIdentifier];
+        
+        if (self.scheduleEventList.count != 0) {
+            ScheduleEvent *scheduleEvent = [self.scheduleEventList objectAtIndex:indexPath.row-1];
+            cell.dateLabel.text = [scheduleEvent.startDate stringWithFormat:@"HH:mm"];
+            cell.planLabel.text = scheduleEvent.eventTitle;
+        }
+        
+        return cell;
     }
-    
-    return cell;
+    else {
+        ScheduleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCalendarScheduleTableCellReuseIdentifier];
+        
+        if (self.scheduleEventList.count != 0) {
+            ScheduleEvent *scheduleEvent = [self.scheduleEventList objectAtIndex:indexPath.row];
+            cell.dateLabel.text = [scheduleEvent.startDate stringWithFormat:@"HH:mm"];
+            cell.planLabel.text = scheduleEvent.eventTitle;
+        }
+        
+        return cell;
+    }
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *weekDayString = [NSString stringWithFormat:@"（%@）", [self.scheduleDate.date dayInWeek]];
     NSString *scheduleDateString = [[self.scheduleDate.date stringWithFormat:@"MM月dd日"] stringByAppendingString:weekDayString];
     
@@ -85,14 +110,11 @@
     return scheduleDateString;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"showScheduleDetail"]) {
+        self.scheduleDetailTableVC = segue.destinationViewController;
+    }
 }
-*/
+
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "ScheduleTableViewController.h"
-#import "ScheduleDetailTableViewCell.h"
+#import "ScheduleTableViewCell.h"
 #import "ScheduleTableViewModel.h"
 #import "ScheduleEvent.h"
 #import "NSDate+HYExtension.h"
@@ -66,7 +66,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ScheduleDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCalendarScheduleTableCellReuseIdentifier];
+    ScheduleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCalendarScheduleTableCellReuseIdentifier];
     
     cell.planLabel.text = [NSString stringWithFormat:@"%d", (int)indexPath.row];
     return cell;

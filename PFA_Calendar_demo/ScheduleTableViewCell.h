@@ -1,5 +1,5 @@
 //
-//  ScheduleDetailTableViewCell.h
+//  ScheduleTableViewCell.h
 //  HY_Calendar_demo
 //
 //  Created by fenrir_cd08 on 2015/07/20.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ScheduleDetailTableViewCell : UITableViewCell
+@interface ScheduleTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *planLabel;

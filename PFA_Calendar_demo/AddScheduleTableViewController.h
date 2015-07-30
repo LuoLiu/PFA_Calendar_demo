@@ -8,17 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class AddScheduleTableViewController;
-@class ScheduleEvent;
-
-@protocol AddScheduleTableViewControllerDelegate <NSObject>
-
-- (void)getNewScheduleEvent:(ScheduleEvent *)scheduleEvent;
-
-@end
-
 @interface AddScheduleTableViewController : UITableViewController
-
-@property (weak, nonatomic) id<AddScheduleTableViewControllerDelegate> delegate;
 
 @end

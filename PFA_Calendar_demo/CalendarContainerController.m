@@ -8,10 +8,12 @@
 
 #import "CalendarContainerController.h"
 #import "CalendarViewController.h"
+#import "CalendarScheduleTableViewController.h"
 
 @interface CalendarContainerController () <CalendarViewControllerDelegate>
 
 @property (strong, nonatomic) CalendarViewController *calendarVC;
+@property (strong, nonatomic) CalendarScheduleTableViewController *calendarScheduleVC;
 
 @end
 
@@ -25,6 +27,11 @@
     [self.delegate isCurrentMonth:isCurrentMonth];
 }
 
+-(void)getScheduleDate:(CalendarDate *)calendarDate {
+    self.calendarScheduleVC.scheduleDate = calendarDate;
+    [self.calendarScheduleVC.tableView reloadData];
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -34,7 +41,7 @@
     }
     else if ([segue.identifier isEqualToString:@"CalendarScheduleEmbedSegue"])
     {
-        //
+        self.calendarScheduleVC = segue.destinationViewController;
     }
 }
 

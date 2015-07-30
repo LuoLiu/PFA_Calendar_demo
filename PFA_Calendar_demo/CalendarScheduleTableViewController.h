@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class CalendarDate;
+
 @interface CalendarScheduleTableViewController : UITableViewController
 
-@property (strong, nonatomic) NSDate *scheduleDate;
+@property (strong, nonatomic) CalendarDate *scheduleDate;
 
 @end

@@ -59,8 +59,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"scrollToNextMonth" object:nil];
 }
 
-- (IBAction)selectedToday:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"selectedToday" object:nil];
+- (IBAction)toToday:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"scrollToToday" object:nil];
 }
 
 - (void)calendarCurrentMonthStringDidChangeTo:(NSString *)monthString {

@@ -1,5 +1,5 @@
 //
-//  CalendarCellInfo.h
+//  CalendarDate.h
 //  HY_Calendar_demo
 //
 //  Created by fenrir_cd08 on 2015/07/20.
@@ -8,11 +8,11 @@
 
 #import <Mantle/Mantle.h>
 
-@interface CalendarCellInfo : NSObject
+@interface CalendarDate : NSObject
 
 ///日付
-///YYYY/MM/DDの形式
-@property (copy, nonatomic) NSString *date;
+///yyyy/MM/ddの形式
+@property (strong, nonatomic) NSDate *date;
 
 ///戌の日
 ///0: 通常日、1: 戌の日

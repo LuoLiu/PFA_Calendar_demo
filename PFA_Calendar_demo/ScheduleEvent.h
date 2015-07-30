@@ -24,6 +24,8 @@ typedef NS_ENUM(NSInteger, ScheduleEventIsShare) {
     ScheduleEventTypeShare  = 1
 };
 
+@class CalendarDate;
+
 @interface ScheduleEvent : NSObject
 
 ///イベントID (アプリ内のID)
@@ -48,13 +50,13 @@ typedef NS_ENUM(NSInteger, ScheduleEventIsShare) {
 @property (assign, nonatomic) ScheduleEventIsShare isShare;
 
 ///開始日時
-///YYYY/MM/DD hh:mm:ss JSTの形式。時間未指定時は、YYYY/MM/DD
+///yyyy/MM/dd HH:mm:ss JSTの形式。時間未指定時は、YYYY/MM/DD
 ///*****更新種別=1:追加、2:変更の場合必須
-@property (copy, nonatomic) NSString *startDate;
+@property (strong, nonatomic) NSDate *startDate;
 
 ///終了日時
-///YYYY/MM/DD hh:mm:ss JSTの形式。時間未指定時は、YYYY/MM/DD
-@property (copy, nonatomic) NSString *endDate;
+///yyyy/MM/dd HH:mm:ss JSTの形式。時間未指定時は、YYYY/MM/DD
+@property (strong, nonatomic) NSDate *endDate;
 
 ///アラーム時間 (開始日時の指定分前にアラーム)
 @property (assign, nonatomic) NSInteger alarmMinutes;
@@ -64,8 +66,10 @@ typedef NS_ENUM(NSInteger, ScheduleEventIsShare) {
 @property (copy, nonatomic) NSString *memo;
 
 ///処理日時
-///YYYY/MM/DD hh:mm:ss JSTの形式
+///yyyy/MM/dd HH:mm:ss JSTの形式
 ///*****必須
-@property (copy, nonatomic) NSString *opeDate;
+@property (strong, nonatomic) NSDate *opeDate;
 
+///////////////////
+@property (strong, nonatomic) CalendarDate *calendarDate;
 @end

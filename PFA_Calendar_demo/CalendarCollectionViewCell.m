@@ -9,6 +9,8 @@
 #import "CalendarCollectionViewCell.h"
 #import "NSDate+HYExtension.h"
 #import "CalendarCollectionViewModel.h"
+#import "CalendarDate.h"
+#import "ScheduleEvent.h"
 
 #define kCellSelectedColor      [UIColor redColor]
 #define kCellTodayColor         [UIColor blueColor]
@@ -67,7 +69,7 @@
     self.mmIcon.hidden = YES;
     self.ppIcon.hidden = YES;
     
-    self.weekAndDayLabel.text = [_calenderViewModel weekAndDayToExpBirthday:self.date];
+    self.weekAndDayLabel.text = [_calenderViewModel weekAndDayToExpBirthday:self.calendarDate.date];
 }
 
 - (UIColor *)backgroundColorForCurrentStateInDictionary:(NSDictionary *)dictionary {
@@ -98,19 +100,23 @@
     return dictionary[@(CalendarCellStateNormal)];
 }
 
+- (BOOL)hasEvent {
+    return [self.scheduleEvent.startDate isEqualToDateForDay:self.calendarDate.date];
+}
+
 - (BOOL)isPlaceholder {
-    return ![self.date isEqualToDateForMonth:self.month];
+    return ![self.calendarDate.date isEqualToDateForMonth:self.month];
 }
 
 - (BOOL)isToday {
-    return [self.date isEqualToDateForDay:_calenderViewModel.currentDate];
+    return [self.calendarDate.date isEqualToDateForDay:_calenderViewModel.currentDate];
 }
 
 - (BOOL)isSaturday {
-    return [self.date weekday] == 7;
+    return [self.calendarDate.date weekday] == 7;
 }
 
 - (BOOL)isSunday {
-    return [self.date weekday] == 1;
+    return [self.calendarDate.date weekday] == 1;
 }
 @end

@@ -7,8 +7,10 @@
 //
 
 #import "CalendarScheduleTableViewController.h"
+#import "CalendarViewController.h"
 #import "ScheduleDetailTableViewCell.h"
 #import "ScheduleEvent.h"
+#import "CalendarDate.h"
 #import "NSDate+HYExtension.h"
 
 #define kCalendarScheduleTableCellReuseIdentifier      @"ScheduleDetailTableCellIdentifier"
@@ -27,15 +29,15 @@
     ///////获取特定日期的scheduleEventList
     _scheduleEventList = [NSMutableArray array];
     ///////////test
-    _scheduleDate = [NSDate date];
+    
     ScheduleEvent *event1 = [[ScheduleEvent alloc] init];
     event1.eventTitle = @"Test 1";
-    event1.startDate = @"00:11";
+    event1.startDate = [NSDate dateFromString:@"00:11" format:@"HH:mm"];
     [_scheduleEventList addObject:event1];
     
     ScheduleEvent *event2 = [[ScheduleEvent alloc] init];
     event2.eventTitle = @"Test 2";
-    event2.startDate = @"00:22";
+    event2.startDate = [NSDate dateFromString:@"00:22" format:@"HH:mm"];
     [_scheduleEventList addObject:event2];
     ///////////test
 
@@ -64,7 +66,7 @@
     
     if (self.scheduleEventList.count != 0) {
         ScheduleEvent *scheduleEvent = [self.scheduleEventList objectAtIndex:indexPath.row];
-        cell.dateLabel.text = scheduleEvent.startDate;
+        cell.dateLabel.text = [scheduleEvent.startDate stringWithFormat:@"HH:mm"];
         cell.planLabel.text = scheduleEvent.eventTitle;
     }
     
@@ -72,8 +74,8 @@
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *weekDayString = [NSString stringWithFormat:@"（%@）", [self.scheduleDate dayInWeek]];
-    NSString *scheduleDateString = [[self.scheduleDate stringWithFormat:@"MM月dd日"] stringByAppendingString:weekDayString];
+    NSString *weekDayString = [NSString stringWithFormat:@"（%@）", [self.scheduleDate.date dayInWeek]];
+    NSString *scheduleDateString = [[self.scheduleDate.date stringWithFormat:@"MM月dd日"] stringByAppendingString:weekDayString];
     
     if (self.scheduleDate.isHoliday) {
         NSString *holidayName = [NSString stringWithString:self.scheduleDate.holidayName];

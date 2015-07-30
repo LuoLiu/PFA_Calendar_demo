@@ -9,6 +9,7 @@
 #import "CalendarViewController.h"
 #import "CalendarCollectionViewCell.h"
 #import "CalendarCollectionViewModel.h"
+#import "CalendarDate.h"
 #import "NSDate+HYExtension.h"
 
 //#define kCalendarCellNibName               @"CalendarCollectionViewCell"
@@ -32,22 +33,20 @@
     [self bindView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToPreMonth:) name:@"scrollToPreMonth" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToNextMonth:) name:@"scrollToNextMonth" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectedToday:) name:@"selectedToday" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToToday:) name:@"scrollToToday" object:nil];
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (_viewModel.currentMonth) {
-            [self scrollToCurrentMonthAnimated:NO];
-            NSInteger section = [_viewModel indexPathForDate:_viewModel.currentMonth].section;
-            [self.delegate calendarCurrentMonthStringDidChangeTo:[_viewModel setMonthLabelForSection:section]];
-            [self.collectionView.visibleCells makeObjectsPerformSelector:@selector(setNeedsLayout)];
-            [self.delegate isCurrentMonth:YES];
-        }
+        [self scrollToToday:self];
+        NSInteger section = [_viewModel indexPathForDate:_viewModel.currentMonth].section;
+        [self.delegate calendarCurrentMonthStringDidChangeTo:[_viewModel setMonthLabelForSection:section]];
+        [self.collectionView.visibleCells makeObjectsPerformSelector:@selector(setNeedsLayout)];
+        [self.delegate isCurrentMonth:YES];
     });
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"scrollToPreMonth" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"scrollToNextMonth" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"selectedToday" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"scrollToToday" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,21 +76,21 @@
     CalendarCollectionViewCell *cell = (CalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if (cell.isPlaceholder) {
         // 如果是上个月或者下个月的元素，则无需调用代理方法，在[setSelectedDate:animated:]中还会调用此方法
-        return [_viewModel isDateInRange:cell.date] && ![cell.date isEqualToDateForDay:_viewModel.selectedDate];
+        return [_viewModel isDateInRange:cell.calendarDate.date] && ![cell.calendarDate.date isEqualToDateForDay:_viewModel.selectedDate];
     }
     BOOL shouldSelect = ![collectionView.indexPathsForSelectedItems containsObject:indexPath];
     
-    return shouldSelect && [_viewModel isDateInRange:cell.date];
+    return shouldSelect && [_viewModel isDateInRange:cell.calendarDate.date];
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     CalendarCollectionViewCell *cell = (CalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if (cell.isPlaceholder) {
-        [_viewModel setSelectedDate:cell.date animate:YES];
-        NSIndexPath *selectedIndexPath = [_viewModel indexPathForDate:cell.date];
+        [_viewModel setSelectedDate:cell.calendarDate.date animate:YES];
+        NSIndexPath *selectedIndexPath = [_viewModel indexPathForDate:cell.calendarDate.date];
         if ([self collectionView:self.collectionView shouldSelectItemAtIndexPath:selectedIndexPath]) {
-            if ([self.collectionView indexPathsForSelectedItems].count && cell.date) {
-                NSIndexPath *currentIndexPath = [_viewModel indexPathForDate:cell.date];
+            if ([self.collectionView indexPathsForSelectedItems].count && cell.calendarDate.date) {
+                NSIndexPath *currentIndexPath = [_viewModel indexPathForDate:cell.calendarDate.date];
                 [self.collectionView deselectItemAtIndexPath:currentIndexPath animated:YES];
                 [self collectionView:self.collectionView didDeselectItemAtIndexPath:currentIndexPath];
             }
@@ -99,7 +98,7 @@
             [self collectionView:self.collectionView didSelectItemAtIndexPath:selectedIndexPath];
         }
         if (!self.collectionView.tracking && !self.collectionView.decelerating) {
-            [self collectionViewScrollToSection:[_viewModel indexPathForDate:cell.date].section animated:YES];
+            [self collectionViewScrollToSection:[_viewModel indexPathForDate:cell.calendarDate.date].section animated:YES];
         }
     } else {
         [cell configureCellAppearence];
@@ -112,7 +111,10 @@
             [cell setNeedsLayout];
         }
     }];
-    NSLog(@"select Day: %@, %@", cell.dateLabel.text, [cell.date dayInWeek]);
+    NSLog(@"select Day: %@", cell.dateLabel.text);
+    if (cell.hasEvent) {
+        [self.delegate getScheduleDate:cell.calendarDate];
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -126,11 +128,17 @@
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSInteger section = [self.collectionView indexPathForItemAtPoint:self.collectionView.contentOffset].section;
     [self.delegate calendarCurrentMonthStringDidChangeTo:[_viewModel setMonthLabelForSection:section]];
+    NSDate *currentMonth = _viewModel.currentMonth;
+    NSIndexPath *indexPath = [_viewModel indexPathForDate:currentMonth];
+    [self.delegate isCurrentMonth:indexPath.section == section];
 }
 
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     NSInteger section = [self.collectionView indexPathForItemAtPoint:self.collectionView.contentOffset].section;
     [self.delegate calendarCurrentMonthStringDidChangeTo:[_viewModel setMonthLabelForSection:section]];
+    NSDate *currentMonth = _viewModel.currentMonth;
+    NSIndexPath *indexPath = [_viewModel indexPathForDate:currentMonth];
+    [self.delegate isCurrentMonth:indexPath.section == section];
 }
 
 #pragma mark - Scroll Method
@@ -149,17 +157,6 @@
     }
 }
 
-- (void)selectedToday:(id)sender {
-    NSDate *currentDate = _viewModel.currentDate;
-    NSIndexPath *indexPath = [_viewModel indexPathForDate:currentDate];
-    [self scrollToCurrentMonthAnimated:YES];
-    [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
-    //CalendarCollectionViewCell *cell = (CalendarCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    //[cell configureCellAppearence];
-    //NSLog(@"select Day: %@", cell.dateLabel.text);
-
-}
-
 - (void)collectionViewScrollToSection:(NSInteger)section animated:(BOOL)animated {
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:section];
     [self.collectionView scrollToItemAtIndexPath:indexPath
@@ -172,6 +169,15 @@
     NSIndexPath *indexPath = [_viewModel indexPathForDate:currentMonth];
     [self collectionViewScrollToSection:indexPath.section animated:animated];
 }
+
+- (void)scrollToToday:(id)sender {
+    NSDate *currentDate = _viewModel.currentDate;
+    NSIndexPath *indexPath = [_viewModel indexPathForDate:currentDate];
+    [self scrollToCurrentMonthAnimated:YES];
+    [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
+    [self.delegate getScheduleDate:[_viewModel calendarDateForIndexPath:indexPath]];
+}
+
 
 #pragma mark - UICollectionView FlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -190,8 +196,9 @@
     
     cell.calenderViewModel = _viewModel;
     cell.month = [[[_viewModel.minimumDate firstDayOfMonth] dateByAddMonths:indexPath.section] dateByIgnoringTimeComponents];
-    cell.date = [_viewModel dateForIndexPath:indexPath];
-    NSInteger dateDay = [cell.date getDay];
+    cell.calendarDate = [_viewModel calendarDateForIndexPath:indexPath];
+    //cell.calendarDate.date = [_viewModel dateForIndexPath:indexPath];
+    NSInteger dateDay = [cell.calendarDate.date getDay];
     cell.dateLabel.text = [NSString stringWithFormat:@"%d",(int)dateDay];
     [cell configureCellAppearence];
 

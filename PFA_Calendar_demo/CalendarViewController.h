@@ -9,18 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @class CalendarViewController;
+@class CalendarDate;
 
 @protocol CalendarViewControllerDelegate <NSObject>
 
+@optional
 - (void)calendarCurrentMonthStringDidChangeTo:(NSString *)monthString;
 - (void)isCurrentMonth:(BOOL)isCurrentMonth;
+- (void)getScheduleDate:(CalendarDate *)calendarDate;
 
 @end
 
 @interface CalendarViewController : UICollectionViewController
 
 @property (weak, nonatomic) id<CalendarViewControllerDelegate> delegate;
-
-
 
 @end

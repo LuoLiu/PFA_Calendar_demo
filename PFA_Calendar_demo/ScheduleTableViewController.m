@@ -10,6 +10,7 @@
 #import "ScheduleDetailTableViewCell.h"
 #import "ScheduleTableViewModel.h"
 #import "ScheduleEvent.h"
+#import "NSDate+HYExtension.h"
 
 #define kCalendarScheduleTableCellReuseIdentifier    @"ScheduleDetailTableCellIdentifier"
 
@@ -28,15 +29,15 @@
     ///////////test
     ScheduleEvent *event1 = [[ScheduleEvent alloc] init];
     event1.eventTitle = @"Test 1";
-    event1.startDate = @"2015/7/27 11:00:11";
+    event1.startDate = [NSDate dateFromString:@"2015/7/27 11:00:11" format:@"yyyy/MM/dd HH:mm:ss"];
     
     ScheduleEvent *event2 = [[ScheduleEvent alloc] init];
     event2.eventTitle = @"Test 2";
-    event2.startDate = @"2015/7/27 22:00:22";
     
     ScheduleEvent *event3 = [[ScheduleEvent alloc] init];
     event3.eventTitle = @"Test 3";
-    event3.startDate = @"2015/7/28 23:00:33";
+    event3.startDate = event2.startDate = [NSDate dateFromString:@"2015/7/28 23:00:33" format:@"yyyy/MM/dd HH:mm:ss"];
+
     
     _evenList = [NSArray arrayWithObjects:event1, event2, event3, nil];
     ///////////test

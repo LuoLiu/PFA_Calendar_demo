@@ -210,24 +210,6 @@
     return [self dateByAddYears:-years];
 }
 
-#pragma mark - Property
-
-- (NSString *)date {
-    return [self stringWithFormat:@"YYYY/MM/DD"];
-}
-
-- (BOOL)isDogsDay {
-    return NO;
-}
-
-- (BOOL)isHoliday {
-    return NO;
-}
-
-- (NSString *)holidayName {
-    return @"holidayName";
-}
-
 #pragma mark - DateTransform
 
 + (instancetype)dateFromString:(NSString *)string format:(NSString *)format {

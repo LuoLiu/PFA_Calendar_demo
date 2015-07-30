@@ -8,6 +8,7 @@
 
 #import "CalendarCollectionViewModel.h"
 #import "NSDate+HYExtension.h"
+#import "CalendarDate.h"
 
 #define kWEEK_DAYS           (7)
 #define kCOLLECTIONVIEW_ROWS (6)
@@ -26,8 +27,9 @@
     
     if (self) {
         _dateList = dateList;
-        _minimumDate  = [dateList firstObject];
-        _maximumDate  = [dateList lastObject];
+        
+        _minimumDate  = [[dateList firstObject] date];
+        _maximumDate  = [[dateList lastObject] date];
         _currentDate  = [NSDate date].dateByIgnoringTimeComponents;
         _currentMonth = [_currentDate copy];
         ////////test
@@ -40,7 +42,7 @@
     return self;
 }
 
-#pragma mark - Collection 
+#pragma mark - Collection
 
 - (NSInteger)numberOfSections {
     return [_maximumDate monthsFrom:[_minimumDate firstDayOfMonth]] + 1;
@@ -48,6 +50,21 @@
 
 - (NSInteger)numberOfItemsInSection:(NSInteger)section {
     return kWEEK_DAYS*kCOLLECTIONVIEW_ROWS;
+}
+
+- (CalendarDate *)calendarDateForIndexPath:(NSIndexPath *)indexPath {
+    NSDate *date = [self dateForIndexPath:indexPath];
+//    for (CalendarDate *calendarDate in _dateList) {
+//        if ([calendarDate.date isEqualToDate:date]) {
+//            return calendarDate;
+//        }
+//    }
+    
+    /////test
+    CalendarDate *calendarDate = [[CalendarDate alloc] init];
+    calendarDate.date = date;
+    
+    return calendarDate;
 }
 
 - (NSDate *)dateForIndexPath:(NSIndexPath *)indexPath {

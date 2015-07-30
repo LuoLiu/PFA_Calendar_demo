@@ -10,6 +10,7 @@
 
 @class CalendarContainerController;
 @class CalendarViewController;
+@class CalendarDate;
 
 @protocol CalendarContainerControllerDelegate <NSObject>
 

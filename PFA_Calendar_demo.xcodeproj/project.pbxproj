@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7839591D1B60F5DD002C55CA /* CalendarContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7839591C1B60F5DD002C55CA /* CalendarContainerController.m */; };
-		787D3C861B5CE133004E882B /* CalendarCellInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 787D3C851B5CE133004E882B /* CalendarCellInfo.m */; };
+		787D3C861B5CE133004E882B /* CalendarDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 787D3C851B5CE133004E882B /* CalendarDate.m */; };
 		78BBEFFC1B5DF1C700DE8EDA /* AlarmTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78BBEFFB1B5DF1C700DE8EDA /* AlarmTableViewController.m */; };
 		78BBEFFF1B5DF2ED00DE8EDA /* AddScheduleContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78BBEFFE1B5DF2ED00DE8EDA /* AddScheduleContainerController.m */; };
 		78BBF0021B5DF32000DE8EDA /* AddScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78BBF0011B5DF32000DE8EDA /* AddScheduleTableViewController.m */; };
@@ -47,8 +47,8 @@
 		7839591C1B60F5DD002C55CA /* CalendarContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarContainerController.m; sourceTree = "<group>"; };
 		786681B11B5CE710006C17F3 /* libPods-MagicalRecord.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MagicalRecord.a"; path = "Pods/../build/Debug-iphoneos/libPods-MagicalRecord.a"; sourceTree = "<group>"; };
 		786681B31B5CE715006C17F3 /* libPods-Mantle.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Mantle.a"; path = "Pods/../build/Debug-iphoneos/libPods-Mantle.a"; sourceTree = "<group>"; };
-		787D3C841B5CE133004E882B /* CalendarCellInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarCellInfo.h; sourceTree = "<group>"; };
-		787D3C851B5CE133004E882B /* CalendarCellInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCellInfo.m; sourceTree = "<group>"; };
+		787D3C841B5CE133004E882B /* CalendarDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDate.h; sourceTree = "<group>"; };
+		787D3C851B5CE133004E882B /* CalendarDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDate.m; sourceTree = "<group>"; };
 		78BBEFFA1B5DF1C700DE8EDA /* AlarmTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmTableViewController.h; sourceTree = "<group>"; };
 		78BBEFFB1B5DF1C700DE8EDA /* AlarmTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmTableViewController.m; sourceTree = "<group>"; };
 		78BBEFFD1B5DF2ED00DE8EDA /* AddScheduleContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddScheduleContainerController.h; sourceTree = "<group>"; };
@@ -122,8 +122,8 @@
 		78671C101B5CD9A500CBE291 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				787D3C841B5CE133004E882B /* CalendarCellInfo.h */,
-				787D3C851B5CE133004E882B /* CalendarCellInfo.m */,
+				787D3C841B5CE133004E882B /* CalendarDate.h */,
+				787D3C851B5CE133004E882B /* CalendarDate.m */,
 				78BBF00F1B5DFEDE00DE8EDA /* NSDate+HYExtension.h */,
 				78BBF0101B5DFEDE00DE8EDA /* NSDate+HYExtension.m */,
 				78BBF0121B5DFF8500DE8EDA /* ScheduleEvent.h */,
@@ -388,7 +388,7 @@
 				78FBEE6A1B5C98D10022F0CC /* HYCalendarViewController.m in Sources */,
 				7839591D1B60F5DD002C55CA /* CalendarContainerController.m in Sources */,
 				78FBEE361B5C85910022F0CC /* AppDelegate.m in Sources */,
-				787D3C861B5CE133004E882B /* CalendarCellInfo.m in Sources */,
+				787D3C861B5CE133004E882B /* CalendarDate.m in Sources */,
 				78BBF0051B5DF70B00DE8EDA /* ScheduleTableViewModel.m in Sources */,
 				78FBEE771B5CCC320022F0CC /* CalendarCollectionViewModel.m in Sources */,
 				78BBEFFF1B5DF2ED00DE8EDA /* AddScheduleContainerController.m in Sources */,

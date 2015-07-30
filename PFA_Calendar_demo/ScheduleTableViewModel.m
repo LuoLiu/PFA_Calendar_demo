@@ -8,6 +8,7 @@
 
 #import "ScheduleTableViewModel.h"
 #import "ScheduleEvent.h"
+#import "CalendarDate.h"
 #import "NSDate+HYExtension.h"
 
 @interface ScheduleTableViewModel ()
@@ -76,11 +77,11 @@
 }
 
 - (NSString *)dateTitleForEvent:(ScheduleEvent *)event {
-    NSDate *eventDate = [NSDate dateFromString:event.startDate format:@"yyyy/MM/dd HH:mm:ss"];
+    NSDate *eventDate = event.startDate;
     NSString *weekDayString = [NSString stringWithFormat:@"（%@）", [eventDate dayInWeek]];
     NSString *title = [[eventDate stringWithFormat:@"MM月dd日"] stringByAppendingString:weekDayString];
-    if (eventDate.isHoliday) {
-        NSString *holidayName = [NSString stringWithString:eventDate.holidayName];
+    if (event.calendarDate.isHoliday) {
+        NSString *holidayName = [NSString stringWithString:event.calendarDate.holidayName];
         title = [title stringByAppendingString:holidayName];
     }
     return title;

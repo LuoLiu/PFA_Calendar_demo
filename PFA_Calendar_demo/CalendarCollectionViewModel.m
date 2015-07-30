@@ -1,13 +1,13 @@
 //
 //  CalendarCollectionViewModel.m
-//  PFA_Calendar_demo
+//  HY_Calendar_demo
 //
 //  Created by fenrir_cd08 on 2015/07/20.
 //  Copyright (c) 2015年 fenrir_cd08. All rights reserved.
 //
 
 #import "CalendarCollectionViewModel.h"
-#import "NSDate+PFAExtension.h"
+#import "NSDate+HYExtension.h"
 
 #define kWEEK_DAYS           (7)
 #define kCOLLECTIONVIEW_ROWS (6)
@@ -95,27 +95,8 @@
     selectedDate = [selectedDate daysFrom:_minimumDate] < 0 ? [NSDate dateWithYear:[_minimumDate getYear] month:[_minimumDate getMonth] day:[selectedDate getDay]] : selectedDate;
     selectedDate = [selectedDate daysFrom:_maximumDate] > 0 ? [NSDate dateWithYear:[_maximumDate getYear] month:[_maximumDate getMonth] day:[selectedDate getDay]] : selectedDate;
     selectedDate = selectedDate.dateByIgnoringTimeComponents;
-//    NSIndexPath *selectedIndexPath = [self indexPathForDate:selectedDate];
-//    if ([self collectionView:_collectionView shouldSelectItemAtIndexPath:selectedIndexPath]) {
-//        if (_collectionView.indexPathsForSelectedItems.count && _selectedDate) {
-//            NSIndexPath *currentIndexPath = [self indexPathForDate:_selectedDate];
-//            [_collectionView deselectItemAtIndexPath:currentIndexPath animated:YES];
-//            [self collectionView:_collectionView didDeselectItemAtIndexPath:currentIndexPath];
-//        }
-//        [_collectionView selectItemAtIndexPath:selectedIndexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-//        [self collectionView:_collectionView didSelectItemAtIndexPath:selectedIndexPath];
-//    }
-//    if (!_collectionView.tracking && !_collectionView.decelerating) {
-//        [self willChangeValueForKey:@"currentMonth"];
-//        _currentMonth = [selectedDate copy];
-//        if (!_supressEvent) {
-//            _supressEvent = YES;
-//            [self currentMonthDidChange];
-//            _supressEvent = NO;
-//        }
-        [self didChangeValueForKey:@"currentMonth"];
-//        [self scrollToDate:selectedDate animate:animate];
-//    }
+    _currentMonth = [selectedDate copy];
+    [self didChangeValueForKey:@"currentMonth"];
 }
 
 - (void)setCurrentDate:(NSDate *)currentDate {

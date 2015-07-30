@@ -1,13 +1,13 @@
 //
 //  CalendarCollectionViewCell.m
-//  PFA_Calendar_demo
+//  HY_Calendar_demo
 //
 //  Created by fenrir_cd08 on 2015/07/20.
 //  Copyright (c) 2015年 fenrir_cd08. All rights reserved.
 //
 
 #import "CalendarCollectionViewCell.h"
-#import "NSDate+PFAExtension.h"
+#import "NSDate+HYExtension.h"
 #import "CalendarCollectionViewModel.h"
 
 #define kCellSelectedColor      [UIColor redColor]
@@ -58,6 +58,7 @@
 - (void)configureCellAppearence {
     
     self.weekAndDayLabel.hidden = self.isPlaceholder;
+//    self.userInteractionEnabled = !self.isPlaceholder;
     
     self.backgroundColor = [self backgroundColorForCurrentStateInDictionary:_backgroundColors];
     self.dateLabel.textColor = [self textColorForCurrentStateInDictionary:_dateLabelColors];
@@ -111,10 +112,5 @@
 
 - (BOOL)isSunday {
     return [self.date weekday] == 1;
-}
-
-- (BOOL)isWeekend
-{
-    return [self.date weekday] == 1 || [self.date weekday] == 7;
 }
 @end

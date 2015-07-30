@@ -1,6 +1,6 @@
 //
 //  CalendarViewController.m
-//  PFA_Calendar_demo
+//  HY_Calendar_demo
 //
 //  Created by fenrir_cd08 on 2015/07/20.
 //  Copyright (c) 2015年 fenrir_cd08. All rights reserved.
@@ -9,7 +9,7 @@
 #import "CalendarViewController.h"
 #import "CalendarCollectionViewCell.h"
 #import "CalendarCollectionViewModel.h"
-#import "NSDate+PFAExtension.h"
+#import "NSDate+HYExtension.h"
 
 //#define kCalendarCellNibName               @"CalendarCollectionViewCell"
 #define kCalendarCellReuseIdentifier       @"CalendarCellIdentifier"
@@ -33,6 +33,21 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToPreMonth:) name:@"scrollToPreMonth" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToNextMonth:) name:@"scrollToNextMonth" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectedToday:) name:@"selectedToday" object:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (_viewModel.currentMonth) {
+            [self scrollToCurrentMonthAnimated:NO];
+            NSInteger section = [_viewModel indexPathForDate:_viewModel.currentMonth].section;
+            [self.delegate calendarCurrentMonthStringDidChangeTo:[_viewModel setMonthLabelForSection:section]];
+            [self.collectionView.visibleCells makeObjectsPerformSelector:@selector(setNeedsLayout)];
+            [self.delegate isCurrentMonth:YES];
+        }
+    });
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"scrollToPreMonth" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"scrollToNextMonth" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"selectedToday" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,12 +88,22 @@
     CalendarCollectionViewCell *cell = (CalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if (cell.isPlaceholder) {
         [_viewModel setSelectedDate:cell.date animate:YES];
+        NSIndexPath *selectedIndexPath = [_viewModel indexPathForDate:cell.date];
+        if ([self collectionView:self.collectionView shouldSelectItemAtIndexPath:selectedIndexPath]) {
+            if ([self.collectionView indexPathsForSelectedItems].count && cell.date) {
+                NSIndexPath *currentIndexPath = [_viewModel indexPathForDate:cell.date];
+                [self.collectionView deselectItemAtIndexPath:currentIndexPath animated:YES];
+                [self collectionView:self.collectionView didDeselectItemAtIndexPath:currentIndexPath];
+            }
+            [self.collectionView selectItemAtIndexPath:selectedIndexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+            [self collectionView:self.collectionView didSelectItemAtIndexPath:selectedIndexPath];
+        }
+        if (!self.collectionView.tracking && !self.collectionView.decelerating) {
+            [self collectionViewScrollToSection:[_viewModel indexPathForDate:cell.date].section animated:YES];
+        }
     } else {
         [cell configureCellAppearence];
         _viewModel.selectedDate = [_viewModel dateForIndexPath:indexPath];
-//        if (!_supressEvent) {
-//            [_viewModel didSelectDate:_viewModel.selectedDate];
-//        }
     }
     
     // CollectionView选中状态仅仅在‘当月’体现，placeholder需要重新计算'选中'状态
@@ -108,7 +133,7 @@
     [self.delegate calendarCurrentMonthStringDidChangeTo:[_viewModel setMonthLabelForSection:section]];
 }
 
-#pragma mark - NSNotification Method
+#pragma mark - Scroll Method
 
 - (void)scrollToPreMonth:(id)sender {
     NSInteger section = [self.collectionView indexPathForItemAtPoint:self.collectionView.contentOffset].section;

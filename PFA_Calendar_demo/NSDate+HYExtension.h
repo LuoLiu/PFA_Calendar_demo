@@ -1,6 +1,6 @@
 //
-//  NSDate+PFAExtension.h
-//  PFA_Calendar_demo
+//  NSDate+HYExtension.h
+//  HY_Calendar_demo
 //
 //  Created by fenrir_cd08 on 2015/07/21.
 //  Copyright (c) 2015年 fenrir_cd08. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDate (PFAExtension)
+@interface NSDate (HYExtension)
 
 ///日付
 ///YYYY/MM/DDの形式
@@ -60,7 +60,7 @@
 + (instancetype)dateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day;
 @end
 
-@interface NSCalendar (PFAExtension)
+@interface NSCalendar (HYExtension)
 
 + (instancetype)sharedCalendar;
 

@@ -1,6 +1,6 @@
 //
-//  PFA_Calendar_demoTests.m
-//  PFA_Calendar_demoTests
+//  HY_Calendar_demoTests.m
+//  HY_Calendar_demoTests
 //
 //  Created by fenrir_cd08 on 2015/07/20.
 //  Copyright (c) 2015年 fenrir_cd08. All rights reserved.
@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-@interface PFA_Calendar_demoTests : XCTestCase
+@interface HY_Calendar_demoTests : XCTestCase
 
 @end
 
-@implementation PFA_Calendar_demoTests
+@implementation HY_Calendar_demoTests
 
 - (void)setUp {
     [super setUp];

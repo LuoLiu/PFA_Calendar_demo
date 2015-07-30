@@ -1,6 +1,6 @@
 //
 //  AddScheduleTableViewController.m
-//  PFA_Calendar_demo
+//  HY_Calendar_demo
 //
 //  Created by fenrir_cd08 on 2015/07/21.
 //  Copyright (c) 2015年 fenrir_cd08. All rights reserved.
@@ -42,6 +42,10 @@
     self.startDate = [NSDate dateFromString:_scheduleEvent.startDate format:@"yyyy/MM/dd HH:mm:ss"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addScheduleEvent) name:@"addScheduleEvent" object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"addScheduleEvent" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

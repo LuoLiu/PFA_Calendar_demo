@@ -1,25 +1,25 @@
 //
-//  PFACalendarViewController.m
-//  PFA_Calendar_demo
+//  HYCalendarViewController.m
+//  HY_Calendar_demo
 //
 //  Created by fenrir_cd08 on 2015/07/20.
 //  Copyright (c) 2015年 fenrir_cd08. All rights reserved.
 //
 
-#import "PFACalendarViewController.h"
+#import "HYCalendarViewController.h"
 #import "CalendarContainerController.h"
 #import "ScheduleTableViewController.h"
 #import "CalendarViewController.h"
 
-@interface PFACalendarViewController () <CalendarContainerControllerDelegate>
+@interface HYCalendarViewController () <CalendarContainerControllerDelegate>
 
-@property (strong, nonatomic) CalendarContainerController *calendarCC;
+@property (strong, nonatomic) CalendarContainerController *calendarContainer;
 @property (strong, nonatomic) ScheduleTableViewController *scheduleVC;
 @property (strong, nonatomic) CalendarViewController *calendarVC;
 
 @end
 
-@implementation PFACalendarViewController
+@implementation HYCalendarViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,8 +27,9 @@
     self.segmentedControl.selectedSegmentIndex = 0;
     self.CalenderContainer.hidden = NO;
     self.ScheduleContainer.hidden = YES;
+    self.monthLabel.text = @"";
     
-//    self.calendarCC = [self.storyboard instantiateViewControllerWithIdentifier:@"CalendarContainerControllerIdentifier"];
+//    self.calendarContainer = [self.storyboard instantiateViewControllerWithIdentifier:@"CalendarContainerControllerIdentifier"];
 //    self.scheduleVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ScheduleTableViewControllerIdentifier"];
 
 }
@@ -67,13 +68,16 @@
     NSLog(@"CurrentMonth:%@", monthString);
 }
 
+-(void)isCurrentMonth:(BOOL)isCurrentMonth {
+    self.todayButton.hidden = isCurrentMonth;
+}
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"CalendarContainerEmbedSegue"]) {
-        self.calendarCC = segue.destinationViewController;
-        self.calendarCC.delegate = self;
+        self.calendarContainer = segue.destinationViewController;
+        self.calendarContainer.delegate = self;
     }
     else if ([segue.identifier isEqualToString:@"ScheduleTableViewEmbedSegue"])
     {

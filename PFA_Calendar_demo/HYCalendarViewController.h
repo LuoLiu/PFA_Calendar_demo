@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PFACalendarViewController : UIViewController
+@interface HYCalendarViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UIView *CalenderContainer;
 @property (weak, nonatomic) IBOutlet UIView *ScheduleContainer;
 @property (weak, nonatomic) IBOutlet UILabel *monthLabel;
+@property (weak, nonatomic) IBOutlet UIButton *todayButton;
 
 @end

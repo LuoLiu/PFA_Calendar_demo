@@ -11,6 +11,14 @@
 #import "AlarmTableViewController.h"
 #import "NSDate+HYExtension.h"
 
+#define kDateStartRow   2
+#define kDateEndRow     4
+#define kMemoRow        8
+#define kDelRow         9
+#define kDatePickerHeight   162
+#define kMemoRowHeight      175
+#define kDelRowHeight       168
+
 @interface AddScheduleTableViewController () <AlarmTableViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *eventTitleTextField;
@@ -18,6 +26,10 @@
 @property (weak, nonatomic) IBOutlet UISwitch *checkUpSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *shareSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *alarmLabel;
+@property (weak, nonatomic) IBOutlet UILabel *startDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *endDateLabel;
+@property (weak, nonatomic) IBOutlet UIDatePicker *startDatePicker;
+@property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
 
 @property (strong, nonatomic) AlarmTableViewController *alarmTableVC;
 @property (strong, nonatomic) ScheduleEvent *scheduleEvent;
@@ -25,6 +37,9 @@
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
 @property (assign, nonatomic) NSInteger alarmMinutes;
+
+@property (assign, nonatomic) BOOL isEditStartDate;
+@property (assign, nonatomic) BOOL isEditEndDate;
 
 @end
 
@@ -35,6 +50,12 @@
     
     _scheduleEvent = [[ScheduleEvent alloc] init];
     _memoTextView.text = @"";
+    _startDateLabel.text = [[NSDate date] stringWithFormat:@"yyyy/MM/dd HH:mm:ss"];
+    _endDateLabel.text = [[NSDate date] stringWithFormat:@"yyyy/MM/dd HH:mm:ss"];
+    _isEditStartDate = NO;
+    _isEditEndDate = NO;
+    self.startDatePicker.hidden = YES;
+    self.endDatePicker.hidden = YES;
     
     //test
     _scheduleEvent.startDate = [NSDate dateFromString:@"2015/7/29 23:00:22" format:@"yyyy/MM/dd HH:mm:ss"];
@@ -60,8 +81,70 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 8;
+    return 10;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && indexPath.row == kDateStartRow + 1) {
+        if (_isEditStartDate) {
+            return self.tableView.rowHeight + kDatePickerHeight;
+        } else {
+            return 0;
+        }
+    }
+    else if (indexPath.section == 0 && indexPath.row == kDateEndRow + 1) {
+        if (_isEditEndDate) {
+            return self.tableView.rowHeight + kDatePickerHeight;
+        } else {
+            return 0;
+        }
+    }
+    else if (indexPath.section == 0 && indexPath.row == kMemoRow) {
+        return kMemoRowHeight;
+    }
+    else if (indexPath.section == 0 && indexPath.row == kDelRow) {
+        return kDelRowHeight;
+    }
+    else {
+        return self.tableView.rowHeight;
+    }
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && indexPath.row == kDateStartRow) {
+        _isEditStartDate = !_isEditStartDate;
+        self.startDatePicker.hidden = !self.startDatePicker.hidden;
+
+        [UIView animateWithDuration:0.4 animations:^{
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:kDateStartRow + 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+
+            [self.tableView reloadData];
+        }];
+    }
+    if (indexPath.section == 0 && indexPath.row == kDateEndRow) {
+        _isEditEndDate = !_isEditEndDate;
+        self.endDatePicker.hidden = !self.endDatePicker.hidden;
+        [UIView animateWithDuration:0.4 animations:^{
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:kDateEndRow + 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView reloadData];
+        }];
+    }
+}
+
+#pragma mark - DatePicker
+
+- (IBAction)startDateValueChanged:(id)sender {
+    
+}
+
+- (IBAction)endDateValueChanged:(id)sender {
+    
+}
+
+
+#pragma mark - Button Method
 
 - (IBAction)checkUpSwitchAction:(id)sender {
     if ([(UISwitch *)sender isOn]) {
@@ -94,6 +177,8 @@
     //Delete scheduleEvent
     
 }
+
+#pragma mark - Alarm
 
 -(void)alarmMinutes:(NSInteger)alarmMinutes {
     

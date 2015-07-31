@@ -94,18 +94,18 @@
 - (UIImage *)imageForForIndexPath:(NSIndexPath *)indexPath {
     ScheduleEvent *event = [self eventForIndexPath:indexPath];
     if (event.eventType == ScheduleEventTypeCheckup) {
-        return [UIImage imageNamed:@""];//医院icon
+        return [UIImage imageNamed:@"icon_hospital"];//医院icon
     }
     else if (!event.isShare) {
-        return [UIImage imageNamed:@""];//上传者icon
+        return [UIImage imageNamed:@"icon_mm"];//上传者icon
     }
-    else if (event.isShare && _addEvenForSelf){//&& 上传者
+    else if (event.isShare && !_addEvenForSelf){//&& 上传者
         _addEvenForSelf = YES;
-        return [UIImage imageNamed:@""];//上传者icon
+        return [UIImage imageNamed:@"icon_mm"];//上传者icon
     }
     else {
         _addEvenForSelf = NO;
-        return [UIImage imageNamed:@""];//对方icon
+        return [UIImage imageNamed:@"icon_pp"];//对方icon
     }
 }
 

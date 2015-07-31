@@ -15,6 +15,8 @@
 @property (strong, nonatomic) CalendarViewController *calendarVC;
 @property (strong, nonatomic) CalendarScheduleTableViewController *calendarScheduleVC;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewContainerHeightConstaint;
+
 @end
 
 @implementation CalendarContainerController
@@ -30,6 +32,15 @@
 -(void)getScheduleDate:(CalendarDate *)calendarDate {
     self.calendarScheduleVC.scheduleDate = calendarDate;
     [self.calendarScheduleVC.tableView reloadData];
+    [self updateViewConstraints];
+}
+
+-(void)updateViewConstraints {
+    [super updateViewConstraints];
+    
+    if (self.calendarScheduleVC.tableView.contentSize.height < self.tableViewContainerHeightConstaint.constant) {
+        self.tableViewContainerHeightConstaint.constant = self.calendarScheduleVC.tableView.contentSize.height;
+    }
 }
 
 #pragma mark - Navigation

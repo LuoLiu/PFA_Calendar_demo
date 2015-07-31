@@ -10,8 +10,6 @@
 
 @interface ScheduleDetailTableViewController ()
 
-
-
 @end
 
 @implementation ScheduleDetailTableViewController

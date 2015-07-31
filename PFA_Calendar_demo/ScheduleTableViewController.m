@@ -9,13 +9,15 @@
 #import "ScheduleTableViewController.h"
 #import "ScheduleTableViewCell.h"
 #import "ScheduleTableViewModel.h"
+#import "ScheduleDetailTableViewController.h"
 #import "ScheduleEvent.h"
 #import "NSDate+HYExtension.h"
 
-#define kCalendarScheduleTableCellReuseIdentifier    @"ScheduleDetailTableCellIdentifier"
+static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTableCellIdentifier";
 
 @interface ScheduleTableViewController ()
 
+@property (strong, nonatomic) ScheduleDetailTableViewController *scheduleDetailTableVC;
 @property (strong, nonatomic) ScheduleTableViewModel *viewModel;
 @property (strong, nonatomic) NSArray *evenList;
 
@@ -88,20 +90,32 @@
 }
 
 - (void)configureCell:(ScheduleTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    ScheduleEvent *cellEvent = [_viewModel eventForIndexPath:indexPath];
+    cell.scheduleEvent = cellEvent;
     cell.dateLabel.text = [_viewModel dateStringForIndexPath:indexPath];
     cell.planLabel.text = [_viewModel planStringForIndexPath:indexPath];
     cell.iconImageView.image = [_viewModel imageForForIndexPath:indexPath];
     ////////test
-        ScheduleEvent *cellEvent = [_viewModel eventForIndexPath:indexPath];
-        if (cellEvent.eventType == ScheduleEventTypeCheckup) {
-            cell.iconImageView.backgroundColor = [UIColor yellowColor];//test
-        }
-        else if (!cellEvent.isShare) {
-            cell.iconImageView.backgroundColor = [UIColor redColor];//test
-        }
-        else {
-            //两个cell
-        }
+//        ScheduleEvent *cellEvent = [_viewModel eventForIndexPath:indexPath];
+//        if (cellEvent.eventType == ScheduleEventTypeCheckup) {
+//            cell.iconImageView.backgroundColor = [UIColor yellowColor];//test
+//        }
+//        else if (!cellEvent.isShare) {
+//            cell.iconImageView.backgroundColor = [UIColor redColor];//test
+//        }
+//        else {
+//            //两个cell
+//        }
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showScheduleDetail"]) {
+        self.scheduleDetailTableVC = segue.destinationViewController;
+        ScheduleTableViewCell *cell = sender;
+        self.scheduleDetailTableVC.scheduleEvent = cell.scheduleEvent;
+    }
 }
 
 @end

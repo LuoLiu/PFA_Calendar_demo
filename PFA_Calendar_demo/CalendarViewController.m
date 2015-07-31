@@ -12,10 +12,9 @@
 #import "CalendarDate.h"
 #import "NSDate+HYExtension.h"
 
-//#define kCalendarCellNibName               @"CalendarCollectionViewCell"
-#define kCalendarCellReuseIdentifier       @"CalendarCellIdentifier"
 #define WEEK_DAYS           (7)
 #define COLLECTIONVIEW_ROWS (6)
+static NSString *kCalendarCellReuseIdentifier = @"CalendarCellIdentifier";
 
 @interface CalendarViewController ()
 

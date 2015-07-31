@@ -15,7 +15,7 @@
 #import "CalendarDate.h"
 #import "NSDate+HYExtension.h"
 
-#define kCalendarScheduleTableCellReuseIdentifier      @"ScheduleDetailTableCellIdentifier"
+static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTableCellIdentifier";
 
 @interface CalendarScheduleTableViewController ()
 
@@ -29,6 +29,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.tableFooterView = [[UIView alloc] init];
     
     ///////获取特定日期的scheduleEventList
     _scheduleEventList = [NSMutableArray array];
@@ -49,6 +51,7 @@
     event3.startDate = [NSDate dateFromString:@"00:33" format:@"HH:mm"];
     [_scheduleEventList addObject:event3];
     ///////////test
+    _hasAnnounce = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,33 +77,26 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ScheduleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCalendarScheduleTableCellReuseIdentifier];
+    ScheduleEvent *scheduleEvent= [[ScheduleEvent alloc] init];
     if (_hasAnnounce) {
         if (indexPath.row == 0) {
             AnnounceTableViewCell *announceCell = [tableView dequeueReusableCellWithIdentifier:@"AnnounceCell" forIndexPath:indexPath];
             announceCell.contentLabel.text = @"アナウンス";
             return announceCell;
         }
-        ScheduleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCalendarScheduleTableCellReuseIdentifier];
         
         if (self.scheduleEventList.count != 0) {
-            ScheduleEvent *scheduleEvent = [self.scheduleEventList objectAtIndex:indexPath.row-1];
-            cell.dateLabel.text = [scheduleEvent.startDate stringWithFormat:@"HH:mm"];
-            cell.planLabel.text = scheduleEvent.eventTitle;
+            scheduleEvent = [self.scheduleEventList objectAtIndex:indexPath.row-1];
         }
-        
-        return cell;
     }
-    else {
-        ScheduleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCalendarScheduleTableCellReuseIdentifier];
-        
-        if (self.scheduleEventList.count != 0) {
-            ScheduleEvent *scheduleEvent = [self.scheduleEventList objectAtIndex:indexPath.row];
-            cell.dateLabel.text = [scheduleEvent.startDate stringWithFormat:@"HH:mm"];
-            cell.planLabel.text = scheduleEvent.eventTitle;
-        }
-        
-        return cell;
+    else if (self.scheduleEventList.count != 0){
+        scheduleEvent = [self.scheduleEventList objectAtIndex:indexPath.row];
     }
+    cell.scheduleEvent = scheduleEvent;
+    cell.dateLabel.text = [scheduleEvent.startDate stringWithFormat:@"HH:mm"];
+    cell.planLabel.text = scheduleEvent.eventTitle;
+    return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -115,11 +111,14 @@
     return scheduleDateString;
 }
 
+#pragma mark - Navigation
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showScheduleDetail"]) {
         self.scheduleDetailTableVC = segue.destinationViewController;
+        ScheduleTableViewCell *cell = sender;
+        self.scheduleDetailTableVC.scheduleEvent = cell.scheduleEvent;
     }
 }
-
 
 @end

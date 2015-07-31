@@ -12,11 +12,11 @@
 #import "CalendarDate.h"
 #import "ScheduleEvent.h"
 
-#define kCellSelectedColor      [UIColor redColor]
-#define kCellTodayColor         [UIColor blueColor]
 #define kCellPlaceholderColor   [UIColor clearColor]
 #define kCellNormalColor        [UIColor whiteColor]
-#define kCellAnnounceColor      [UIColor yellowColor]
+//#define kCellSelectedColor      [UIColor redColor]
+//#define kCellTodayColor         [UIColor blueColor]
+//#define kCellAnnounceColor      [UIColor yellowColor]
 
 #define kCellNormalTextColor        [UIColor blackColor]
 #define kCellPlaceholderTextColor   [UIColor colorWithWhite:0.5 alpha:1]
@@ -39,9 +39,9 @@
     _backgroundColors = [NSMutableDictionary dictionary];
     _backgroundColors[@(CalendarCellStatePlaceholder)] = kCellPlaceholderColor;
     _backgroundColors[@(CalendarCellStateNormal)]      = kCellNormalColor;
-    _backgroundColors[@(CalendarCellStateSelected)]    = kCellSelectedColor;
-    _backgroundColors[@(CalendarCellStateToday)]       = kCellTodayColor;
-    _backgroundColors[@(CalendarCellStateAnnounce)]    = kCellAnnounceColor;
+//    _backgroundColors[@(CalendarCellStateSelected)]    = kCellSelectedColor;
+//    _backgroundColors[@(CalendarCellStateToday)]       = kCellTodayColor;
+//    _backgroundColors[@(CalendarCellStateAnnounce)]    = kCellAnnounceColor;
     
     _dateLabelColors = [NSMutableDictionary dictionary];
     _dateLabelColors[@(CalendarCellStateNormal)]        = kCellNormalTextColor;
@@ -63,9 +63,9 @@
 
 - (void)configureCellAppearence {
     self.weekAndDayLabel.hidden = self.isPlaceholder;
-//    self.userInteractionEnabled = !self.isPlaceholder;
     
     self.backgroundColor = [self backgroundColorForCurrentStateInDictionary:_backgroundColors];
+    self.backgroundImageView.image = [self setBackgroundImage];
     self.dateLabel.textColor = [self textColorForCurrentStateInDictionary:_dateLabelColors];
 
     self.hospitalIcon.hidden = YES;
@@ -73,7 +73,6 @@
     self.ppIcon.hidden = YES;
     
     self.weekAndDayLabel.text = [_calenderViewModel weekAndDayToExpBirthday:self.calendarDate.date];
-    self.backgroundImageView.image = [self setBackgroundImage];
     self.monthIcon.image = [self setmonthIconImage];
 
 }
@@ -105,6 +104,14 @@
     else if ([self.calendarDate isDogsDay]) {
         return [UIImage imageNamed:@""];
     }
+    else if (self.isToday) {
+        return [UIImage imageNamed:@"bg_today"];
+    }
+    else if (self.selected) {
+        return [UIImage imageNamed:@"bg_selected"];
+    }
+    //////announce
+    
     return nil;
 }
 
@@ -112,12 +119,12 @@
     if (self.isPlaceholder) {
         return dictionary[@(CalendarCellStatePlaceholder)];
     }
-    if (self.isToday) {
-        return dictionary[@(CalendarCellStateToday)];
-    }
-    if (self.selected) {
-        return dictionary[@(CalendarCellStateSelected)];
-    }
+//    if (self.isToday) {
+//        return dictionary[@(CalendarCellStateToday)];
+//    }
+//    if (self.selected) {
+//        return dictionary[@(CalendarCellStateSelected)];
+//    }
     
     return dictionary[@(CalendarCellStateNormal)];
 }

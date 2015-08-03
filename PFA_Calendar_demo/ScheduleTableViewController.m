@@ -29,6 +29,8 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
+    
     ///////////test
     ScheduleEvent *event1 = [[ScheduleEvent alloc] init];
     event1.eventTitle = @"Test 1";

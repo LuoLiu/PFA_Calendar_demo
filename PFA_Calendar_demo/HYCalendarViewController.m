@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
+    
     self.segmentedControl.selectedSegmentIndex = 0;
     self.CalenderContainer.hidden = NO;
     self.ScheduleContainer.hidden = YES;

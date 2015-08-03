@@ -41,6 +41,7 @@
 
 @property (assign, nonatomic) BOOL isEditStartDate;
 @property (assign, nonatomic) BOOL isEditEndDate;
+@property (assign, nonatomic) BOOL canSave;
 
 @end
 
@@ -49,12 +50,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
+    
     _scheduleEvent = [[ScheduleEvent alloc] init];
     _memoTextView.text = @"";
     _startDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:[NSDate date]];
     _endDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:[NSDate date]];
     _isEditStartDate = NO;
     _isEditEndDate = NO;
+    _canSave = YES;
     self.startDatePicker.hidden = YES;
     self.endDatePicker.hidden = YES;
     
@@ -117,6 +121,10 @@
     if (indexPath.section == 0 && indexPath.row == kDateStartRow) {
         _isEditStartDate = !_isEditStartDate;
         self.startDatePicker.hidden = !self.startDatePicker.hidden;
+        if (!self.endDatePicker.hidden) {
+            self.endDatePicker.hidden = YES;
+            _isEditEndDate = NO;
+        }
 
         [UIView animateWithDuration:0.4 animations:^{
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:kDateStartRow + 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
@@ -127,6 +135,11 @@
     if (indexPath.section == 0 && indexPath.row == kDateEndRow) {
         _isEditEndDate = !_isEditEndDate;
         self.endDatePicker.hidden = !self.endDatePicker.hidden;
+        if (!self.startDatePicker.hidden) {
+            self.startDatePicker.hidden = YES;
+            _isEditStartDate = NO;
+        }
+        
         [UIView animateWithDuration:0.4 animations:^{
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:kDateEndRow + 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView reloadData];
@@ -137,11 +150,32 @@
 #pragma mark - DatePicker
 
 - (IBAction)startDateValueChanged:(id)sender {
+    UIDatePicker *datePicker = sender;
     
+    _scheduleEvent.startDate = datePicker.date;
+    _startDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:datePicker.date];
 }
 
 - (IBAction)endDateValueChanged:(id)sender {
+    UIDatePicker *datePicker = sender;
     
+    _scheduleEvent.endDate = datePicker.date;
+    NSComparisonResult result = [datePicker.date compare:self.startDatePicker.date];
+    if (result < 0) {
+        NSString *endDateString = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:datePicker.date];
+        NSUInteger length = [endDateString length];
+        NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:endDateString];
+        [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
+        [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, length)];
+        [_endDateLabel setTextColor:[UIColor redColor]];
+        [_endDateLabel setAttributedText:attri];
+        _canSave = NO;
+    }
+    else {
+        [_endDateLabel setTextColor:[UIColor blackColor]];
+        _endDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:datePicker.date];
+        _canSave = YES;
+    }
 }
 
 
@@ -171,7 +205,14 @@
 }
 
 - (IBAction)okButtonTapped:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"addScheduleEvent" object:nil];
+    if (!_canSave) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"EndDate Error" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"addScheduleEvent" object:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)delButtonTapped:(id)sender {

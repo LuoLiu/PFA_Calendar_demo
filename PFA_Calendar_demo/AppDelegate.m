@@ -22,6 +22,8 @@
         UIUserNotificationSettings *setting = [UIUserNotificationSettings settingsForTypes:type categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:setting];
     }
+    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigation_bar_mm"] forBarMetrics:UIBarMetricsDefault];
     return YES;
 }
 

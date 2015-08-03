@@ -83,34 +83,64 @@
         return nil;
     }
     if ([self.calendarDate.date isEqualToDateForDay:_calenderViewModel.expBirthday]) {
-        self.monthIcon.backgroundColor = [UIColor greenColor];///test
-        return [UIImage imageNamed:@""];
+        return [UIImage imageNamed:@"icon_dueday"];
     }
-    else if ([_calenderViewModel pregMonthsInDate:self.calendarDate.date] >= 0) {
-        self.monthIcon.backgroundColor = [UIColor redColor];///test
-        return [UIImage imageNamed:@""];
+    else if ([_calenderViewModel pregMonthsInDate:self.calendarDate.date] > 0) {
+        NSInteger pregMonth = [_calenderViewModel pregMonthsInDate:self.calendarDate.date];
+        switch (pregMonth) {
+            case 1:
+                return [UIImage imageNamed:@"icon_1month"];
+                break;
+            case 2:
+                return [UIImage imageNamed:@"icon_2month"];
+                break;
+            case 3:
+                return [UIImage imageNamed:@"icon_3month"];
+                break;
+            case 4:
+                return [UIImage imageNamed:@"icon_4month"];
+                break;
+            case 5:
+                return [UIImage imageNamed:@"icon_5month"];
+                break;
+            case 6:
+                return [UIImage imageNamed:@"icon_6month"];
+                break;
+            case 7:
+                return [UIImage imageNamed:@"icon_7month"];
+                break;
+            case 8:
+                return [UIImage imageNamed:@"icon_8month"];
+                break;
+            case 9:
+                return [UIImage imageNamed:@"icon_9month"];
+                break;
+                
+            default:
+                break;
+        }
     }
-    self.monthIcon.backgroundColor = [UIColor clearColor];///test
+    self.monthIcon.backgroundColor = [UIColor clearColor];
     return nil;
 }
 
 - (UIImage *)setBackgroundImage {
     if ([self.calendarDate.date isEqualToDate:_calenderViewModel.expBirthday]) {
-        return [UIImage imageNamed:@""];
+        return [UIImage imageNamed:@"dueday_icon"];
     }
     else if ([self.calendarDate.date isEqualToDate:_calenderViewModel.birthday]) {
-        return [UIImage imageNamed:@""];
+        return [UIImage imageNamed:@"birthday_icon"];
     }
     else if ([self.calendarDate isDogsDay]) {
-        return [UIImage imageNamed:@""];
+        return [UIImage imageNamed:@"dogday_icon"];
     }
     else if (self.isToday) {
-        return [UIImage imageNamed:@"bg_today"];
+        return [UIImage imageNamed:@"today_bg"];
     }
     else if (self.selected) {
-        return [UIImage imageNamed:@"bg_selected"];
+        return [UIImage imageNamed:@"dueday_bg"];
     }
-    //////announce
+    //////announce  noteday_bg
     
     return nil;
 }

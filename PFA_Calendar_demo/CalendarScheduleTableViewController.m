@@ -14,6 +14,7 @@
 #import "ScheduleEvent.h"
 #import "CalendarDate.h"
 #import "NSDate+HYExtension.h"
+#import "DateFormatterHelper.h"
 
 static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTableCellIdentifier";
 
@@ -38,17 +39,17 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
     
     ScheduleEvent *event1 = [[ScheduleEvent alloc] init];
     event1.eventTitle = @"Test 1";
-    event1.startDate = [NSDate dateFromString:@"00:11" format:@"HH:mm"];
+    event1.startDate = [[DateFormatterHelper hmDateFormatter] dateFromString:@"00:11"];
     [_scheduleEventList addObject:event1];
     
     ScheduleEvent *event2 = [[ScheduleEvent alloc] init];
     event2.eventTitle = @"Test 2";
-    event2.startDate = [NSDate dateFromString:@"00:22" format:@"HH:mm"];
+    event2.startDate = [[DateFormatterHelper hmDateFormatter] dateFromString:@"00:22"];
     [_scheduleEventList addObject:event2];
     
     ScheduleEvent *event3 = [[ScheduleEvent alloc] init];
     event3.eventTitle = @"Test 3";
-    event3.startDate = [NSDate dateFromString:@"00:33" format:@"HH:mm"];
+    event3.startDate = [[DateFormatterHelper hmDateFormatter] dateFromString:@"00:33"];
     [_scheduleEventList addObject:event3];
     ///////////test
     _hasAnnounce = YES;
@@ -94,15 +95,13 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
         scheduleEvent = [self.scheduleEventList objectAtIndex:indexPath.row];
     }
     cell.scheduleEvent = scheduleEvent;
-    cell.dateLabel.text = [scheduleEvent.startDate stringWithFormat:@"HH:mm"];
+    cell.dateLabel.text = [[DateFormatterHelper hmDateFormatter] stringFromDate:scheduleEvent.startDate];
     cell.planLabel.text = scheduleEvent.eventTitle;
     return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *weekDayString = [NSString stringWithFormat:@"（%@）", [self.scheduleDate.date dayInWeek]];
-    NSString *scheduleDateString = [[self.scheduleDate.date stringWithFormat:@"MM月dd日"] stringByAppendingString:weekDayString];
-    
+    NSString *scheduleDateString = [[DateFormatterHelper scheduleDateFormatter] stringFromDate:self.scheduleDate.date];
     if (self.scheduleDate.isHoliday) {
         NSString *holidayName = [NSString stringWithString:self.scheduleDate.holidayName];
         scheduleDateString = [scheduleDateString stringByAppendingString:holidayName];

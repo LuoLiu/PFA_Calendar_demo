@@ -80,11 +80,12 @@
     return [calendar dateFromComponents:components];
 }
 
-- (NSString *)stringWithFormat:(NSString *)format {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = format;
-    return [formatter stringFromDate:self];
-}
+//- (NSString *)stringWithFormat:(NSString *)format {
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier: @"ja"];
+//    formatter.dateFormat = format;
+//    return [formatter stringFromDate:self];
+//}
 
 - (BOOL)isEqualToDateForDay:(NSDate *)date {
     return [self getYear] == [date getYear] && [self getMonth] == [date getMonth] && [self getDay] == [date getDay];
@@ -212,11 +213,11 @@
 
 #pragma mark - DateTransform
 
-+ (instancetype)dateFromString:(NSString *)string format:(NSString *)format {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = format;
-    return [formatter dateFromString:string];
-}
+//+ (instancetype)dateFromString:(NSString *)string format:(NSString *)format {
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    formatter.dateFormat = format;
+//    return [formatter dateFromString:string];
+//}
 
 + (instancetype)dateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day {
     NSCalendar *calendar = [NSCalendar sharedCalendar];

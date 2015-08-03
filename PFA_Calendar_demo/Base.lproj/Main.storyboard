@@ -322,7 +322,7 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YYYY/MM/DD 00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTl-bH-LKP">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YYYY/MM/DD 00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTl-bH-LKP">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -357,13 +357,13 @@
                                                     <exclude reference="vTl-bH-LKP"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="NZ5-Hp-XRu"/>
-                                                    <exclude reference="t8h-HV-AsM"/>
                                                     <exclude reference="HuL-8K-qe9"/>
                                                     <exclude reference="hYQ-xp-rGa"/>
                                                     <exclude reference="lqk-mc-1ci"/>
                                                     <exclude reference="2mk-oB-p9G"/>
                                                     <exclude reference="yBR-v7-Cz9"/>
+                                                    <exclude reference="NZ5-Hp-XRu"/>
+                                                    <exclude reference="t8h-HV-AsM"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -373,13 +373,13 @@
                                                     <include reference="vTl-bH-LKP"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="NZ5-Hp-XRu"/>
-                                                    <include reference="t8h-HV-AsM"/>
                                                     <include reference="HuL-8K-qe9"/>
                                                     <include reference="hYQ-xp-rGa"/>
                                                     <include reference="lqk-mc-1ci"/>
                                                     <include reference="2mk-oB-p9G"/>
                                                     <include reference="yBR-v7-Cz9"/>
+                                                    <include reference="NZ5-Hp-XRu"/>
+                                                    <include reference="t8h-HV-AsM"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -483,7 +483,7 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YYYY/MM/DD 00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAU-Ye-Qjx">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YYYY/MM/DD 00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAU-Ye-Qjx">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -518,13 +518,13 @@
                                                     <exclude reference="OAU-Ye-Qjx"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="Hgy-oT-3aO"/>
-                                                    <exclude reference="Pge-d5-m0X"/>
                                                     <exclude reference="87n-pB-fEz"/>
                                                     <exclude reference="JRC-H2-VAp"/>
                                                     <exclude reference="XLD-mF-zcn"/>
                                                     <exclude reference="9E4-2D-hiI"/>
                                                     <exclude reference="FY4-PG-pfU"/>
+                                                    <exclude reference="Hgy-oT-3aO"/>
+                                                    <exclude reference="Pge-d5-m0X"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -534,13 +534,13 @@
                                                     <include reference="OAU-Ye-Qjx"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="Hgy-oT-3aO"/>
-                                                    <include reference="Pge-d5-m0X"/>
                                                     <include reference="87n-pB-fEz"/>
                                                     <include reference="JRC-H2-VAp"/>
                                                     <include reference="XLD-mF-zcn"/>
                                                     <include reference="9E4-2D-hiI"/>
                                                     <include reference="FY4-PG-pfU"/>
+                                                    <include reference="Hgy-oT-3aO"/>
+                                                    <include reference="Pge-d5-m0X"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -2264,7 +2264,7 @@
         <scene sceneID="KgM-IH-WTn">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="LS9-Ds-0hC" customClass="CalendarScheduleTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="35" sectionHeaderHeight="22" sectionFooterHeight="1" id="fsd-wJ-HMl">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="35" sectionHeaderHeight="22" sectionFooterHeight="1" id="fsd-wJ-HMl">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <prototypes>
@@ -2279,6 +2279,9 @@
                                             <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="46" y="9" width="186" height="17"/>
+                                            </variation>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aQc-Zm-LNW">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>

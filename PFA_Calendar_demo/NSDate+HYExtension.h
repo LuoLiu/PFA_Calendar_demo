@@ -17,7 +17,8 @@
 - (NSInteger)weekOfYear;
 - (NSString *)dayInWeek;
 - (NSDate *)dateByIgnoringTimeComponents;
-- (NSString *)stringWithFormat:(NSString *)format;
+//- (NSString *)stringWithFormat:(NSString *)format;
+//+ (instancetype)dateFromString:(NSString *)string format:(NSString *)format;
 
 - (BOOL)isEqualToDateForDay:(NSDate *)date;
 - (BOOL)isEqualToDateForWeek:(NSDate *)date;
@@ -41,7 +42,6 @@
 - (NSDate *)dateByAddYears:(NSInteger)years;
 - (NSDate *)dateByMinusYears:(NSInteger)years;
 
-+ (instancetype)dateFromString:(NSString *)string format:(NSString *)format;
 + (instancetype)dateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day;
 @end
 

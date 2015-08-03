@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		781BC8AF1B6EF115008B837C /* DateFormatterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 781BC8AE1B6EF115008B837C /* DateFormatterHelper.m */; };
 		7839591D1B60F5DD002C55CA /* CalendarContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7839591C1B60F5DD002C55CA /* CalendarContainerController.m */; };
 		787D3C861B5CE133004E882B /* CalendarDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 787D3C851B5CE133004E882B /* CalendarDate.m */; };
 		78BBEFFC1B5DF1C700DE8EDA /* AlarmTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78BBEFFB1B5DF1C700DE8EDA /* AlarmTableViewController.m */; };
@@ -44,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		31B6F7C00B3C9DA910F22806 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		781BC8AD1B6EF115008B837C /* DateFormatterHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatterHelper.h; sourceTree = "<group>"; };
+		781BC8AE1B6EF115008B837C /* DateFormatterHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatterHelper.m; sourceTree = "<group>"; };
 		7839591B1B60F5DD002C55CA /* CalendarContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarContainerController.h; sourceTree = "<group>"; };
 		7839591C1B60F5DD002C55CA /* CalendarContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarContainerController.m; sourceTree = "<group>"; };
 		786681B11B5CE710006C17F3 /* libPods-MagicalRecord.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MagicalRecord.a"; path = "Pods/../build/Debug-iphoneos/libPods-MagicalRecord.a"; sourceTree = "<group>"; };
@@ -175,6 +178,8 @@
 			children = (
 				78BBF00F1B5DFEDE00DE8EDA /* NSDate+HYExtension.h */,
 				78BBF0101B5DFEDE00DE8EDA /* NSDate+HYExtension.m */,
+				781BC8AD1B6EF115008B837C /* DateFormatterHelper.h */,
+				781BC8AE1B6EF115008B837C /* DateFormatterHelper.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -412,6 +417,7 @@
 				78FBEE671B5C97D60022F0CC /* CalendarViewController.m in Sources */,
 				78BBF0021B5DF32000DE8EDA /* AddScheduleTableViewController.m in Sources */,
 				78FBEE5B1B5C97330022F0CC /* CalendarScheduleTableViewController.m in Sources */,
+				781BC8AF1B6EF115008B837C /* DateFormatterHelper.m in Sources */,
 				78BBEFFC1B5DF1C700DE8EDA /* AlarmTableViewController.m in Sources */,
 				78BBF0141B5DFF8500DE8EDA /* ScheduleEvent.m in Sources */,
 				78FBEE6E1B5C9BD20022F0CC /* ScheduleTableViewCell.m in Sources */,

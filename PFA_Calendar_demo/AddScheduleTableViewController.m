@@ -10,6 +10,7 @@
 #import "ScheduleEvent.h"
 #import "AlarmTableViewController.h"
 #import "NSDate+HYExtension.h"
+#import "DateFormatterHelper.h"
 
 #define kDateStartRow   2
 #define kDateEndRow     4
@@ -50,15 +51,15 @@
     
     _scheduleEvent = [[ScheduleEvent alloc] init];
     _memoTextView.text = @"";
-    _startDateLabel.text = [[NSDate date] stringWithFormat:@"yyyy/MM/dd HH:mm:ss"];
-    _endDateLabel.text = [[NSDate date] stringWithFormat:@"yyyy/MM/dd HH:mm:ss"];
+    _startDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:[NSDate date]];
+    _endDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:[NSDate date]];
     _isEditStartDate = NO;
     _isEditEndDate = NO;
     self.startDatePicker.hidden = YES;
     self.endDatePicker.hidden = YES;
     
     //test
-    _scheduleEvent.startDate = [NSDate dateFromString:@"2015/7/29 23:00:22" format:@"yyyy/MM/dd HH:mm:ss"];
+    _scheduleEvent.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/29 23:00:22"];
     //test
     self.startDate = _scheduleEvent.startDate;
     

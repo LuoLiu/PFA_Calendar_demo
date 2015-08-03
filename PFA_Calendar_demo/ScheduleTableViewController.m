@@ -80,8 +80,16 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
     return [_viewModel numberOfRowsInSection:section];
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [_viewModel titleForHeaderInSection:section];
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    return [_viewModel titleForHeaderInSection:section];
+//}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 22)];
+    titleLable.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"nav_bg_red"]];
+    titleLable.text = [_viewModel titleForHeaderInSection:section];
+    
+    return titleLable;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

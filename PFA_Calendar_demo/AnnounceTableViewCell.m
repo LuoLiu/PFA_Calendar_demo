@@ -11,7 +11,8 @@
 @implementation AnnounceTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"nav_bg_noteday"]];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

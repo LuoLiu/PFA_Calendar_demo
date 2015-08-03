@@ -84,7 +84,6 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
     if (_hasAnnounce) {
         if (indexPath.row == 0) {
             AnnounceTableViewCell *announceCell = [tableView dequeueReusableCellWithIdentifier:@"AnnounceCell" forIndexPath:indexPath];
-            cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"nav_bg_noteday"]];
             announceCell.contentLabel.text = @"アナウンス";
             return announceCell;
         }

@@ -12,10 +12,12 @@
 #import "NSDate+HYExtension.h"
 #import "DateFormatterHelper.h"
 
-#define kDateStartRow   2
-#define kDateEndRow     4
-#define kMemoRow        8
-#define kDelRow         9
+#define kDateStartRow   3
+#define kDateEndRow     5
+#define kNavBarRow      0
+#define kMemoRow        9
+#define kDelRow         10
+#define kNavBarHeight       64
 #define kDatePickerHeight   162
 #define kMemoRowHeight      175
 #define kDelRowHeight       168
@@ -86,7 +88,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return 11;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -103,6 +105,9 @@
         } else {
             return 0;
         }
+    }
+    else if (indexPath.section == 0 && indexPath.row == kNavBarRow) {
+        return kNavBarHeight;
     }
     else if (indexPath.section == 0 && indexPath.row == kMemoRow) {
         return kMemoRowHeight;
@@ -204,6 +209,10 @@
     
 }
 
+- (IBAction)back:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)okButtonTapped:(id)sender {
     if (!_canSave) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"EndDate Error" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -211,7 +220,7 @@
     }
     else {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"addScheduleEvent" object:nil];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

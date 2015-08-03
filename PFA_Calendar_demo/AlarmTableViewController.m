@@ -27,6 +27,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)back:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)okButtonTapped:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.delegate alarmMinutes:_alarmMinutes];
+        [self configureAlarmWithMinutes:_alarmMinutes];
+    }];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -74,9 +85,6 @@
         default:
             break;
     }
-    [self.delegate alarmMinutes:_alarmMinutes];
-    [self configureAlarmWithMinutes:_alarmMinutes];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)configureAlarmWithMinutes:(NSInteger)minutes {

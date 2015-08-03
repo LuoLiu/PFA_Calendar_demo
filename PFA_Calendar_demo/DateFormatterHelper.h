@@ -10,25 +10,25 @@
 
 @interface DateFormatterHelper : NSObject
 
-//// yyyyMMdd
+/// yyyyMMdd
 + (NSDateFormatter *)shortDateFormatter;
 
-//// yyyyMMddHHmmss
+/// yyyyMMddHHmmss
 + (NSDateFormatter *)longDateFormatter;
 
-//// yyyy/MM/dd HH:mm:ss
+/// yyyy/MM/dd HH:mm:ss
 + (NSDateFormatter *)longDateYMDHMSDateFormatter;
 
-//// HH:mm
+/// HH:mm
 + (NSDateFormatter *)hmDateFormatter;
 
-//// M月d日
+/// M月d日
 + (NSDateFormatter *)mdDateFormatter;
 
-//// M月d日（EEE）
+/// M月d日（EEE）
 + (NSDateFormatter *)scheduleDateFormatter;
 
-//// yyyy年M月d日 HH:mm
+/// yyyy年M月d日 HH:mm
 + (NSDateFormatter *)scheduleYMDHMDateFormatter;
 
 @end

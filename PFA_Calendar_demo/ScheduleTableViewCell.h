@@ -17,5 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 
 @property (strong, nonatomic) ScheduleEvent *scheduleEvent;
+@property (assign, nonatomic) BOOL addEvenForSelf;
+
+- (UIImage *)setCellIcon;
 
 @end

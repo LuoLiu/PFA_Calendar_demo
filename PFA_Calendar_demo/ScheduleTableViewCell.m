@@ -7,6 +7,7 @@
 //
 
 #import "ScheduleTableViewCell.h"
+#import "ScheduleEvent.h"
 
 @implementation ScheduleTableViewCell
 
@@ -14,10 +15,29 @@
     
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void)prepareForInterfaceBuilder {
+    self.scheduleEvent = nil;
+    self.dateLabel.text = @"";
+    self.planLabel.text = @"";
+    self.iconImageView.image = nil;
+}
 
-    // Configure the view for the selected state
+- (UIImage *)setCellIcon {
+    ScheduleEvent *event = self.scheduleEvent;
+    if (event.eventType == ScheduleEventTypeCheckup) {
+        return [UIImage imageNamed:@"icon_hospital_big"];//医院icon
+    }
+    else if (!event.isShare) {
+        return [UIImage imageNamed:@"icon_mama_big"];//上传者icon
+    }
+    else if (event.isShare && !_addEvenForSelf){//&& 上传者
+        _addEvenForSelf = YES;
+        return [UIImage imageNamed:@"icon_mama_big"];//上传者icon
+    }
+    else {
+        _addEvenForSelf = NO;
+        return [UIImage imageNamed:@"icon_baba_big"];//对方icon
+    }
 }
 
 @end

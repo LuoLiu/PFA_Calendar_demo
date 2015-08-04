@@ -29,10 +29,11 @@
     [self.delegate isCurrentMonth:isCurrentMonth];
 }
 
--(void)getScheduleDate:(CalendarDate *)calendarDate {
+-(void)getScheduleDate:(CalendarDate *)calendarDate andEventList:(NSArray *)eventList{
     self.calendarScheduleVC.scheduleDate = calendarDate;
+    self.calendarScheduleVC.scheduleEventList = eventList;
     [self.calendarScheduleVC.tableView reloadData];
-    [self updateViewConstraints];
+//    [self updateViewConstraints];
 }
 
 //-(void)updateViewConstraints {

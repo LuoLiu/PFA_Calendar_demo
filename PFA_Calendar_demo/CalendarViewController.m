@@ -28,7 +28,6 @@ static NSString *kCalendarCellReuseIdentifier = @"CalendarCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self.collectionView registerNib:[UINib nibWithNibName:kCalendarCellNibName bundle:nil] forCellWithReuseIdentifier:kCalendarCellReuseIdentifier];
     [self bindView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToPreMonth:) name:@"scrollToPreMonth" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToNextMonth:) name:@"scrollToNextMonth" object:nil];
@@ -75,7 +74,7 @@ static NSString *kCalendarCellReuseIdentifier = @"CalendarCellIdentifier";
     CalendarCollectionViewCell *cell = (CalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if (cell.isPlaceholder) {
         // 如果是上个月或者下个月的元素，则无需调用代理方法，在[setSelectedDate:animated:]中还会调用此方法
-        return [_viewModel isDateInRange:cell.calendarDate.date] && ![cell.calendarDate.date isEqualToDateForDay:_viewModel.selectedDate];
+        return [_viewModel isDateInRange:cell.calendarDate.date] && ![[_viewModel dateForIndexPath:indexPath] isEqualToDateForDay:_viewModel.selectedDate];
     }
     BOOL shouldSelect = ![collectionView.indexPathsForSelectedItems containsObject:indexPath];
     
@@ -97,7 +96,7 @@ static NSString *kCalendarCellReuseIdentifier = @"CalendarCellIdentifier";
                 [self.collectionView deselectItemAtIndexPath:currentIndexPath animated:YES];
                 [self collectionView:self.collectionView didDeselectItemAtIndexPath:currentIndexPath];
             }
-            [self.collectionView selectItemAtIndexPath:selectedIndexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+            [self.collectionView selectItemAtIndexPath:selectedIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
             //[self collectionView:self.collectionView didSelectItemAtIndexPath:selectedIndexPath];
         }
         if (!self.collectionView.tracking && !self.collectionView.decelerating) {
@@ -105,8 +104,8 @@ static NSString *kCalendarCellReuseIdentifier = @"CalendarCellIdentifier";
         }
     } else {
         [cell configureCellAppearence];
-        _viewModel.selectedDate = [_viewModel dateForIndexPath:indexPath];
     }
+    _viewModel.selectedDate = [_viewModel dateForIndexPath:indexPath];
     
     // CollectionView选中状态仅仅在‘当月’体现，placeholder需要重新计算'选中'状态
     [collectionView.visibleCells enumerateObjectsUsingBlock:^(CalendarCollectionViewCell *cell, NSUInteger idx, BOOL *stop) {
@@ -115,7 +114,7 @@ static NSString *kCalendarCellReuseIdentifier = @"CalendarCellIdentifier";
         }
     }];
     NSLog(@"select Day: %@", cell.dateLabel.text);
-    [self.delegate getScheduleDate:cell.calendarDate];
+    [self.delegate getScheduleDate:cell.calendarDate andEventList:cell.eventList];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -175,15 +174,15 @@ static NSString *kCalendarCellReuseIdentifier = @"CalendarCellIdentifier";
     NSIndexPath *indexPath = [_viewModel indexPathForDate:currentDate];
     [self scrollToCurrentMonthAnimated:animated];
     [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
-    [self.delegate getScheduleDate:[_viewModel calendarDateForIndexPath:indexPath]];
+    [self.delegate getScheduleDate:[_viewModel calendarDateForIndexPath:indexPath] andEventList:[_viewModel eventListForIndexPath:indexPath]];
 }
 
 - (void)scrollToToday {
     [self scrollToTodayAnimated:YES];
 }
 
-
 #pragma mark - UICollectionView FlowLayout
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     return CGSizeMake(CGRectGetWidth(self.collectionView.frame)/WEEK_DAYS, CGRectGetHeight(self.collectionView.frame)/COLLECTIONVIEW_ROWS);
@@ -193,7 +192,8 @@ static NSString *kCalendarCellReuseIdentifier = @"CalendarCellIdentifier";
 
 - (void)bindView {
     NSArray *dateList = [NSArray array];
-    _viewModel = [[CalendarCollectionViewModel alloc] initWithDateList:dateList];
+    NSArray *eventList = [NSArray array];
+    _viewModel = [[CalendarCollectionViewModel alloc] initWithDateList:dateList andEventList:(NSArray *)eventList];
 }
 
 - (void)configureCell:(CalendarCollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -204,6 +204,7 @@ static NSString *kCalendarCellReuseIdentifier = @"CalendarCellIdentifier";
     //cell.calendarDate.date = [_viewModel dateForIndexPath:indexPath];
     NSInteger dateDay = [cell.calendarDate.date getDay];
     cell.dateLabel.text = [NSString stringWithFormat:@"%d",(int)dateDay];
+    cell.eventList = [_viewModel eventListForIndexPath:indexPath];
     [cell configureCellAppearence];
 
     [cell setNeedsLayout];

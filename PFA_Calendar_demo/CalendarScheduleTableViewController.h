@@ -13,5 +13,6 @@
 @interface CalendarScheduleTableViewController : UITableViewController
 
 @property (strong, nonatomic) CalendarDate *scheduleDate;
+@property (strong, nonatomic) NSArray *scheduleEventList;
 
 @end

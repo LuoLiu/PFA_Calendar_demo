@@ -28,6 +28,38 @@
     self = [super init];
     
     if (self) {
+        ///////////test
+        ScheduleEvent *event1 = [[ScheduleEvent alloc] init];
+        event1.eventTitle = @"検診";
+        event1.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/27 11:00:11"];
+        event1.eventType = ScheduleEventTypeCheckup;
+        
+        ScheduleEvent *event2 = [[ScheduleEvent alloc] init];
+        event2.eventTitle = @"検診";
+        event2.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/28 22:00:22"];
+        event2.eventType = ScheduleEventTypeCheckup;
+        
+        ScheduleEvent *event3 = [[ScheduleEvent alloc] init];
+        event3.eventTitle = @"Test 3";
+        event3.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/28 23:00:33"];
+        event3.eventType = ScheduleEventTypeOthers;
+        event3.isShare = YES;
+        
+        ScheduleEvent *event4 = [[ScheduleEvent alloc] init];
+        event4.eventTitle = @"Test Test 4";
+        event4.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/6/1 10:54:33"];
+        event4.eventType = ScheduleEventTypeOthers;
+        event4.isShare = YES;
+        
+        ScheduleEvent *event5 = [[ScheduleEvent alloc] init];
+        event5.eventTitle = @"検診";
+        event5.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/8/28 13:20:33"];
+        event5.eventType = ScheduleEventTypeCheckup;
+        
+        eventList = [NSArray arrayWithObjects:event1, event2, event3, event4, event5,nil];
+        
+        ///////////test
+        
         _eventList = [self sortEventList:eventList byAscending:YES];
         _dateList = [self getDateList];
     }

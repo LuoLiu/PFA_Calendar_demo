@@ -1230,7 +1230,9 @@
                             <constraint firstItem="UZY-eC-Cuh" firstAttribute="top" secondItem="x19-LP-1ru" secondAttribute="bottom" constant="8" id="l3s-I1-qNp">
                                 <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                             </constraint>
-                            <constraint firstItem="zMm-fJ-ELZ" firstAttribute="top" secondItem="UZY-eC-Cuh" secondAttribute="bottom" constant="-35" id="s7R-79-SuJ"/>
+                            <constraint firstItem="zMm-fJ-ELZ" firstAttribute="top" secondItem="UZY-eC-Cuh" secondAttribute="bottom" constant="-35" id="s7R-79-SuJ">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-47"/>
+                            </constraint>
                             <constraint firstItem="x19-LP-1ru" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="50" id="sf1-EN-2Ad">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
@@ -1320,6 +1322,7 @@
                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="16" id="3h7-gt-iHj"/>
+                                        <constraint firstAttribute="width" constant="88" id="tC8-ju-YEK"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="18"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1327,12 +1330,14 @@
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="3h7-gt-iHj"/>
+                                            <exclude reference="tC8-ju-YEK"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                        <rect key="frame" x="111" y="261" width="88" height="16"/>
+                                        <rect key="frame" x="115" y="261" width="88" height="16"/>
                                         <mask key="constraints">
                                             <include reference="3h7-gt-iHj"/>
+                                            <include reference="tC8-ju-YEK"/>
                                         </mask>
                                     </variation>
                                 </label>
@@ -1350,7 +1355,7 @@
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                        <rect key="frame" x="125" y="280" width="61" height="21"/>
+                                        <rect key="frame" x="130" y="280" width="57" height="21"/>
                                         <mask key="constraints">
                                             <include reference="2AA-oa-JFC"/>
                                         </mask>
@@ -1370,7 +1375,7 @@
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                        <rect key="frame" x="225" y="272" width="30" height="24"/>
+                                        <rect key="frame" x="247" y="272" width="30" height="24"/>
                                         <mask key="constraints">
                                             <include reference="2Y3-Ru-bzy"/>
                                         </mask>
@@ -1388,11 +1393,11 @@
                                 <constraint firstItem="wt7-E6-geg" firstAttribute="top" secondItem="IIq-V7-Cme" secondAttribute="bottom" constant="3" id="gE1-Zf-bmb"/>
                                 <constraint firstAttribute="centerY" secondItem="sHT-vw-pVZ" secondAttribute="centerY" id="l2f-br-eor"/>
                                 <constraint firstAttribute="trailing" secondItem="Ukw-xO-xHd" secondAttribute="trailing" id="m03-Ms-SfA">
-                                    <variation key="heightClass=regular-widthClass=compact" constant="55"/>
+                                    <variation key="heightClass=regular-widthClass=compact" constant="40"/>
                                 </constraint>
                                 <constraint firstAttribute="centerX" secondItem="wt7-E6-geg" secondAttribute="centerX" id="qmN-QP-hJi"/>
                                 <constraint firstItem="sHT-vw-pVZ" firstAttribute="leading" secondItem="GOg-gn-4LP" secondAttribute="leading" id="wuD-qS-7s6">
-                                    <variation key="heightClass=regular-widthClass=compact" constant="55"/>
+                                    <variation key="heightClass=regular-widthClass=compact" constant="40"/>
                                 </constraint>
                             </constraints>
                             <variation key="default">
@@ -2087,9 +2092,6 @@
                                             <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="46" y="9" width="85" height="17"/>
-                                            </variation>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_note" translatesAutoresizingMaskIntoConstraints="NO" id="aQc-Zm-LNW">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -2124,7 +2126,7 @@
                                             <variation key="heightClass=regular-widthClass=compact" constant="-0.5"/>
                                         </constraint>
                                         <constraint firstItem="fUv-W3-4Zg" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2pb-hL-PdF" secondAttribute="trailingMargin" id="hph-Ck-m8Y">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="-135"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="-236"/>
                                         </constraint>
                                         <constraint firstItem="aQc-Zm-LNW" firstAttribute="leading" secondItem="2pb-hL-PdF" secondAttribute="leadingMargin" id="jU3-8Y-bqG"/>
                                     </constraints>
@@ -2953,7 +2955,7 @@
         <image name="right_arrow" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U0V-wb-0Wp"/>
+        <segue reference="Pad-Bo-DZA"/>
         <segue reference="Rcb-c0-dTh"/>
     </inferredMetricsTieBreakers>
 </document>

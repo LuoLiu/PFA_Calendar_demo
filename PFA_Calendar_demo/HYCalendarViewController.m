@@ -67,10 +67,10 @@
 
 - (void)calendarCurrentMonthStringDidChangeTo:(NSString *)monthString {
     self.monthLabel.text = monthString;
-    NSLog(@"CurrentMonth:%@", monthString);
+    NSLog(@"SelectMonth:%@", monthString);
 }
 
--(void)isCurrentMonth:(BOOL)isCurrentMonth {
+- (void)isCurrentMonth:(BOOL)isCurrentMonth {
     self.todayButton.hidden = isCurrentMonth;
 }
 

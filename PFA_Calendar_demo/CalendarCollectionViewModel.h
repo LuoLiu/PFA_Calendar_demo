@@ -14,6 +14,7 @@
 @interface CalendarCollectionViewModel : NSObject
 
 @property (strong, nonatomic) NSArray *dateList;
+@property (strong, nonatomic) NSArray *eventList;
 @property (strong, nonatomic) NSDate *minimumDate;
 @property (strong, nonatomic) NSDate *maximumDate;
 @property (strong, nonatomic) NSDate *currentDate;
@@ -27,11 +28,12 @@
 ///誕生日(出生日)
 @property (strong, nonatomic) NSDate *birthday;
 
-- (instancetype)initWithDateList:(NSArray *)dateList;
+- (instancetype)initWithDateList:(NSArray *)dateList andEventList:(NSArray *)eventList;
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfItemsInSection:(NSInteger)section;
 - (NSDate *)dateForIndexPath:(NSIndexPath *)indexPath;
 - (NSIndexPath *)indexPathForDate:(NSDate *)date;
+- (NSMutableArray *)eventListForIndexPath:(NSIndexPath *)indexPath;
 //- (NSDate *)monthForSection:(NSInteger)section;
 
 - (BOOL)isDateInRange:(NSDate *)date;

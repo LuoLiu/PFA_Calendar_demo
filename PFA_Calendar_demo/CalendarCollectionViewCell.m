@@ -52,6 +52,7 @@
 }
 
 -(void)prepareForReuse {
+    self.eventList = nil;
     self.selected = NO;
     self.backgroundColor = _backgroundColors[@(CalendarCellStateNormal)];
     self.hospitalIcon.hidden = YES;
@@ -125,7 +126,10 @@
 }
 
 - (UIImage *)setBackgroundImage {
-    if ([self.calendarDate.date isEqualToDate:_calenderViewModel.expBirthday]) {
+    if (self.isPlaceholder) {
+        return nil;
+    }
+    else if ([self.calendarDate.date isEqualToDate:_calenderViewModel.expBirthday]) {
         return [UIImage imageNamed:@"dueday_icon"];
     }
     else if ([self.calendarDate.date isEqualToDate:_calenderViewModel.birthday]) {
@@ -157,7 +161,7 @@
             self.ppIcon.hidden = NO;
         }
         else {
-            /////显示提交者icon
+            self.mmIcon.hidden = NO;/////显示提交者icon
         }
     }
 }

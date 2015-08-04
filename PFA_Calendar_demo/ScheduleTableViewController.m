@@ -20,7 +20,7 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
 
 @property (strong, nonatomic) ScheduleDetailTableViewController *scheduleDetailTableVC;
 @property (strong, nonatomic) ScheduleTableViewModel *viewModel;
-@property (strong, nonatomic) NSArray *evenList;
+@property (strong, nonatomic) NSArray *eventList;
 
 @end
 
@@ -30,39 +30,7 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
-    
-    ///////////test
-    ScheduleEvent *event1 = [[ScheduleEvent alloc] init];
-    event1.eventTitle = @"Test 1";
-    event1.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/27 11:00:11"];
-    event1.eventType = ScheduleEventTypeCheckup;
-    
-    ScheduleEvent *event2 = [[ScheduleEvent alloc] init];
-    event2.eventTitle = @"Test 2";
-    event2.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/28 22:00:22"];
-    event2.eventType = ScheduleEventTypeOthers;
-    
-    ScheduleEvent *event3 = [[ScheduleEvent alloc] init];
-    event3.eventTitle = @"Test 3";
-    event3.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/28 23:00:33"];
-    event3.eventType = ScheduleEventTypeOthers;
-    event3.isShare = YES;
-    
-    ScheduleEvent *event4 = [[ScheduleEvent alloc] init];
-    event4.eventTitle = @"Test Test 4";
-    event4.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/6/1 10:54:33"];
-    event4.eventType = ScheduleEventTypeOthers;
-    event4.isShare = YES;
-
-    ScheduleEvent *event5 = [[ScheduleEvent alloc] init];
-    event5.eventTitle = @"Test 5";
-    event5.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/8/28 13:20:33"];
-    event5.eventType = ScheduleEventTypeCheckup;
-    
-    _evenList = [NSArray arrayWithObjects:event1, event2, event3, event4, event5,nil];
-    ///////////test
-
-    _viewModel = [[ScheduleTableViewModel alloc] initWithEventList:_evenList];
+    [self bindView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,6 +64,13 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
     
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
+}
+
+#pragma mark - Configure
+
+- (void)bindView {
+    NSArray *eventList = [NSArray array];
+    _viewModel = [[ScheduleTableViewModel alloc] initWithEventList:eventList];
 }
 
 - (void)configureCell:(ScheduleTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {

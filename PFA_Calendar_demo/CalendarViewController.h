@@ -16,7 +16,7 @@
 @optional
 - (void)calendarCurrentMonthStringDidChangeTo:(NSString *)monthString;
 - (void)isCurrentMonth:(BOOL)isCurrentMonth;
-- (void)getScheduleDate:(CalendarDate *)calendarDate;
+- (void)getScheduleDate:(CalendarDate *)calendarDate andEventList:(NSArray *)eventList;
 
 @end
 

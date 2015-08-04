@@ -20,7 +20,6 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
 
 @interface CalendarScheduleTableViewController ()
 
-@property (strong, nonatomic) NSMutableArray *scheduleEventList;
 @property (strong, nonatomic) ScheduleDetailTableViewController *scheduleDetailTableVC;
 @property (assign, nonatomic) BOOL hasAnnounce;
 
@@ -32,28 +31,25 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
     [super viewDidLoad];
     
     self.tableView.tableFooterView = [[UIView alloc] init];
-    
-    ///////获取特定日期的scheduleEventList
-    _scheduleEventList = [NSMutableArray array];
     ///////////test
     
-    ScheduleEvent *event1 = [[ScheduleEvent alloc] init];
-    event1.eventTitle = @"Test 1";
-    event1.startDate = [[DateFormatterHelper hmDateFormatter] dateFromString:@"00:11"];
-    [_scheduleEventList addObject:event1];
-    
-    ScheduleEvent *event2 = [[ScheduleEvent alloc] init];
-    event2.eventTitle = @"Test 2";
-    event2.startDate = [[DateFormatterHelper hmDateFormatter] dateFromString:@"00:22"];
-    [_scheduleEventList addObject:event2];
-    
-    ScheduleEvent *event3 = [[ScheduleEvent alloc] init];
-    event3.eventTitle = @"Test 3";
-    event3.startDate = [[DateFormatterHelper hmDateFormatter] dateFromString:@"00:33"];
-    [_scheduleEventList addObject:event3];
+//    ScheduleEvent *event1 = [[ScheduleEvent alloc] init];
+//    event1.eventTitle = @"Test 1";
+//    event1.startDate = [[DateFormatterHelper hmDateFormatter] dateFromString:@"00:11"];
+//    [_scheduleEventList addObject:event1];
+//    
+//    ScheduleEvent *event2 = [[ScheduleEvent alloc] init];
+//    event2.eventTitle = @"Test 2";
+//    event2.startDate = [[DateFormatterHelper hmDateFormatter] dateFromString:@"00:22"];
+//    [_scheduleEventList addObject:event2];
+//    
+//    ScheduleEvent *event3 = [[ScheduleEvent alloc] init];
+//    event3.eventTitle = @"Test 3";
+//    event3.startDate = [[DateFormatterHelper hmDateFormatter] dateFromString:@"00:33"];
+//    [_scheduleEventList addObject:event3];
     ///////////test
     
-    _hasAnnounce = YES;
+    _hasAnnounce = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -119,6 +115,7 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
     cell.scheduleEvent = scheduleEvent;
     cell.dateLabel.text = [[DateFormatterHelper hmDateFormatter] stringFromDate:scheduleEvent.startDate];
     cell.planLabel.text = scheduleEvent.eventTitle;
+    cell.iconImageView.image = [cell setCellIcon];
     return cell;
 }
 

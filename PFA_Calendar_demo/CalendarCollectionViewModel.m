@@ -7,8 +7,10 @@
 //
 
 #import "CalendarCollectionViewModel.h"
-#import "NSDate+HYExtension.h"
 #import "CalendarDate.h"
+#import "ScheduleEvent.h"
+#import "NSDate+HYExtension.h"
+#import "DateFormatterHelper.h"
 
 #define kWEEK_DAYS           (7)
 #define kCOLLECTIONVIEW_ROWS (6)
@@ -22,11 +24,12 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithDateList:(NSArray *)dateList {
+- (instancetype)initWithDateList:(NSArray *)dateList andEventList:(NSArray *)eventList{
     self = [super init];
     
     if (self) {
         _dateList = dateList;
+        _eventList = eventList;
         
         _minimumDate  = [[dateList firstObject] date];
         _maximumDate  = [[dateList lastObject] date];
@@ -38,6 +41,38 @@
         _pregDate    = [NSDate dateWithYear:2015 month:3 day:5];
         _expBirthday = [NSDate dateWithYear:2015 month:12 day:25];
         ////////test
+        
+        ///////////test
+        ScheduleEvent *event1 = [[ScheduleEvent alloc] init];
+        event1.eventTitle = @"検診";
+        event1.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/27 11:00:11"];
+        event1.eventType = ScheduleEventTypeCheckup;
+        
+        ScheduleEvent *event2 = [[ScheduleEvent alloc] init];
+        event2.eventTitle = @"検診";
+        event2.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/28 22:00:22"];
+        event2.eventType = ScheduleEventTypeCheckup;
+        
+        ScheduleEvent *event3 = [[ScheduleEvent alloc] init];
+        event3.eventTitle = @"Test 3";
+        event3.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/28 23:00:33"];
+        event3.eventType = ScheduleEventTypeOthers;
+        event3.isShare = YES;
+        
+        ScheduleEvent *event4 = [[ScheduleEvent alloc] init];
+        event4.eventTitle = @"Test Test 4";
+        event4.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/6/1 10:54:33"];
+        event4.eventType = ScheduleEventTypeOthers;
+        event4.isShare = YES;
+        
+        ScheduleEvent *event5 = [[ScheduleEvent alloc] init];
+        event5.eventTitle = @"検診";
+        event5.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/8/28 13:20:33"];
+        event5.eventType = ScheduleEventTypeCheckup;
+        
+        _eventList = [NSArray arrayWithObjects:event1, event2, event3, event4, event5,nil];
+        ///////////test
+
     }
     return self;
 }
@@ -95,6 +130,20 @@
     return [NSIndexPath indexPathForItem:item inSection:section];
 }
 
+- (NSMutableArray *)eventListForIndexPath:(NSIndexPath *)indexPath {
+    NSMutableArray *eventList = [NSMutableArray array];
+    for (ScheduleEvent *event in self.eventList) {
+        if ([event.startDate isEqualToDateForDay:[self dateForIndexPath:indexPath]]) {
+            [eventList addObject:event];
+            if (event.isShare) {
+                [eventList addObject:event];
+            }
+        }
+    }
+   
+    return eventList;
+}
+
 //- (NSDate *)monthForSection:(NSInteger)section {
 //    NSDate *selectMonth = [[_minimumDate firstDayOfMonth] dateByAddMonths:section];
 //    NSDate *date = [selectMonth dateByAddMonths:section];
@@ -112,7 +161,6 @@
     selectedDate = [selectedDate daysFrom:_minimumDate] < 0 ? [NSDate dateWithYear:[_minimumDate getYear] month:[_minimumDate getMonth] day:[selectedDate getDay]] : selectedDate;
     selectedDate = [selectedDate daysFrom:_maximumDate] > 0 ? [NSDate dateWithYear:[_maximumDate getYear] month:[_maximumDate getMonth] day:[selectedDate getDay]] : selectedDate;
     selectedDate = selectedDate.dateByIgnoringTimeComponents;
-    _currentMonth = [selectedDate copy];
     [self didChangeValueForKey:@"currentMonth"];
 }
 
@@ -133,7 +181,7 @@
     }
     if (![_currentMonth isEqualToDateForMonth:currentMonth]) {
         currentMonth = [currentMonth dateByIgnoringTimeComponents];
-        _currentMonth = currentMonth;//
+        _currentMonth = currentMonth;
     }
 }
 

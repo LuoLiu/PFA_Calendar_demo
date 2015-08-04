@@ -10,6 +10,7 @@
 #import "CalendarContainerController.h"
 #import "ScheduleTableViewController.h"
 #import "CalendarViewController.h"
+#import "AddScheduleTableViewController.h"
 
 @interface HYCalendarViewController () <CalendarContainerControllerDelegate>
 
@@ -84,6 +85,10 @@
     else if ([segue.identifier isEqualToString:@"ScheduleTableViewEmbedSegue"])
     {
         self.scheduleVC = segue.destinationViewController;
+    }
+    else if ([segue.identifier isEqualToString:@"AddScheduleSegue"]) {
+        AddScheduleTableViewController *addScheduleVC = segue.destinationViewController;
+        addScheduleVC.isEditSchedule = NO;
     }
 }
 

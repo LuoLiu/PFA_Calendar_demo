@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class ScheduleEvent;
+
 @interface AddScheduleTableViewController : UITableViewController
+
+@property (strong, nonatomic) ScheduleEvent *scheduleEvent;
+@property (assign, nonatomic) BOOL isEditSchedule;
 
 @end

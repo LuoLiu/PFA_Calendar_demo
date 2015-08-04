@@ -33,9 +33,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *endDateLabel;
 @property (weak, nonatomic) IBOutlet UIDatePicker *startDatePicker;
 @property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
+@property (weak, nonatomic) IBOutlet UINavigationItem *navItem;
 
 @property (strong, nonatomic) AlarmTableViewController *alarmTableVC;
-@property (strong, nonatomic) ScheduleEvent *scheduleEvent;
 
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
@@ -54,26 +54,49 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
     
-    _scheduleEvent = [[ScheduleEvent alloc] init];
-    _memoTextView.text = @"";
-    _startDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:[NSDate date]];
-    _endDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:[NSDate date]];
     _isEditStartDate = NO;
     _isEditEndDate = NO;
     _canSave = YES;
     self.startDatePicker.hidden = YES;
     self.endDatePicker.hidden = YES;
     
-    //test
-    //_scheduleEvent.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/29 23:00:22"];
-    //test
-    //self.startDate = _scheduleEvent.startDate;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addScheduleEvent) name:@"addScheduleEvent" object:nil];
-}
+    if (!_isEditSchedule) {
+        self.navItem.title = @"予定を追加する";
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"addScheduleEvent" object:nil];
+        _scheduleEvent = [[ScheduleEvent alloc] init];
+        _memoTextView.text = @"";
+        _startDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:[NSDate date]];
+        _endDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:[NSDate date]];
+        
+        //test
+        //_scheduleEvent.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/29 23:00:22"];
+        //test
+        //self.startDate = _scheduleEvent.startDate;
+    }
+    else
+    {
+        self.navItem.title = @"予定編集";
+
+        if (_scheduleEvent.eventType == ScheduleEventTypeCheckup) {
+            [_checkUpSwitch setOn:YES animated:NO];
+        }
+        else {
+            [_checkUpSwitch setOn:NO animated:NO];
+        }
+        
+        _eventTitleTextField.text = _scheduleEvent.eventTitle;
+        
+        _startDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:_scheduleEvent.startDate];
+        _startDate = _scheduleEvent.startDate;
+        _startDatePicker.date = _startDate;
+        _endDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:_scheduleEvent.endDate];
+        _endDate = _scheduleEvent.endDate;
+        _endDatePicker.date = _endDate;
+        
+        _alarmLabel.text = [self stringForAlarmMinutes:_scheduleEvent.alarmMinutes];
+        
+        _memoTextView.text = _scheduleEvent.memo;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -201,21 +224,6 @@
     _scheduleEvent.isShare = [(UISwitch *)sender isOn];
 }
 
-- (void)addScheduleEvent {
-    if (!_startDate) {
-        _startDate = self.startDatePicker.date;
-    }
-    if (!_endDate) {
-        _endDate = self.endDatePicker.date;
-    }
-    _scheduleEvent.isShare = self.shareSwitch.isOn;
-    _scheduleEvent.startDate = _startDate;
-    _scheduleEvent.endDate = _endDate;
-    _scheduleEvent.alarmMinutes = self.alarmMinutes;
-    _scheduleEvent.eventTitle = [NSString stringWithString:self.eventTitleTextField.text];
-    _scheduleEvent.memo = [NSString stringWithString:self.memoTextView.text];
-}
-
 - (IBAction)back:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -226,7 +234,25 @@
         [alertView show];
     }
     else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"addScheduleEvent" object:nil];
+        if (!_startDate) {
+            _startDate = self.startDatePicker.date;
+        }
+        if (!_endDate) {
+            _endDate = self.endDatePicker.date;
+        }
+        _scheduleEvent.isShare = self.shareSwitch.isOn;
+        _scheduleEvent.startDate = _startDate;
+        _scheduleEvent.endDate = _endDate;
+        _scheduleEvent.alarmMinutes = self.alarmMinutes;
+        _scheduleEvent.eventTitle = [NSString stringWithString:self.eventTitleTextField.text];
+        _scheduleEvent.memo = [NSString stringWithString:self.memoTextView.text];
+        
+        if (!_isEditSchedule) {
+            [self addScheduleEvent];
+        }
+        else {
+            [self updateScheduleEvent];
+        }
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
@@ -236,15 +262,26 @@
     
 }
 
-#pragma mark - Alarm
+- (void)addScheduleEvent {
+    NSLog(@"addScheduleEvent");
+    ////////AddEvent API
+}
+
+- (void)updateScheduleEvent {
+    NSLog(@"updateScheduleEvent");
+    ////////updateEvent API
+}
+
+#pragma mark - AlarmTableViewControllerDelegate
 
 -(void)alarmMinutes:(NSInteger)alarmMinutes {
-    
     _alarmMinutes = alarmMinutes;
+    self.alarmLabel.text = [self stringForAlarmMinutes:alarmMinutes];
+}
 
+-(NSString *)stringForAlarmMinutes:(NSInteger)alarmMinutes {
     if (alarmMinutes < 0) {
-        self.alarmLabel.text = @"あし";
-        return;
+        return @"あし";
     }
     
     NSString *alarmString = @"";
@@ -275,8 +312,9 @@
             alarmString = @"あし";
             break;
     }
-    self.alarmLabel.text = [NSString stringWithString:alarmString];
+    return alarmString;
 }
+
 
 #pragma mark - Navigation
 

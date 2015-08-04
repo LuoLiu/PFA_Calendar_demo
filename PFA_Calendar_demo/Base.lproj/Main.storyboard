@@ -768,6 +768,7 @@
                         <outlet property="endDatePicker" destination="BxQ-oA-HEp" id="5ev-kv-4SR"/>
                         <outlet property="eventTitleTextField" destination="y3G-Fa-7hp" id="j8S-XM-XC3"/>
                         <outlet property="memoTextView" destination="osW-vQ-py4" id="pPL-HE-7pp"/>
+                        <outlet property="navItem" destination="hn5-9y-Qux" id="4L6-Cc-hVm"/>
                         <outlet property="shareSwitch" destination="s0R-43-Iyn" id="aDV-G8-boa"/>
                         <outlet property="startDateLabel" destination="vTl-bH-LKP" id="VbZ-sR-c8l"/>
                         <outlet property="startDatePicker" destination="Wyf-C2-4AO" id="GFv-lL-Wbi"/>
@@ -1333,8 +1334,7 @@
                                             <exclude reference="tC8-ju-YEK"/>
                                         </mask>
                                     </variation>
-                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                        <rect key="frame" x="115" y="261" width="88" height="16"/>
+                                    <variation key="heightClass=regular-widthClass=compact">
                                         <mask key="constraints">
                                             <include reference="3h7-gt-iHj"/>
                                             <include reference="tC8-ju-YEK"/>
@@ -1354,8 +1354,7 @@
                                             <exclude reference="2AA-oa-JFC"/>
                                         </mask>
                                     </variation>
-                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                        <rect key="frame" x="130" y="280" width="57" height="21"/>
+                                    <variation key="heightClass=regular-widthClass=compact">
                                         <mask key="constraints">
                                             <include reference="2AA-oa-JFC"/>
                                         </mask>
@@ -1374,8 +1373,7 @@
                                             <exclude reference="2Y3-Ru-bzy"/>
                                         </mask>
                                     </variation>
-                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                        <rect key="frame" x="247" y="272" width="30" height="24"/>
+                                    <variation key="heightClass=regular-widthClass=compact">
                                         <mask key="constraints">
                                             <include reference="2Y3-Ru-bzy"/>
                                         </mask>
@@ -1440,7 +1438,7 @@
                         <barButtonItem key="rightBarButtonItem" image="btn_add" id="z4a-fE-KRl">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="djV-DE-ROh" kind="showDetail" id="Pad-Bo-DZA"/>
+                                <segue destination="djV-DE-ROh" kind="showDetail" identifier="AddScheduleIdentifier" id="Pad-Bo-DZA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2297,7 +2295,7 @@
                                                             <barButtonItem key="rightBarButtonItem" systemItem="edit" id="5Ru-gG-V34">
                                                                 <color key="tintColor" red="0.8980392157" green="0.25490196079999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <connections>
-                                                                    <segue destination="djV-DE-ROh" kind="showDetail" id="U0V-wb-0Wp"/>
+                                                                    <segue destination="djV-DE-ROh" kind="showDetail" identifier="EditScheduleSegue" id="U0V-wb-0Wp"/>
                                                                 </connections>
                                                             </barButtonItem>
                                                         </navigationItem>
@@ -2349,7 +2347,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lyr-Qs-Al9" id="jtt-e3-AIY">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tDD-wq-1Yu">
+                                                <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tDD-wq-1Yu">
                                                     <rect key="frame" x="-25" y="-15" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="LFY-nx-Cwq"/>
@@ -2698,7 +2696,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D6E-rw-VWS" id="BXf-Kk-aui">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K6r-CG-Ex9">
+                                                <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K6r-CG-Ex9">
                                                     <rect key="frame" x="-25" y="-15" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="49" id="1sD-TQ-Mjn"/>
@@ -2779,7 +2777,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DKf-yC-iQV" id="aqK-Ta-nt1">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCM-Ze-L2Q">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCM-Ze-L2Q">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -2955,7 +2953,7 @@
         <image name="right_arrow" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Pad-Bo-DZA"/>
+        <segue reference="U0V-wb-0Wp"/>
         <segue reference="Rcb-c0-dTh"/>
     </inferredMetricsTieBreakers>
 </document>

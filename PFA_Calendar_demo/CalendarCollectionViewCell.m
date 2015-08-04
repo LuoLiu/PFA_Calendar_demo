@@ -154,6 +154,7 @@
     for (ScheduleEvent *event in self.eventList) {
         if (event.eventType == ScheduleEventTypeCheckup) {
             self.hospitalIcon.hidden = NO;
+            continue;
         }
         
         if (event.isShare) {

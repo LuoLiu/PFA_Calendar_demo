@@ -30,6 +30,7 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
+    self.tableView.tableFooterView = [[UIView alloc] init];
     [self bindView];
 }
 
@@ -50,7 +51,12 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [[UIView alloc] init];
-    headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"nav_bg_red"]];
+    if (section == 0) {
+        headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"nav_bg_red"]];
+    }
+    else {
+        headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"nav_bg"]];
+    }
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, self.view.frame.size.width, 22)];
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.backgroundColor = [UIColor clearColor];

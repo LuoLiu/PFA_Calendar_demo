@@ -22,7 +22,7 @@
 #define kMemoRowHeight      175
 #define kDelRowHeight       168
 
-@interface AddScheduleTableViewController () <AlarmTableViewControllerDelegate, UITextFieldDelegate>
+@interface AddScheduleTableViewController () <AlarmTableViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *eventTitleTextField;
 @property (weak, nonatomic) IBOutlet UITextView *memoTextView;
@@ -323,20 +323,37 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if ([string isEqualToString:@"\n"]) {
-        return YES;
-    }
-    
     NSString * aString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (self.eventTitleTextField == textField)
     {
         if ([aString length] > 15) {
             textField.text = [aString substringToIndex:15];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:@"超过最大字数不能输入了"
+                                                            message:@"Cannot more than 15 Characters"
                                                            delegate:nil
                                                   cancelButtonTitle:@"Ok"
                                                   otherButtonTitles:nil, nil];
+            
+            [alertView show];
+            return NO;
+        }
+    }
+    return YES;
+}
+
+#pragma mark - UITextViewDelegate
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    NSString * aString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    if (self.memoTextView == textView)
+    {
+        if ([aString length] > 500) {
+            textView.text = [aString substringToIndex:500];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                message:@"Cannot more than 500 Characters"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil, nil];
             
             [alertView show];
             return NO;

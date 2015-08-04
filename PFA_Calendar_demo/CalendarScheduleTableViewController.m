@@ -31,24 +31,6 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
     [super viewDidLoad];
     
     self.tableView.tableFooterView = [[UIView alloc] init];
-    ///////////test
-    
-//    ScheduleEvent *event1 = [[ScheduleEvent alloc] init];
-//    event1.eventTitle = @"Test 1";
-//    event1.startDate = [[DateFormatterHelper hmDateFormatter] dateFromString:@"00:11"];
-//    [_scheduleEventList addObject:event1];
-//    
-//    ScheduleEvent *event2 = [[ScheduleEvent alloc] init];
-//    event2.eventTitle = @"Test 2";
-//    event2.startDate = [[DateFormatterHelper hmDateFormatter] dateFromString:@"00:22"];
-//    [_scheduleEventList addObject:event2];
-//    
-//    ScheduleEvent *event3 = [[ScheduleEvent alloc] init];
-//    event3.eventTitle = @"Test 3";
-//    event3.startDate = [[DateFormatterHelper hmDateFormatter] dateFromString:@"00:33"];
-//    [_scheduleEventList addObject:event3];
-    ///////////test
-    
     _hasAnnounce = NO;
 }
 

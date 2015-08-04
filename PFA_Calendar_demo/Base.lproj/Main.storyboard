@@ -638,6 +638,9 @@
                                                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="djV-DE-ROh" id="v9g-BP-oqb"/>
+                                                    </connections>
                                                 </textView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_memo" translatesAutoresizingMaskIntoConstraints="NO" id="tHP-o1-mkL">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>

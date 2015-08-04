@@ -35,13 +35,13 @@
     [self updateViewConstraints];
 }
 
--(void)updateViewConstraints {
-    [super updateViewConstraints];
-    
-    if (self.calendarScheduleVC.tableView.contentSize.height < self.tableViewContainerHeightConstaint.constant) {
-        self.tableViewContainerHeightConstaint.constant = self.calendarScheduleVC.tableView.contentSize.height;
-    }
-}
+//-(void)updateViewConstraints {
+//    [super updateViewConstraints];
+//    
+//    if (self.calendarScheduleVC.tableView.contentSize.height < self.tableViewContainerHeightConstaint.constant) {
+//        self.tableViewContainerHeightConstaint.constant = self.calendarScheduleVC.tableView.contentSize.height;
+//    }
+//}
 
 #pragma mark - Navigation
 

@@ -39,9 +39,11 @@ typedef NS_ENUM(NSInteger, CalendarCellState) {
 
 @property (strong, nonatomic) CalendarCollectionViewModel *calenderViewModel;
 @property (strong, nonatomic) CalendarDate  *calendarDate;
-@property (strong, nonatomic) ScheduleEvent *scheduleEvent;
+//@property (strong, nonatomic) ScheduleEvent *scheduleEvent;
+@property (strong, nonatomic) NSMutableArray *eventList;
 @property (strong, nonatomic) NSDate *month;
-@property (assign, nonatomic, getter=hasEvent)      BOOL hasEvent;
+//@property (assign, nonatomic, getter=hasEvent)      BOOL hasEvent;
+@property (assign, nonatomic, getter=hasAnnounce)   BOOL hasAnnounce;
 @property (assign, nonatomic, getter=isPlaceholder) BOOL isPlaceholder;
 @property (assign, nonatomic, getter=isSaturday)    BOOL isSaturday;
 @property (assign, nonatomic, getter=isSunday)      BOOL isSunday;

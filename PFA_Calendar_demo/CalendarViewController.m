@@ -115,13 +115,10 @@ static NSString *kCalendarCellReuseIdentifier = @"CalendarCellIdentifier";
         }
     }];
     NSLog(@"select Day: %@", cell.dateLabel.text);
-    if (cell.hasEvent) {
-        [self.delegate getScheduleDate:cell.calendarDate];
-    }
+    [self.delegate getScheduleDate:cell.calendarDate];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     CalendarCollectionViewCell *cell = (CalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     [cell configureCellAppearence];
 }

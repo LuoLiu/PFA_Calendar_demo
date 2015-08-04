@@ -70,6 +70,15 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
+    if (self.scheduleEventList.count == 0) {
+        if (_hasAnnounce) {
+            return 2;
+        }
+        else {
+            return 1;
+        }
+    }
+    
     if (_hasAnnounce) {
         return self.scheduleEventList.count+1;
     }
@@ -79,6 +88,20 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.scheduleEventList.count == 0) {
+
+        if (_hasAnnounce) {
+            if (indexPath.row == 0) {
+                AnnounceTableViewCell *announceCell = [tableView dequeueReusableCellWithIdentifier:@"AnnounceCell" forIndexPath:indexPath];
+                announceCell.contentLabel.text = @"アナウンス";
+                return announceCell;
+            }
+        }
+        UITableViewCell *cell = [[UITableViewCell alloc] init];
+        cell.textLabel.text = @"NO envent.";
+        return cell;
+    }
+    
     ScheduleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCalendarScheduleTableCellReuseIdentifier];
     ScheduleEvent *scheduleEvent= [[ScheduleEvent alloc] init];
     if (_hasAnnounce) {
@@ -88,11 +111,9 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
             return announceCell;
         }
         
-        if (self.scheduleEventList.count != 0) {
-            scheduleEvent = [self.scheduleEventList objectAtIndex:indexPath.row-1];
-        }
+        scheduleEvent = [self.scheduleEventList objectAtIndex:indexPath.row-1];
     }
-    else if (self.scheduleEventList.count != 0){
+    else {
         scheduleEvent = [self.scheduleEventList objectAtIndex:indexPath.row];
     }
     cell.scheduleEvent = scheduleEvent;
@@ -101,14 +122,23 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
     return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"nav_bg"]];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, self.view.frame.size.width, 22)];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    
     NSString *scheduleDateString = [[DateFormatterHelper scheduleDateFormatter] stringFromDate:self.scheduleDate.date];
     if (self.scheduleDate.isHoliday) {
         NSString *holidayName = [NSString stringWithString:self.scheduleDate.holidayName];
         scheduleDateString = [scheduleDateString stringByAppendingString:holidayName];
     }
+    titleLabel.text = scheduleDateString;
     
-    return scheduleDateString;
+    [headerView addSubview:titleLabel];
+    return headerView;
 }
 
 #pragma mark - Navigation

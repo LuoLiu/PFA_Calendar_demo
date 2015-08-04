@@ -14,9 +14,6 @@
 
 #define kCellPlaceholderColor   [UIColor clearColor]
 #define kCellNormalColor        [UIColor whiteColor]
-//#define kCellSelectedColor      [UIColor redColor]
-//#define kCellTodayColor         [UIColor blueColor]
-//#define kCellAnnounceColor      [UIColor yellowColor]
 
 #define kCellNormalTextColor        [UIColor blackColor]
 #define kCellPlaceholderTextColor   [UIColor colorWithWhite:0.5 alpha:1]
@@ -36,12 +33,15 @@
 - (void)awakeFromNib {
     self.layer.borderWidth = 0.5;
     self.layer.borderColor = [UIColor grayColor].CGColor;
+    self.monthIcon.backgroundColor = [UIColor clearColor];
+    
+    self.hospitalIcon.image = [UIImage imageNamed:@"icon_hospital"];
+    self.mmIcon.image       = [UIImage imageNamed:@"icon_mama"];
+    self.ppIcon.image       = [UIImage imageNamed:@"icon_baba"];
+
     _backgroundColors = [NSMutableDictionary dictionary];
     _backgroundColors[@(CalendarCellStatePlaceholder)] = kCellPlaceholderColor;
     _backgroundColors[@(CalendarCellStateNormal)]      = kCellNormalColor;
-//    _backgroundColors[@(CalendarCellStateSelected)]    = kCellSelectedColor;
-//    _backgroundColors[@(CalendarCellStateToday)]       = kCellTodayColor;
-//    _backgroundColors[@(CalendarCellStateAnnounce)]    = kCellAnnounceColor;
     
     _dateLabelColors = [NSMutableDictionary dictionary];
     _dateLabelColors[@(CalendarCellStateNormal)]        = kCellNormalTextColor;
@@ -58,7 +58,6 @@
     self.mmIcon.hidden = YES;
     self.ppIcon.hidden = YES;
     self.monthIcon.image = nil;
-    self.monthIcon.backgroundColor = [UIColor clearColor];///test
 }
 
 - (void)configureCellAppearence {
@@ -75,6 +74,7 @@
     self.weekAndDayLabel.text = [_calenderViewModel weekAndDayToExpBirthday:self.calendarDate.date];
     self.monthIcon.image = [self setmonthIconImage];
 
+    [self configureCellIcons];
 }
 
 - (UIImage *)setmonthIconImage {
@@ -140,9 +140,26 @@
     else if (self.selected) {
         return [UIImage imageNamed:@"dueday_bg"];
     }
-    //////announce  noteday_bg
-    
+    else if (self.hasAnnounce) {
+        return [UIImage imageNamed:@"noteday_bg"];
+    }
     return nil;
+}
+
+- (void)configureCellIcons {
+    for (ScheduleEvent *event in self.eventList) {
+        if (event.eventType == ScheduleEventTypeCheckup) {
+            self.hospitalIcon.hidden = NO;
+        }
+        
+        if (event.isShare) {
+            self.mmIcon.hidden = NO;
+            self.ppIcon.hidden = NO;
+        }
+        else {
+            /////显示提交者icon
+        }
+    }
 }
 
 - (UIColor *)backgroundColorForCurrentStateInDictionary:(NSDictionary *)dictionary {
@@ -176,8 +193,12 @@
     return dictionary[@(CalendarCellStateNormal)];
 }
 
-- (BOOL)hasEvent {
-    return [self.scheduleEvent.startDate isEqualToDateForDay:self.calendarDate.date];
+//- (BOOL)hasEvent {
+//    return self.eventList.count != 0;
+//}
+
+- (BOOL)hasAnnounce {
+    return NO;////T
 }
 
 - (BOOL)isPlaceholder {

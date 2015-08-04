@@ -22,7 +22,7 @@
 #define kMemoRowHeight      175
 #define kDelRowHeight       168
 
-@interface AddScheduleTableViewController () <AlarmTableViewControllerDelegate>
+@interface AddScheduleTableViewController () <AlarmTableViewControllerDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *eventTitleTextField;
 @property (weak, nonatomic) IBOutlet UITextView *memoTextView;
@@ -315,6 +315,35 @@
     return alarmString;
 }
 
+#pragma mark - UITextFieldDelegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if ([string isEqualToString:@"\n"]) {
+        return YES;
+    }
+    
+    NSString * aString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (self.eventTitleTextField == textField)
+    {
+        if ([aString length] > 15) {
+            textField.text = [aString substringToIndex:15];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"超过最大字数不能输入了"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil, nil];
+            
+            [alertView show];
+            return NO;
+        }
+    }
+    return YES;
+}
 
 #pragma mark - Navigation
 

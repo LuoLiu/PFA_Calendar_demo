@@ -36,7 +36,7 @@
                         <sections>
                             <tableViewSection id="Rr0-2T-0Lp">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="64" id="KGp-pL-Ja5">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="64" id="KGp-pL-Ja5">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGp-pL-Ja5" id="gz1-iv-R2X">
@@ -189,7 +189,9 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="検診" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y3G-Fa-7hp">
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="210" id="6eH-mU-fCO"/>
+                                                        <constraint firstAttribute="width" constant="210" id="6eH-mU-fCO">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="250"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -203,6 +205,9 @@
                                                             <include reference="6eH-mU-fCO"/>
                                                         </mask>
                                                     </variation>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="djV-DE-ROh" id="E7R-jQ-s2D"/>
+                                                    </connections>
                                                 </textField>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_title" translatesAutoresizingMaskIntoConstraints="NO" id="P8G-of-crt">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -236,10 +241,10 @@
                                                     <exclude reference="P8G-of-crt"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="2Z7-jy-Cj4"/>
-                                                    <exclude reference="M3a-I0-0EL"/>
                                                     <exclude reference="QUk-NT-hpe"/>
                                                     <exclude reference="S4D-vG-fih"/>
+                                                    <exclude reference="2Z7-jy-Cj4"/>
+                                                    <exclude reference="M3a-I0-0EL"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -248,10 +253,10 @@
                                                     <include reference="P8G-of-crt"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="2Z7-jy-Cj4"/>
-                                                    <include reference="M3a-I0-0EL"/>
                                                     <include reference="QUk-NT-hpe"/>
                                                     <include reference="S4D-vG-fih"/>
+                                                    <include reference="2Z7-jy-Cj4"/>
+                                                    <include reference="M3a-I0-0EL"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -795,7 +800,7 @@
                         <sections>
                             <tableViewSection id="hpB-8q-9pq">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="64" id="pzJ-tu-k0N">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="64" id="pzJ-tu-k0N">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pzJ-tu-k0N" id="CZi-7b-S7K">
@@ -2455,11 +2460,15 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="vHN-tf-DnN" firstAttribute="centerY" secondItem="2gK-7E-9af" secondAttribute="centerY" constant="2.5" id="8Vx-wH-lkT"/>
+                                                <constraint firstItem="vHN-tf-DnN" firstAttribute="centerY" secondItem="2gK-7E-9af" secondAttribute="centerY" constant="2.5" id="8Vx-wH-lkT">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                                </constraint>
                                                 <constraint firstItem="2gK-7E-9af" firstAttribute="leading" secondItem="kJV-CS-1l2" secondAttribute="leadingMargin" id="IIv-ad-jAw"/>
                                                 <constraint firstAttribute="centerY" secondItem="2gK-7E-9af" secondAttribute="centerY" constant="-0.5" id="cpL-SK-uNi"/>
                                                 <constraint firstItem="vHN-tf-DnN" firstAttribute="trailing" secondItem="kJV-CS-1l2" secondAttribute="trailingMargin" id="fu8-bW-XTC"/>
-                                                <constraint firstItem="vHN-tf-DnN" firstAttribute="leading" secondItem="2gK-7E-9af" secondAttribute="trailing" constant="48" id="gFN-it-xEO"/>
+                                                <constraint firstItem="vHN-tf-DnN" firstAttribute="leading" secondItem="2gK-7E-9af" secondAttribute="trailing" constant="48" id="gFN-it-xEO">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                                </constraint>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">

@@ -12,7 +12,7 @@
 #import "CalendarViewController.h"
 #import "AddScheduleTableViewController.h"
 
-@interface HYCalendarViewController () <CalendarContainerControllerDelegate>
+@interface HYCalendarViewController () <CalendarContainerControllerDelegate, ScheduleTableViewControllerDelegate>
 
 @property (strong, nonatomic) CalendarContainerController *calendarContainer;
 @property (strong, nonatomic) ScheduleTableViewController *scheduleVC;
@@ -63,7 +63,12 @@
 }
 
 - (IBAction)toToday:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"scrollToToday" object:nil];
+    if (self.CalenderContainer.hidden == NO) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"scrollToToday" object:nil];
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"scrollToTodaySchedule" object:nil];
+    }
 }
 
 - (void)calendarCurrentMonthStringDidChangeTo:(NSString *)monthString {
@@ -73,6 +78,10 @@
 
 - (void)isCurrentMonth:(BOOL)isCurrentMonth {
     self.todayButton.hidden = isCurrentMonth;
+}
+
+-(void)isTodayDismiss:(BOOL)isTodayDismiss {
+    self.todayButton.hidden = !isTodayDismiss;
 }
 
 #pragma mark - Navigation
@@ -85,6 +94,7 @@
     else if ([segue.identifier isEqualToString:@"ScheduleTableViewEmbedSegue"])
     {
         self.scheduleVC = segue.destinationViewController;
+        self.scheduleVC.delegate = self;
     }
     else if ([segue.identifier isEqualToString:@"AddScheduleSegue"]) {
         AddScheduleTableViewController *addScheduleVC = segue.destinationViewController;

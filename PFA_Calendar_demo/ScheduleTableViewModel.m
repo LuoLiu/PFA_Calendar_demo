@@ -61,12 +61,12 @@
         
         ScheduleEvent *event5 = [[ScheduleEvent alloc] init];
         event5.eventTitle = @"検診";
-        event5.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/8/28 13:20:33"];
-        event5.endDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/8/31 13:20:33"];
+        event5.startDate = [NSDate date];
+        event5.endDate = [NSDate date];
         event5.eventType = ScheduleEventTypeCheckup;
         event5.memo = @"ScheduleEvent";
         
-        eventList = [NSArray arrayWithObjects:event1, event2, event3, event4, event5,nil];
+        eventList = [NSArray arrayWithObjects:event1, event2, event3, event4, event5, event1, event2, event3, event4, event5, event1, event2, event3, event4, event5, nil];
         ///////////test
         
         _eventList = [self sortEventList:eventList byAscending:YES];

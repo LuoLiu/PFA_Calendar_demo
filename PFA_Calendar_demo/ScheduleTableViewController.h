@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ScheduleTableViewControllerDelegate <NSObject>
+
+- (void)isTodayDismiss:(BOOL)isTodayDismiss;
+
+@end
+
 @interface ScheduleTableViewController : UITableViewController
+
+@property (weak, nonatomic) id<ScheduleTableViewControllerDelegate> delegate;
 
 @end

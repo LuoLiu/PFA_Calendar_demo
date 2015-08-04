@@ -241,10 +241,10 @@
                                                     <exclude reference="P8G-of-crt"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="QUk-NT-hpe"/>
-                                                    <exclude reference="S4D-vG-fih"/>
                                                     <exclude reference="2Z7-jy-Cj4"/>
                                                     <exclude reference="M3a-I0-0EL"/>
+                                                    <exclude reference="QUk-NT-hpe"/>
+                                                    <exclude reference="S4D-vG-fih"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -253,10 +253,10 @@
                                                     <include reference="P8G-of-crt"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="QUk-NT-hpe"/>
-                                                    <include reference="S4D-vG-fih"/>
                                                     <include reference="2Z7-jy-Cj4"/>
                                                     <include reference="M3a-I0-0EL"/>
+                                                    <include reference="QUk-NT-hpe"/>
+                                                    <include reference="S4D-vG-fih"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -1342,7 +1342,8 @@
                                             <exclude reference="tC8-ju-YEK"/>
                                         </mask>
                                     </variation>
-                                    <variation key="heightClass=regular-widthClass=compact">
+                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                        <rect key="frame" x="115" y="261" width="88" height="16"/>
                                         <mask key="constraints">
                                             <include reference="3h7-gt-iHj"/>
                                             <include reference="tC8-ju-YEK"/>
@@ -1362,7 +1363,8 @@
                                             <exclude reference="2AA-oa-JFC"/>
                                         </mask>
                                     </variation>
-                                    <variation key="heightClass=regular-widthClass=compact">
+                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                        <rect key="frame" x="130" y="280" width="57" height="21"/>
                                         <mask key="constraints">
                                             <include reference="2AA-oa-JFC"/>
                                         </mask>
@@ -1381,7 +1383,8 @@
                                             <exclude reference="2Y3-Ru-bzy"/>
                                         </mask>
                                     </variation>
-                                    <variation key="heightClass=regular-widthClass=compact">
+                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                        <rect key="frame" x="247" y="272" width="30" height="24"/>
                                         <mask key="constraints">
                                             <include reference="2Y3-Ru-bzy"/>
                                         </mask>

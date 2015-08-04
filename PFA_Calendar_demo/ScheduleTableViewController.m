@@ -29,9 +29,15 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
+    self.view.backgroundColor = [UIColor clearColor];
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self bindView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToTodaySchedule) name:@"scrollToTodaySchedule" object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"scrollToTodaySchedule" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,6 +76,24 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
     
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
+}
+
+#pragma mark - Table view Delegate
+
+-(void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section {
+    if (section == 0) {
+        [self.delegate isTodayDismiss:YES];
+    }
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    if (section == 0) {
+        [self.delegate isTodayDismiss:NO];
+    }
+}
+
+- (void)scrollToTodaySchedule {
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 #pragma mark - Configure

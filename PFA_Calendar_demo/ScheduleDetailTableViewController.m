@@ -10,6 +10,12 @@
 
 @interface ScheduleDetailTableViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *startDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *endDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *alarmLabel;
+@property (weak, nonatomic) IBOutlet UITextView *memoTextView;
+
 @end
 
 @implementation ScheduleDetailTableViewController

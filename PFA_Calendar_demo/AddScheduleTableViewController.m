@@ -65,9 +65,9 @@
     self.endDatePicker.hidden = YES;
     
     //test
-    _scheduleEvent.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/29 23:00:22"];
+    //_scheduleEvent.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/29 23:00:22"];
     //test
-    self.startDate = _scheduleEvent.startDate;
+    //self.startDate = _scheduleEvent.startDate;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addScheduleEvent) name:@"addScheduleEvent" object:nil];
 }
@@ -157,14 +157,13 @@
 - (IBAction)startDateValueChanged:(id)sender {
     UIDatePicker *datePicker = sender;
     
-    _scheduleEvent.startDate = datePicker.date;
+    _startDate = datePicker.date;
     _startDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:datePicker.date];
 }
 
 - (IBAction)endDateValueChanged:(id)sender {
     UIDatePicker *datePicker = sender;
     
-    _scheduleEvent.endDate = datePicker.date;
     NSComparisonResult result = [datePicker.date compare:self.startDatePicker.date];
     if (result < 0) {
         NSString *endDateString = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:datePicker.date];
@@ -177,6 +176,7 @@
         _canSave = NO;
     }
     else {
+        _endDate = datePicker.date;
         [_endDateLabel setTextColor:[UIColor blackColor]];
         _endDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:datePicker.date];
         _canSave = YES;
@@ -202,11 +202,18 @@
 }
 
 - (void)addScheduleEvent {
+    if (!_startDate) {
+        _startDate = self.startDatePicker.date;
+    }
+    if (!_endDate) {
+        _endDate = self.endDatePicker.date;
+    }
     _scheduleEvent.isShare = self.shareSwitch.isOn;
+    _scheduleEvent.startDate = _startDate;
+    _scheduleEvent.endDate = _endDate;
     _scheduleEvent.alarmMinutes = self.alarmMinutes;
     _scheduleEvent.eventTitle = [NSString stringWithString:self.eventTitleTextField.text];
     _scheduleEvent.memo = [NSString stringWithString:self.memoTextView.text];
-    
 }
 
 - (IBAction)back:(id)sender {

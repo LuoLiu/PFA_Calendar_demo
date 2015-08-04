@@ -84,6 +84,10 @@ static NSString *kCalendarCellReuseIdentifier = @"CalendarCellIdentifier";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     CalendarCollectionViewCell *cell = (CalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCalendarCellReuseIdentifier forIndexPath:indexPath];
+        [self configureCell:cell atIndexPath:indexPath];
+    }
     if (cell.isPlaceholder) {
         [_viewModel setSelectedDate:cell.calendarDate.date animate:YES];
         NSIndexPath *selectedIndexPath = [_viewModel indexPathForDate:cell.calendarDate.date];
@@ -94,7 +98,7 @@ static NSString *kCalendarCellReuseIdentifier = @"CalendarCellIdentifier";
                 [self collectionView:self.collectionView didDeselectItemAtIndexPath:currentIndexPath];
             }
             [self.collectionView selectItemAtIndexPath:selectedIndexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-            [self collectionView:self.collectionView didSelectItemAtIndexPath:selectedIndexPath];
+            //[self collectionView:self.collectionView didSelectItemAtIndexPath:selectedIndexPath];
         }
         if (!self.collectionView.tracking && !self.collectionView.decelerating) {
             [self collectionViewScrollToSection:[_viewModel indexPathForDate:cell.calendarDate.date].section animated:YES];

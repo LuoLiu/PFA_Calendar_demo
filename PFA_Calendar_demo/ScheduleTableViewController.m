@@ -80,20 +80,18 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
     return [_viewModel numberOfRowsInSection:section];
 }
 
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    return [_viewModel titleForHeaderInSection:section];
-//}
-
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 22)];
-    titleLable.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"nav_bg_red"]];
-    titleLable.text = [_viewModel titleForHeaderInSection:section];
-    
-    return titleLable;
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"nav_bg_red"]];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, self.view.frame.size.width, 22)];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.text = [_viewModel titleForHeaderInSection:section];
+    [headerView addSubview:titleLabel];
+    return headerView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     ScheduleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCalendarScheduleTableCellReuseIdentifier forIndexPath:indexPath];
     
     [self configureCell:cell atIndexPath:indexPath];
@@ -106,17 +104,6 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
     cell.dateLabel.text = [_viewModel dateStringForIndexPath:indexPath];
     cell.planLabel.text = [_viewModel planStringForIndexPath:indexPath];
     cell.iconImageView.image = [_viewModel imageForForIndexPath:indexPath];
-    ////////test
-//        ScheduleEvent *cellEvent = [_viewModel eventForIndexPath:indexPath];
-//        if (cellEvent.eventType == ScheduleEventTypeCheckup) {
-//            cell.iconImageView.backgroundColor = [UIColor yellowColor];//test
-//        }
-//        else if (!cellEvent.isShare) {
-//            cell.iconImageView.backgroundColor = [UIColor redColor];//test
-//        }
-//        else {
-//            //两个cell
-//        }
 }
 
 #pragma mark - Navigation

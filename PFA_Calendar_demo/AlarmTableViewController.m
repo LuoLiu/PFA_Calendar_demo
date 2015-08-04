@@ -50,35 +50,35 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case 0:
+        case 1:
             //あし
             _alarmMinutes = -1;
             break;
-        case 1:
+        case 2:
             //予定時刻
             _alarmMinutes = 0;
             break;
-        case 2:
+        case 3:
             //5 分前
             _alarmMinutes = 5;
             break;
-        case 3:
+        case 4:
             //15 分前
             _alarmMinutes = 15;
             break;
-        case 4:
+        case 5:
             //30 分前
             _alarmMinutes = 30;
             break;
-        case 5:
+        case 6:
             //1 時間前
             _alarmMinutes = 60;
             break;
-        case 6:
+        case 7:
             //2 時間前
             _alarmMinutes = 60*2;
             break;
-        case 7:
+        case 8:
             //1 日前
             _alarmMinutes = 60*24;
             break;

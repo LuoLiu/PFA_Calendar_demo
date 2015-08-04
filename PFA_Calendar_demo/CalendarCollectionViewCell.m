@@ -80,7 +80,6 @@
 
 - (UIImage *)setmonthIconImage {
     if (self.isPlaceholder) {
-        self.monthIcon.backgroundColor = [UIColor clearColor];///test
         return nil;
     }
     if ([self.calendarDate.date isEqualToDateForDay:_calenderViewModel.expBirthday]) {
@@ -151,6 +150,9 @@
 }
 
 - (void)configureCellIcons {
+    if (self.isPlaceholder) {
+        return;
+    }
     for (ScheduleEvent *event in self.eventList) {
         if (event.eventType == ScheduleEventTypeCheckup) {
             self.hospitalIcon.hidden = NO;
@@ -171,12 +173,6 @@
     if (self.isPlaceholder) {
         return dictionary[@(CalendarCellStatePlaceholder)];
     }
-//    if (self.isToday) {
-//        return dictionary[@(CalendarCellStateToday)];
-//    }
-//    if (self.selected) {
-//        return dictionary[@(CalendarCellStateSelected)];
-//    }
     
     return dictionary[@(CalendarCellStateNormal)];
 }
@@ -203,7 +199,7 @@
 //}
 
 - (BOOL)hasAnnounce {
-    return NO;////T
+    return NO;////Announce
 }
 
 - (BOOL)isPlaceholder {

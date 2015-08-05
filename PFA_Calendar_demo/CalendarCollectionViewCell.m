@@ -32,7 +32,7 @@
 
 - (void)awakeFromNib {
     self.layer.borderWidth = 0.5;
-    self.layer.borderColor = [UIColor grayColor].CGColor;
+    self.layer.borderColor = [UIColor redColor].CGColor;
     self.monthIcon.backgroundColor = [UIColor clearColor];
     
     self.hospitalIcon.image = [UIImage imageNamed:@"icon_hospital"];

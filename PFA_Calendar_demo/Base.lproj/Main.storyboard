@@ -22,7 +22,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SIi-D2-b41" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-487.5" y="478.5"/>
+            <point key="canvasLocation" x="-298.5" y="478.5"/>
         </scene>
         <!--予定を追加する-->
         <scene sceneID="nW0-0e-0o7">
@@ -33,6 +33,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="U1Y-kK-KS3">
+                            <rect key="frame" x="0.0" y="833" width="375" height="160"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3bb-MK-B2i">
+                                    <rect key="frame" x="110" y="45" width="154" height="26"/>
+                                    <state key="normal" image="btn_del">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="delButtonTapped:" destination="djV-DE-ROh" eventType="touchUpInside" id="T17-9S-Zs0"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="centerY" secondItem="3bb-MK-B2i" secondAttribute="centerY" constant="22" id="gAF-cn-8xo"/>
+                                <constraint firstAttribute="centerX" secondItem="3bb-MK-B2i" secondAttribute="centerX" constant="0.5" id="qv5-T1-s8I"/>
+                            </constraints>
+                        </view>
                         <sections>
                             <tableViewSection id="Rr0-2T-0Lp">
                                 <cells>
@@ -301,37 +321,6 @@
                                                 <constraint firstItem="osW-vQ-py4" firstAttribute="leading" secondItem="3to-UP-hIU" secondAttribute="leadingMargin" constant="7" id="s7F-nP-7Br"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="168" id="zAR-Or-o2k">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zAR-Or-o2k" id="NbJ-MA-SXx">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RDa-sw-ckr">
-                                                    <rect key="frame" x="111" y="71" width="154" height="26"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="154" id="b3t-n1-7fe"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="15"/>
-                                                    <size key="titleShadowOffset" width="-1" height="0.0"/>
-                                                    <state key="normal" image="btn_del">
-                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="delButtonTapped:" destination="djV-DE-ROh" eventType="touchUpInside" id="Ff4-cI-fas"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="RDa-sw-ckr" secondAttribute="centerY" id="3bO-Hh-zfi"/>
-                                                <constraint firstAttribute="centerX" secondItem="RDa-sw-ckr" secondAttribute="centerX" id="HZq-HI-r84"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -709,7 +698,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="200.25" y="478.12499999999994"/>
+            <point key="canvasLocation" x="192.5" y="478.5"/>
         </scene>
         <!--Calendar Container Controller-->
         <scene sceneID="gxl-g0-dEJ">
@@ -834,7 +823,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Qc-ky-TNq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="199.5" y="1179.5"/>
+            <point key="canvasLocation" x="192.5" y="1179.5"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="25o-y4-1ne">
@@ -957,7 +946,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ScheduleDetailTableCellIdentifier" id="yI9-Ub-h1f" customClass="ScheduleTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScheduleDetailTableCellIdentifier" id="yI9-Ub-h1f" customClass="ScheduleTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yI9-Ub-h1f" id="fhL-eg-pVm">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1007,7 +996,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cBX-qV-Opd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-487.5" y="1237.5"/>
+            <point key="canvasLocation" x="-298.5" y="1179.5"/>
         </scene>
         <!--Calendar Schedule Table View Controller-->
         <scene sceneID="KgM-IH-WTn">
@@ -1049,7 +1038,7 @@
                                     <outlet property="contentLabel" destination="fUv-W3-4Zg" id="2WM-aI-vxQ"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ScheduleDetailTableCellIdentifier" id="Lmg-YQ-zOw" customClass="ScheduleTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScheduleDetailTableCellIdentifier" id="Lmg-YQ-zOw" customClass="ScheduleTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lmg-YQ-zOw" id="hKY-C8-Xo2">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1110,6 +1099,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="hlJ-at-L7i">
+                            <rect key="frame" x="0.0" y="513" width="375" height="155"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                         <sections>
                             <tableViewSection id="qG7-AM-fpu">
                                 <cells>
@@ -1327,33 +1321,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="175" id="jeu-9y-tOf">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jeu-9y-tOf" id="iHw-h8-E27">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="reR-aB-S7I">
-                                                    <rect key="frame" x="111" y="74" width="154" height="26"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="154" id="a7Y-Fb-NvV"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="15"/>
-                                                    <state key="normal" image="btn_del">
-                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="centerX" secondItem="reR-aB-S7I" secondAttribute="centerX" id="l9L-OF-b4n"/>
-                                                <constraint firstAttribute="centerY" secondItem="reR-aB-S7I" secondAttribute="centerY" id="lzk-pT-Rcy"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -1416,7 +1383,7 @@
         <image name="right_arrow" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BpS-Dv-fLn"/>
-        <segue reference="U0V-wb-0Wp"/>
+        <segue reference="Pad-Bo-DZA"/>
+        <segue reference="Rcb-c0-dTh"/>
     </inferredMetricsTieBreakers>
 </document>

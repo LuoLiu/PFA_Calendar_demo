@@ -28,14 +28,13 @@
 }
 
 - (IBAction)back:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)okButtonTapped:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:^{
-        [self.delegate alarmMinutes:_alarmMinutes];
-        [self configureAlarmWithMinutes:_alarmMinutes];
-    }];
+    [self.delegate alarmMinutes:_alarmMinutes];
+    [self configureAlarmWithMinutes:_alarmMinutes];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source
@@ -45,40 +44,40 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 8;
+    return 7;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case 1:
+        case 0:
             //あし
             _alarmMinutes = -1;
             break;
-        case 2:
+        case 1:
             //予定時刻
             _alarmMinutes = 0;
             break;
-        case 3:
+        case 2:
             //5 分前
             _alarmMinutes = 5;
             break;
-        case 4:
+        case 3:
             //15 分前
             _alarmMinutes = 15;
             break;
-        case 5:
+        case 4:
             //30 分前
             _alarmMinutes = 30;
             break;
-        case 6:
+        case 5:
             //1 時間前
             _alarmMinutes = 60;
             break;
-        case 7:
+        case 6:
             //2 時間前
             _alarmMinutes = 60*2;
             break;
-        case 8:
+        case 7:
             //1 日前
             _alarmMinutes = 60*24;
             break;

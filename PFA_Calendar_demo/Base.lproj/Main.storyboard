@@ -10,7 +10,7 @@
         <!--Navigation Controller-->
         <scene sceneID="DcY-k1-a9j">
             <objects>
-                <navigationController id="xme-12-2Pa" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="xme-12-2Pa" sceneMemberID="viewController">
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="nav_bg" id="OdO-ir-Oew">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -38,7 +38,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3bb-MK-B2i">
-                                    <rect key="frame" x="110" y="45" width="154" height="26"/>
+                                    <rect key="frame" x="110" y="67" width="154" height="26"/>
                                     <state key="normal" image="btn_del">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -49,8 +49,8 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="centerY" secondItem="3bb-MK-B2i" secondAttribute="centerY" constant="22" id="gAF-cn-8xo"/>
-                                <constraint firstAttribute="centerX" secondItem="3bb-MK-B2i" secondAttribute="centerX" constant="0.5" id="qv5-T1-s8I"/>
+                                <constraint firstAttribute="centerY" secondItem="3bb-MK-B2i" secondAttribute="centerY" id="gAF-cn-8xo"/>
+                                <constraint firstAttribute="centerX" secondItem="3bb-MK-B2i" secondAttribute="centerX" id="qv5-T1-s8I"/>
                             </constraints>
                         </view>
                         <sections>
@@ -563,7 +563,7 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="x19-LP-1ru">
@@ -578,19 +578,19 @@
                                 </connections>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nDs-yB-fF9" userLabel="Calendar Container View">
-                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="515"/>
                                 <connections>
                                     <segue destination="Xgg-T3-Oqb" kind="embed" identifier="CalendarContainerEmbedSegue" id="Uhl-nj-jml"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UZY-eC-Cuh" userLabel="Schedule Container View">
-                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="515"/>
                                 <connections>
                                     <segue destination="1mw-8v-TBm" kind="embed" identifier="ScheduleTableViewEmbedSegue" id="jVy-T9-GW5"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zMm-fJ-ELZ">
-                                <rect key="frame" x="306" y="583" width="53" height="27"/>
+                                <rect key="frame" x="306" y="588" width="53" height="27"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="btn_today">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -600,14 +600,6 @@
                                     <action selector="toToday:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="i8x-fh-Msz"/>
                                 </connections>
                             </button>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BrQ-uA-eyg">
-                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <items>
-                                    <tabBarItem systemItem="favorites" id="6Bm-ow-Zkd"/>
-                                    <tabBarItem systemItem="more" id="bst-25-KZj"/>
-                                </items>
-                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -616,11 +608,11 @@
                             <constraint firstItem="nDs-yB-fF9" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="CCl-o4-qyg"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="UZY-eC-Cuh" secondAttribute="bottom" id="Dd2-Gr-8TZ"/>
                             <constraint firstItem="UZY-eC-Cuh" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="FFf-mG-5KU"/>
-                            <constraint firstItem="zMm-fJ-ELZ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="519" id="Hcc-Zn-vsk"/>
                             <constraint firstItem="x19-LP-1ru" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="Ioi-Gg-bag"/>
                             <constraint firstAttribute="trailing" secondItem="nDs-yB-fF9" secondAttribute="trailing" id="L1D-v4-OdV"/>
                             <constraint firstAttribute="trailing" secondItem="zMm-fJ-ELZ" secondAttribute="trailing" constant="16" id="WVh-Qq-rfw"/>
                             <constraint firstAttribute="trailing" secondItem="UZY-eC-Cuh" secondAttribute="trailing" id="c1l-B6-Wi3"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="zMm-fJ-ELZ" secondAttribute="bottom" constant="8" id="eCh-UZ-Pc5"/>
                             <constraint firstItem="UZY-eC-Cuh" firstAttribute="top" secondItem="x19-LP-1ru" secondAttribute="bottom" constant="8" id="l3s-I1-qNp"/>
                             <constraint firstItem="x19-LP-1ru" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="sf1-EN-2Ad"/>
                             <constraint firstItem="nDs-yB-fF9" firstAttribute="top" secondItem="x19-LP-1ru" secondAttribute="bottom" constant="8" id="xb8-II-Uvb"/>
@@ -699,7 +691,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="CalenderContainer" destination="nDs-yB-fF9" id="0cQ-RL-6Eg"/>
                         <outlet property="ScheduleContainer" destination="UZY-eC-Cuh" id="K4a-hs-NfF"/>
@@ -806,7 +797,7 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DlL-dE-zoL">
-                                <rect key="frame" x="0.0" y="457" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="497" width="375" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="UaF-ne-PIH"/>
                                 </constraints>
@@ -817,7 +808,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xwG-mO-WRy" firstAttribute="top" secondItem="DlL-dE-zoL" secondAttribute="bottom" constant="60" id="0YT-gS-G4j"/>
+                            <constraint firstItem="xwG-mO-WRy" firstAttribute="top" secondItem="DlL-dE-zoL" secondAttribute="bottom" constant="20" id="0YT-gS-G4j"/>
                             <constraint firstItem="Gji-oj-rWh" firstAttribute="top" secondItem="l7M-9P-BES" secondAttribute="bottom" id="6zw-FD-sZw"/>
                             <constraint firstAttribute="trailing" secondItem="Gji-oj-rWh" secondAttribute="trailing" id="EzG-sU-2tR"/>
                             <constraint firstItem="Gji-oj-rWh" firstAttribute="leading" secondItem="ehz-cI-GIX" secondAttribute="leading" id="GHD-hd-7mO"/>
@@ -955,7 +946,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="ScheduleTableViewControllerIdentifier" id="1mw-8v-TBm" customClass="ScheduleTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Xd3-pt-XH0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="515"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>

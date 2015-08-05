@@ -53,7 +53,7 @@
     }
     else if (screenSize.width == 320)
     {
-        self.calendarViewContainerHeightConstaint.constant = 320;
+        self.calendarViewContainerHeightConstaint.constant = 300;
 
         if (self.calendarScheduleVC.tableView.contentSize.height < 57) {
             self.tableViewContainerHeightConstaint.constant = self.calendarScheduleVC.tableView.contentSize.height;

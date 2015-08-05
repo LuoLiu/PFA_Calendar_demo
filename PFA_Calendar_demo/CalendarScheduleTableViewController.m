@@ -9,6 +9,7 @@
 #import "CalendarScheduleTableViewController.h"
 #import "CalendarViewController.h"
 #import "ScheduleDetailTableViewController.h"
+#import "ScheduleTableViewModel.h"
 #import "ScheduleTableViewCell.h"
 #import "AnnounceTableViewCell.h"
 #import "ScheduleEvent.h"
@@ -21,6 +22,7 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
 @interface CalendarScheduleTableViewController ()
 
 @property (strong, nonatomic) ScheduleDetailTableViewController *scheduleDetailTableVC;
+@property (strong, nonatomic) ScheduleTableViewModel *viewModel;
 @property (assign, nonatomic) BOOL hasAnnounce;
 
 @end
@@ -31,7 +33,10 @@ static NSString *kCalendarScheduleTableCellReuseIdentifier = @"ScheduleDetailTab
     [super viewDidLoad];
     
     self.tableView.tableFooterView = [[UIView alloc] init];
+    _viewModel = [[ScheduleTableViewModel alloc] initWithEventList:_scheduleEventList];
+    ////---------test----------
     _hasAnnounce = NO;
+    ////---------test end------
 }
 
 - (void)didReceiveMemoryWarning {

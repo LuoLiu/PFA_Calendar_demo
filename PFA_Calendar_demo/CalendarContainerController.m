@@ -15,6 +15,7 @@
 @property (strong, nonatomic) CalendarViewController *calendarVC;
 @property (strong, nonatomic) CalendarScheduleTableViewController *calendarScheduleVC;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *calendarViewContainerHeightConstaint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewContainerHeightConstaint;
 
 @end
@@ -33,16 +34,35 @@
     self.calendarScheduleVC.scheduleDate = calendarDate;
     self.calendarScheduleVC.scheduleEventList = eventList;
     [self.calendarScheduleVC.tableView reloadData];
-//    [self updateViewConstraints];
+    [self updateViewConstraints];
 }
 
-//-(void)updateViewConstraints {
-//    [super updateViewConstraints];
-//    
-//    if (self.calendarScheduleVC.tableView.contentSize.height < self.tableViewContainerHeightConstaint.constant) {
-//        self.tableViewContainerHeightConstaint.constant = self.calendarScheduleVC.tableView.contentSize.height;
-//    }
-//}
+-(void)updateViewConstraints {
+    [super updateViewConstraints];
+    
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    if (screenSize.width == 375) {
+        self.calendarViewContainerHeightConstaint.constant = 350;
+        
+        if (self.calendarScheduleVC.tableView.contentSize.height < 92) {
+            self.tableViewContainerHeightConstaint.constant = self.calendarScheduleVC.tableView.contentSize.height;
+        }
+        else {
+            self.tableViewContainerHeightConstaint.constant = 92;
+        }
+    }
+    else if (screenSize.width == 320)
+    {
+        self.calendarViewContainerHeightConstaint.constant = 320;
+
+        if (self.calendarScheduleVC.tableView.contentSize.height < 57) {
+            self.tableViewContainerHeightConstaint.constant = self.calendarScheduleVC.tableView.contentSize.height;
+        }
+        else {
+            self.tableViewContainerHeightConstaint.constant = 57;
+        }
+    }
+}
 
 #pragma mark - Navigation
 

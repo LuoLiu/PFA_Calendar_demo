@@ -33,7 +33,7 @@
 
 - (IBAction)okButtonTapped:(id)sender {
     [self.delegate alarmMinutes:_alarmMinutes];
-    [self configureAlarmWithMinutes:_alarmMinutes];
+//    [self configureAlarmWithMinutes:_alarmMinutes];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -83,20 +83,6 @@
             break;
         default:
             break;
-    }
-}
-
-- (void)configureAlarmWithMinutes:(NSInteger)minutes {
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    if (notification != nil) {
-        NSDate *itemDate = self.startDate;
-        notification.fireDate = [itemDate dateByAddingTimeInterval:-minutes*60];
-        notification.timeZone = [NSTimeZone defaultTimeZone];
-        notification.alertBody = [NSString stringWithFormat:@"%d分钟后XXXX！", (int)minutes];
-        notification.alertAction = NSLocalizedString(@"查看", nil);
-        notification.soundName = UILocalNotificationDefaultSoundName;
-        [notification setApplicationIconBadgeNumber:1];
-        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     }
 }
 

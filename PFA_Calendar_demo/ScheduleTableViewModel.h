@@ -20,7 +20,7 @@
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 - (NSString *)titleForHeaderInSection:(NSInteger)section;
 - (ScheduleEvent *)eventForIndexPath:(NSIndexPath *)indexPath;
-- (NSArray *)eventsForCalendarDate:(CalendarDate *)calendarDate;
+//- (NSArray *)eventsForCalendarDate:(CalendarDate *)calendarDate;
 - (NSString *)dateStringForIndexPath:(NSIndexPath *)indexPath;
 - (NSString *)planStringForIndexPath:(NSIndexPath *)indexPath;
 - (UIImage *)imageForForIndexPath:(NSIndexPath *)indexPath;

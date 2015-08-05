@@ -67,7 +67,7 @@
         event5.memo = @"ScheduleEvent";
         
         eventList = [NSArray arrayWithObjects:event1, event2, event3, event4, event5, event1, event2, event3, event4, event5, event1, event2, event3, event4, event5, nil];
-        ///////////test
+        ///////////test end
         
         _eventList = [self sortEventList:eventList byAscending:YES];
         _dateList = [self getDateList];
@@ -87,20 +87,20 @@
     return [_dateList objectAtIndex:section];
 }
 
-- (NSArray *)eventsForCalendarDate:(CalendarDate *)calendarDate {
-    NSMutableArray *eventsForDate = [NSMutableArray array];
-    NSString *dateString = [self dateTitleForCalendarDate:calendarDate];
-    for (ScheduleEvent *event in self.eventList) {
-        NSString *eventDateTitle = [self dateTitleForCalendarDate:event.calendarDate];
-        if ([eventDateTitle isEqualToString:dateString]) {
-            [eventsForDate addObject:event];
-            if (event.isShare) {
-                [eventsForDate addObject:event];
-            }
-        }
-    }
-    return eventsForDate;
-}
+//- (NSArray *)eventsForCalendarDate:(CalendarDate *)calendarDate {
+//    NSMutableArray *eventsForDate = [NSMutableArray array];
+//    NSString *dateString = [self dateTitleForCalendarDate:calendarDate];
+//    for (ScheduleEvent *event in self.eventList) {
+//        NSString *eventDateTitle = [self dateTitleForCalendarDate:event.calendarDate];
+//        if ([eventDateTitle isEqualToString:dateString]) {
+//            [eventsForDate addObject:event];
+//            if (event.isShare) {
+//                [eventsForDate addObject:event];
+//            }
+//        }
+//    }
+//    return eventsForDate;
+//}
 
 - (NSArray *)eventsForSection:(NSInteger)section {
     NSMutableArray *eventsForSection = [NSMutableArray array];

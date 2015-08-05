@@ -50,6 +50,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
     
     _isEditStartDate = NO;
@@ -65,11 +66,6 @@
         _memoTextView.text = @"";
         _startDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:[NSDate date]];
         _endDateLabel.text = [[DateFormatterHelper scheduleYMDHMDateFormatter] stringFromDate:[NSDate date]];
-        
-        //test
-        //_scheduleEvent.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/29 23:00:22"];
-        //test
-        //self.startDate = _scheduleEvent.startDate;
     }
     else
     {
@@ -248,6 +244,7 @@
         else {
             [self updateScheduleEvent];
         }
+        [self configureAlarmWithMinutes:_scheduleEvent.alarmMinutes];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
@@ -310,6 +307,20 @@
     return alarmString;
 }
 
+- (void)configureAlarmWithMinutes:(NSInteger)minutes {
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    if (notification != nil) {
+        NSDate *itemDate = self.startDate;
+        notification.fireDate = [itemDate dateByAddingTimeInterval:-minutes*60];
+        notification.timeZone = [NSTimeZone defaultTimeZone];
+        notification.alertBody = [NSString stringWithFormat:@"%d分钟后%@！", (int)minutes, _scheduleEvent.eventTitle];
+        notification.alertAction = NSLocalizedString(@"查看", nil);
+        notification.soundName = UILocalNotificationDefaultSoundName;
+//        [notification setApplicationIconBadgeNumber:1];
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    }
+}
+
 #pragma mark - UITextFieldDelegate
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -363,7 +374,7 @@
     if ([segue.identifier isEqualToString:@"ShowAlarmSegue"]) {
         self.alarmTableVC = segue.destinationViewController;
         self.alarmTableVC.delegate = self;
-        self.alarmTableVC.startDate = self.startDate;
+        self.alarmTableVC.startDate = _startDatePicker.date;
     }
 }
 

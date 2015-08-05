@@ -25,7 +25,7 @@
 - (UIImage *)setCellIcon {
     ScheduleEvent *event = self.scheduleEvent;
     if (event.eventType == ScheduleEventTypeCheckup) {
-        return [UIImage imageNamed:@"icon_hospital_big"];//医院icon
+        return [UIImage imageNamed:@"icon_hospital_big"];
     }
     else if (!event.isShare) {
         return [UIImage imageNamed:@"icon_mama_big"];//上传者icon

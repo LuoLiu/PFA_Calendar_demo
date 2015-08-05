@@ -35,14 +35,15 @@
         _maximumDate  = [[dateList lastObject] date];
         _currentDate  = [NSDate date].dateByIgnoringTimeComponents;
         _currentMonth = [_currentDate copy];
-        ////////test
+        //-------test-----------
         _minimumDate = [NSDate dateWithYear:1970 month:1 day:1];
         _maximumDate = [NSDate dateWithYear:2099 month:12 day:31];
         _pregDate    = [NSDate dateWithYear:2015 month:3 day:5];
         _expBirthday = [NSDate dateWithYear:2015 month:12 day:25];
-        ////////test
+        _birthday    = [NSDate dateWithYear:2015 month:12 day:27];
+        //-------test end-------
         
-        ///////////test
+        //-------test-----------
         ScheduleEvent *event1 = [[ScheduleEvent alloc] init];
         event1.eventTitle = @"検診";
         event1.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/27 11:00:11"];
@@ -80,8 +81,8 @@
         event5.eventType = ScheduleEventTypeCheckup;
         event5.memo = @"ScheduleEvent";
         
-        _eventList = [NSArray arrayWithObjects:event1, event2, event3, event4, event5,nil];
-        ///////////test
+        _eventList = [NSArray arrayWithObjects:event1, event2, event3, event4, event5, event1, event2, event3, event4, event5, nil];
+        //-------test end-------
 
     }
     return self;
@@ -105,10 +106,13 @@
 //        }
 //    }
     
-    /////test
     CalendarDate *calendarDate = [[CalendarDate alloc] init];
     calendarDate.date = date;
-    
+    //-------test-----------
+    if ([date isEqualToDateForDay:[NSDate dateWithYear:2015 month:8 day:8]]) {
+        calendarDate.isDogsDay = YES;
+    }
+    //-------test end-------
     return calendarDate;
 }
 

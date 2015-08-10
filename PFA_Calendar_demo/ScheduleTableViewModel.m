@@ -34,6 +34,7 @@
         event1.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/27 11:00:11"];
         event1.endDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/29 11:00:11"];
         event1.eventType = ScheduleEventTypeCheckup;
+        event1.alarmMinutes = 5;
         event1.memo = @"ScheduleEvent";
         
         ScheduleEvent *event2 = [[ScheduleEvent alloc] init];
@@ -41,6 +42,7 @@
         event2.startDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/28 22:00:22"];
         event2.endDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/7/28 23:00:22"];
         event2.eventType = ScheduleEventTypeCheckup;
+        event2.alarmMinutes = -1;
         event2.memo = @"";
         
         ScheduleEvent *event3 = [[ScheduleEvent alloc] init];
@@ -49,6 +51,7 @@
         event3.endDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/8/1 23:00:33"];
         event3.eventType = ScheduleEventTypeOthers;
         event3.isShare = YES;
+        event3.alarmMinutes = -1;
         event3.memo = @"ScheduleEvent";
         
         ScheduleEvent *event4 = [[ScheduleEvent alloc] init];
@@ -57,6 +60,7 @@
         event4.endDate = [[DateFormatterHelper longDateYMDHMSDateFormatter] dateFromString:@"2015/6/2 10:54:33"];
         event4.eventType = ScheduleEventTypeOthers;
         event4.isShare = YES;
+        event4.alarmMinutes = -1;
         event4.memo = @"ScheduleEvent";
         
         ScheduleEvent *event5 = [[ScheduleEvent alloc] init];
@@ -64,6 +68,7 @@
         event5.startDate = [NSDate date];
         event5.endDate = [NSDate date];
         event5.eventType = ScheduleEventTypeCheckup;
+        event5.alarmMinutes = -1;
         event5.memo = @"ScheduleEvent";
         
         eventList = [NSArray arrayWithObjects:event1, event2, event3, event4, event5, event1, event2, event3, event4, event5, event1, event2, event3, event4, event5, nil];

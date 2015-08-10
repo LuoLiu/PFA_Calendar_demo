@@ -51,6 +51,7 @@
     [super viewDidLoad];
     
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
+    
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
     
     _isEditStartDate = NO;
@@ -250,8 +251,8 @@
 }
 
 - (IBAction)delButtonTapped:(id)sender {
-    //Delete scheduleEvent
-    
+    NSLog(@"deleteScheduleEvent");
+    //////Delete scheduleEvent
 }
 
 - (void)addScheduleEvent {
@@ -272,10 +273,6 @@
 }
 
 -(NSString *)stringForAlarmMinutes:(NSInteger)alarmMinutes {
-    if (alarmMinutes < 0) {
-        return @"あし";
-    }
-    
     NSString *alarmString = @"";
     switch (alarmMinutes) {
         case 0:

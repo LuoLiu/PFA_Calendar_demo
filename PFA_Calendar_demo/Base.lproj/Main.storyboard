@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +21,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SIi-D2-b41" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-298.5" y="478.5"/>
+            <point key="canvasLocation" x="-10.5" y="562.5"/>
         </scene>
         <!--予定を追加する-->
         <scene sceneID="nW0-0e-0o7">
@@ -96,9 +95,6 @@
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="検診" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y3G-Fa-7hp">
                                                     <rect key="frame" x="117" y="7" width="250" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="6eH-mU-fCO"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
@@ -131,7 +127,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YYYY/MM/DD 00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTl-bH-LKP">
                                                     <rect key="frame" x="141" y="15" width="226" height="15"/>
                                                     <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_begin" translatesAutoresizingMaskIntoConstraints="NO" id="NKb-81-Vlb">
@@ -185,7 +181,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YYYY/MM/DD 00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAU-Ye-Qjx">
                                                     <rect key="frame" x="141" y="15" width="226" height="15"/>
                                                     <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_end" translatesAutoresizingMaskIntoConstraints="NO" id="DWr-nT-e0d">
@@ -363,7 +359,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0V5-e8-GtQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750.5" y="478.5"/>
+            <point key="canvasLocation" x="1038.5" y="562.5"/>
         </scene>
         <!--アラーム通知-->
         <scene sceneID="uzR-bD-Cpg">
@@ -552,7 +548,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A9d-h1-JeN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1212.5" y="478.5"/>
+            <point key="canvasLocation" x="1500.5" y="562.5"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -701,7 +697,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="192.5" y="478.5"/>
+            <point key="canvasLocation" x="480.5" y="562.5"/>
         </scene>
         <!--Calendar Container Controller-->
         <scene sceneID="gxl-g0-dEJ">
@@ -828,7 +824,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Qc-ky-TNq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="192.5" y="1197.5"/>
+            <point key="canvasLocation" x="480.5" y="1281.5"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="25o-y4-1ne">
@@ -939,7 +935,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KzU-Io-Qar" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750.5" y="1075"/>
+            <point key="canvasLocation" x="1038.5" y="1159"/>
         </scene>
         <!--Schedule Table View Controller-->
         <scene sceneID="nBf-1P-mqr">
@@ -1000,7 +996,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cBX-qV-Opd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-298.5" y="1179.5"/>
+            <point key="canvasLocation" x="-10.5" y="1263.5"/>
         </scene>
         <!--Calendar Schedule Table View Controller-->
         <scene sceneID="KgM-IH-WTn">
@@ -1019,7 +1015,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アナウンス" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUv-W3-4Zg">
                                             <rect key="frame" x="46" y="9" width="85" height="17"/>
                                             <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_note" translatesAutoresizingMaskIntoConstraints="NO" id="aQc-Zm-LNW">
@@ -1093,7 +1089,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FGv-MK-GbT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750.5" y="1394"/>
+            <point key="canvasLocation" x="1038.5" y="1478"/>
         </scene>
         <!--予定の詳細-->
         <scene sceneID="pfj-3m-hRT">
@@ -1160,7 +1156,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="検診" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHN-tf-DnN">
                                                     <rect key="frame" x="100" y="14" width="267" height="16"/>
                                                     <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1189,7 +1185,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YYYY/MM/DD 00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84m-uQ-1Wc">
                                                     <rect key="frame" x="128" y="14" width="239" height="15"/>
                                                     <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1218,7 +1214,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YYYY/MM/DD 00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee5-z7-NjW">
                                                     <rect key="frame" x="128" y="14" width="239" height="15"/>
                                                     <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1360,7 +1356,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vts-Ss-83j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="199.5" y="1964.5"/>
+            <point key="canvasLocation" x="487.5" y="2048.5"/>
         </scene>
     </scenes>
     <resources>
@@ -1387,7 +1383,7 @@
         <image name="right_arrow" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Pad-Bo-DZA"/>
-        <segue reference="BpS-Dv-fLn"/>
+        <segue reference="U0V-wb-0Wp"/>
+        <segue reference="Rcb-c0-dTh"/>
     </inferredMetricsTieBreakers>
 </document>

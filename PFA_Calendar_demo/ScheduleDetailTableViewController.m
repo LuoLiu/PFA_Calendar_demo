@@ -58,10 +58,6 @@
 #pragma mark - Alarm
 
 -(NSString *)stringForAlarmMinutes:(NSInteger)alarmMinutes {
-    if (alarmMinutes < 0) {
-        return @"あし";
-    }
-    
     NSString *alarmString = @"";
     switch (alarmMinutes) {
         case 0:
